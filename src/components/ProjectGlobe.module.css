@@ -1,0 +1,196 @@
+.wrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr);
+  align-items: center;
+  gap: 0 clamp(1rem, 2.5vw, 2rem);
+  width: 100%;
+  min-height: calc(100svh - var(--nav-height) - 5.75rem);
+  margin: 0;
+  padding: 0 clamp(1.25rem, 3vw, 2.75rem) 0.75rem;
+  box-sizing: border-box;
+}
+
+.canvas {
+  width: 100%;
+  height: calc(100svh - var(--nav-height) - 6.5rem);
+  min-height: 360px;
+  border: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+  /* Keep WebGL buffer sharp on retina; avoid CSS blur upscaling */
+  image-rendering: auto;
+}
+
+.panel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: none;
+  max-height: 100%;
+  justify-self: stretch;
+  text-align: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.preview {
+  position: relative;
+  display: block;
+  /* Fill the right column as much as viewport height allows */
+  width: min(100%, 72svh, 34rem);
+  height: auto;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #d7d5d0;
+  flex-shrink: 0;
+}
+
+.previewImage {
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.preview:hover .previewImage {
+  transform: scale(1.04);
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.panel h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.details {
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+  width: 100%;
+  justify-items: center;
+}
+
+.details div {
+  display: grid;
+  gap: 0.2rem;
+  justify-items: center;
+}
+
+.details dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.details dd {
+  margin: 0;
+}
+
+.placeholder {
+  margin: 0;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.quickList {
+  list-style: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+  max-height: min(48svh, 22rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.quickList button {
+  text-align: center;
+  width: 100%;
+  font-size: 0.95rem;
+  color: var(--ink);
+  transition: color 0.25s var(--ease);
+}
+
+.quickList button:hover {
+  color: var(--steel-strong);
+}
+
+/* Phone: square stage so the full circle reads clearly */
+@media (max-width: 960px) {
+  .wrap {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 0 var(--page-pad) var(--space-4);
+    justify-items: center;
+  }
+
+  .canvas {
+    width: min(100%, 72vw, 420px);
+    height: auto;
+    aspect-ratio: 1;
+    min-height: 0;
+    margin-inline: auto;
+  }
+
+  .panel {
+    max-width: min(28rem, 100%);
+    width: 100%;
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .preview {
+    width: min(100%, 78vw, 26rem);
+  }
+
+  .quickList {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .canvas {
+    width: min(100%, 78vw, 340px);
+  }
+
+  .panel h2 {
+    font-size: clamp(1.35rem, 7vw, 1.8rem);
+  }
+
+  .preview {
+    width: min(100%, 84vw, 22rem);
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "Meta": {
+    "siteName": "Santiago Architecture",
+    "homeTitle": "Santiago Architecture | Architecture Studio",
+    "homeDescription": "Architecture studio designing residential, hospitality, and cultural spaces.",
+    "projectsTitle": "Projects | Santiago Architecture",
+    "projectsDescription": "Selected architecture projects across residential, hospitality, and masterplan work.",
+    "aboutTitle": "About | Santiago Architecture",
+    "aboutDescription": "A concise practice focused on clarity, material honesty, and place.",
+    "servicesTitle": "Services | Santiago Architecture",
+    "servicesDescription": "Architecture, interiors, and masterplanning from concept to delivery.",
+    "contactTitle": "Contact | Santiago Architecture",
+    "contactDescription": "Start a conversation about your next project."
+  },
+  "Nav": {
+    "projects": "Projects",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "Home": {
+    "brand": "Santiago Architecture",
+    "headline": "Architecture shaped by place.",
+    "support": "Residential, hospitality, and cultural work with a quiet material focus.",
+    "exploreProjects": "Explore Projects",
+    "startProject": "Start a Project"
+  },
+  "Projects": {
+    "title": "Projects",
+    "selected": "Selected Projects",
+    "gridView": "Grid View",
+    "globeView": "Globe View",
+    "viewProject": "View Project",
+    "nextProject": "Next Project",
+    "gallery": "Project gallery",
+    "image": "Image",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "filters": {
+      "all": "All",
+      "residential": "Residential",
+      "hospitality": "Hospitality",
+      "masterplan": "Masterplan",
+      "commercial": "Commercial",
+      "interior": "Interior",
+      "concept": "Concept"
+    },
+    "labels": {
+      "location": "Location",
+      "typology": "Typology",
+      "year": "Year",
+      "area": "Area"
+    },
+    "empty": "No projects in this category."
+  },
+  "About": {
+    "title": "About",
+    "lead": "Santiago Architecture is a studio working across Mexico and beyond.",
+    "body": "We design with restraint: clear plans, honest materials, and spaces that hold light and climate with care."
+  },
+  "Services": {
+    "title": "Services",
+    "lead": "From early concepts to built work.",
+    "items": {
+      "architecture": {
+        "title": "Architecture",
+        "body": "Houses, hospitality, and civic buildings."
+      },
+      "interiors": {
+        "title": "Interiors",
+        "body": "Material palettes, built-ins, and spatial detail."
+      },
+      "masterplan": {
+        "title": "Masterplanning",
+        "body": "Site strategies and long-horizon frameworks."
+      }
+    }
+  },
+  "Contact": {
+    "title": "Contact",
+    "lead": "Have a project in mind?",
+    "body": "Tell us who you are and what you want to build. We'll follow up to discuss scope, site, and next steps.",
+    "cta": "Start a Project",
+    "ctaMeeting": "Request Meeting",
+    "email": "studio@santiago.architecture",
+    "submit": "Send inquiry",
+    "sending": "Opening mail…",
+    "cancel": "Cancel",
+    "success": "Thanks — your inquiry is ready to send. Next, schedule a meeting so we can talk through the project.",
+    "sendAnother": "Start another inquiry",
+    "mailSubject": "Project inquiry from {name}",
+    "mailIntro": "New project inquiry from the Santiago Architecture site:",
+    "meeting": {
+      "title": "Schedule a meeting",
+      "lead": "Pick a preferred date and time. We'll confirm or suggest an alternative.",
+      "openCalendar": "Open booking calendar",
+      "submit": "Request meeting",
+      "sending": "Opening mail…",
+      "skip": "Skip for now",
+      "done": "Thanks — your meeting request is ready to send. We'll confirm shortly.",
+      "mailSubject": "Meeting request from {name}",
+      "mailIntro": "Meeting request following a project inquiry:",
+      "mailIntroDirect": "Meeting request from the Santiago Architecture site:",
+      "fields": {
+        "date": "Preferred date",
+        "time": "Preferred time",
+        "notes": "Notes"
+      },
+      "placeholders": {
+        "notes": "Timezone, video vs. in-person, or anything we should know."
+      }
+    },
+    "fields": {
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company / client",
+      "projectType": "Project type",
+      "location": "Site location",
+      "timeline": "Timeline",
+      "message": "What do you want to do?"
+    },
+    "placeholders": {
+      "timeline": "e.g. Design start in 2026",
+      "message": "Briefly describe the site, program, size, and goals."
+    },
+    "types": {
+      "residential": "Residential",
+      "hospitality": "Hospitality",
+      "masterplan": "Masterplan",
+      "commercial": "Commercial",
+      "interior": "Interiors",
+      "other": "Other"
+    }
+  },
+  "Footer": {
+    "rights": "All rights reserved."
+  }
+}
