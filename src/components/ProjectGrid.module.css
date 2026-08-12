@@ -1,50 +1,47 @@
 /*
-  Masonry collage on white:
-  mixed portrait / landscape tiles, white gutters,
-  packed like a puzzle (no center seam).
+  Masonry collage — images as protagonists on soft limestone ground.
 */
 
 .collage {
-  --collage-chrome: calc(var(--nav-height) + 5.1rem);
-  --collage-gap: 8px;
+  --collage-gap: 12px;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 2.25rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: minmax(140px, 28vh);
+  grid-auto-rows: minmax(170px, 34vw);
   grid-auto-flow: dense;
   gap: var(--collage-gap);
   width: 100%;
-  min-height: calc(100svh - var(--collage-chrome));
-  background: #fff;
-  overflow: hidden;
+  background: transparent;
 }
 
 .collage > li {
   min-width: 0;
   min-height: 0;
   overflow: hidden;
+  border-radius: var(--image-radius);
 }
 
-.tileA {
+/* Mobile: square-ish + portrait */
+.tileFeatured,
+.tileA,
+.tileD,
+.tileG {
   grid-column: span 2;
   grid-row: span 2;
 }
 
 .tileB,
-.tileC,
-.tileD,
 .tileE,
-.tileF,
-.tileG,
 .tileH {
   grid-column: span 1;
   grid-row: span 1;
 }
 
 .tileC,
-.tileG {
+.tileF {
+  grid-column: span 1;
   grid-row: span 2;
 }
 
@@ -54,52 +51,77 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #fff;
+  border-radius: var(--image-radius);
+  background: transparent;
+  perspective: 900px;
+  transform-style: preserve-3d;
+  box-shadow: none;
+  filter: none;
+}
+
+.item:hover,
+.item:focus-visible {
+  z-index: 4;
+  box-shadow: none;
+  filter: none;
+}
+
+.imageFrame {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--image-radius);
+  overflow: hidden;
+  transform-origin: center center;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: none;
+  filter: none;
 }
 
 .image {
   object-fit: cover;
-  object-position: center;
-  transform: scale(1.06);
-  transition: transform 0.8s var(--ease), filter 0.45s var(--ease);
-  filter: brightness(0.94) contrast(1.04) saturate(1.05);
-}
-
-.item:hover .image {
-  transform: scale(1.12);
-  filter: brightness(1) contrast(1.06) saturate(1.08);
+  object-position: 50% 45%;
+  border-radius: var(--image-radius);
+  background: var(--bg-deep);
+  box-shadow: none;
+  filter: none;
+  transition: transform 1.2s var(--ease-organic);
 }
 
 .meta {
   position: absolute;
   inset: auto 0 0;
-  padding: 1.55rem 0.75rem 0.7rem;
+  z-index: 2;
+  padding: 1.7rem 0.9rem 0.85rem;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.78) 0%,
-    rgba(0, 0, 0, 0.22) 55%,
+    rgba(42, 39, 34, 0.7) 0%,
+    rgba(42, 39, 34, 0.18) 55%,
     transparent 100%
   );
   color: var(--white);
   transform: none;
   opacity: 1;
-  transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
+  transition:
+    transform 0.7s var(--ease-organic),
+    opacity 0.7s var(--ease-soft);
 }
 
 .meta h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(0.88rem, 3.2vw, 1.1rem);
+  font-size: clamp(0.9rem, 3.2vw, 1.12rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
 .meta p {
-  margin: 0.18rem 0 0;
-  color: rgba(255, 255, 255, 0.78);
+  margin: 0.2rem 0 0;
+  color: rgba(250, 250, 247, 0.72);
   font-size: 0.66rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -108,72 +130,45 @@
   padding: 2rem;
 }
 
-/*
-  Desktop puzzle (5 cols × 5 rows), fully packed:
-
-  [ A ][  B  ][  C  ]
-  [ A ][  E  ][  C  ]
-  [ D ][  E  ][  F  ]
-  [ G ][     H     ]
-  [ G ][     H     ]
-*/
 @media (min-width: 900px) {
   .collage {
-    --collage-gap: 12px;
-    --collage-rows: 5;
-    grid-template-columns: 1.1fr 1.35fr 1.15fr 1.25fr 1.2fr;
-    grid-template-rows: repeat(var(--collage-rows), minmax(0, 1fr));
-    grid-auto-rows: unset;
-    height: calc(100svh - var(--collage-chrome));
-    max-height: calc(100svh - var(--collage-chrome));
+    --collage-gap: 16px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: minmax(170px, 22vh);
+    padding-bottom: 2.75rem;
   }
 
-  .tileA {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
+  .tileFeatured {
+    grid-column: span 4;
+    grid-row: span 3;
   }
 
-  .tileB {
-    grid-column: 2 / 4;
-    grid-row: 1 / 2;
-  }
-
-  .tileC {
-    grid-column: 4 / 6;
-    grid-row: 1 / 3;
-  }
-
-  .tileD {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-  }
-
-  .tileE {
-    grid-column: 2 / 4;
-    grid-row: 2 / 4;
-  }
-
-  .tileF {
-    grid-column: 4 / 6;
-    grid-row: 3 / 4;
-  }
-
+  .tileA,
+  .tileD,
   .tileG {
-    grid-column: 1 / 2;
-    grid-row: 4 / 6;
+    grid-column: span 3;
+    grid-row: span 2;
   }
 
+  .tileB,
+  .tileE,
   .tileH {
-    grid-column: 2 / 6;
-    grid-row: 4 / 6;
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .tileC,
+  .tileF {
+    grid-column: span 2;
+    grid-row: span 3;
   }
 
   .meta {
-    padding: 1.7rem 0.9rem 0.8rem;
+    padding: 1.85rem 1rem 0.95rem;
   }
 
   .meta h2 {
-    font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+    font-size: clamp(0.98rem, 1.4vw, 1.22rem);
   }
 
   .meta p {
@@ -183,7 +178,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .meta {
-    transform: translateY(0.3rem);
+    transform: translateY(0.4rem);
     opacity: 0;
   }
 
@@ -196,51 +191,36 @@
 
 @media (max-height: 500px) and (orientation: landscape) {
   .collage {
-    --collage-chrome: calc(var(--nav-height) + 3.75rem);
     --collage-gap: 8px;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: repeat(4, minmax(0, 1fr));
-    height: calc(100svh - var(--collage-chrome));
-    max-height: calc(100svh - var(--collage-chrome));
+    grid-auto-rows: minmax(130px, 30vh);
   }
 
-  .tileA {
-    grid-column: 1 / 3;
-    grid-row: 1 / 3;
-  }
-
-  .tileB {
-    grid-column: 3 / 5;
-    grid-row: 1 / 2;
-  }
-
-  .tileC {
-    grid-column: 5 / 7;
-    grid-row: 1 / 3;
-  }
-
-  .tileD {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-  }
-
-  .tileE {
-    grid-column: 3 / 5;
-    grid-row: 2 / 4;
-  }
-
-  .tileF {
-    grid-column: 5 / 7;
-    grid-row: 3 / 4;
-  }
-
+  .tileFeatured,
+  .tileA,
+  .tileD,
   .tileG {
-    grid-column: 1 / 3;
-    grid-row: 4 / 5;
+    grid-column: span 3;
+    grid-row: span 2;
   }
 
+  .tileB,
+  .tileE,
   .tileH {
-    grid-column: 3 / 7;
-    grid-row: 4 / 5;
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .tileC,
+  .tileF {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meta,
+  .image {
+    transition: none;
   }
 }

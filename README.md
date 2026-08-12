@@ -12,7 +12,6 @@ Bilingual architecture studio website (English / Español) built with Next.js Ap
 ## Develop
 
 ```bash
-cd santiago-architecture
 npm install
 npm run dev
 ```

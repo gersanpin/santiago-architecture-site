@@ -1,8 +1,9 @@
 .footer {
   border-top: 1px solid var(--line);
-  padding: var(--space-3) 0;
+  padding: var(--space-4) 0;
   color: var(--ink-muted);
   font-size: 0.85rem;
+  background: transparent;
 }
 
 .inner {
@@ -25,4 +26,9 @@
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.02em;
+  transition: opacity var(--duration-ui) var(--ease-soft);
+}
+
+.brand:hover {
+  opacity: 0.7;
 }

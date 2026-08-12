@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ContactInquiryForm } from "@/components/ContactInquiryForm";
+import { Reveal } from "@/components/Reveal";
 import { buildMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
 import styles from "../content.module.css";
@@ -28,13 +29,18 @@ export default async function ContactPage({ params }: Props) {
   return (
     <div className={`${styles.stage} ${styles.contactStage}`}>
       <div className={`${styles.shell} ${styles.contactShell}`}>
-        <h1 className={styles.title}>{t("title")}</h1>
-        <hr className={styles.rule} />
-        <p className={styles.lead}>{t("lead")}</p>
-        <p className={styles.body}>{t("body")}</p>
-        <Suspense fallback={null}>
-          <ContactInquiryForm studioEmail={t("email")} />
-        </Suspense>
+        <Reveal>
+          <h1 className={styles.title}>{t("title")}</h1>
+          <hr className={styles.rule} />
+          <p className={styles.lead}>{t("lead")}</p>
+          <p className={styles.body}>{t("body")}</p>
+          <p className={styles.body}>{t("bodySecondary")}</p>
+        </Reveal>
+        <Reveal delay={1} className={styles.contactForm}>
+          <Suspense fallback={null}>
+            <ContactInquiryForm studioEmail={t("email")} />
+          </Suspense>
+        </Reveal>
       </div>
     </div>
   );

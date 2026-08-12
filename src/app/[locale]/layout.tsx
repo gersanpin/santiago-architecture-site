@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { PageFade } from "@/components/PageFade";
 import { siteConfig } from "@/lib/site";
 import "@/styles/globals.css";
 
@@ -70,7 +71,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           <Suspense fallback={null}>
             <SiteHeader />
           </Suspense>
-          <main>{children}</main>
+          <main>
+            <PageFade>{children}</PageFade>
+          </main>
           <Suspense fallback={null}>
             <SiteFooter />
           </Suspense>

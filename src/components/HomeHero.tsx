@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
 import styles from "./HomeHero.module.css";
 
 const INTERVAL_MS = 5000;
@@ -51,6 +52,8 @@ export function HomeHero({ covers }: Props) {
             alt=""
             fill
             priority={index === 0}
+            quality={IMAGE_QUALITY}
+            unoptimized={IMAGE_UNOPTIMIZED}
             className={`${styles.heroImage} ${
               index === active ? styles.heroImageActive : ""
             }`}

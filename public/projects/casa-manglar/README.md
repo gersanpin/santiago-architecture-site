@@ -1,10 +1,8 @@
 # Casa Manglar — images
 
-Drop the three project photos here with these exact names:
+Project photos (PNG):
 
-- `01.jpg` — main / street elevation
-- `02.jpg` — wider facade with carport
-- `03.jpg` — corner / sunset view
+- `01.png` — cover / portada (street elevation)
+- `02.png` … `06.png` — gallery
 
-Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`  
-If you use another extension, update the paths in `src/data/projects.ts`.
+Then hard-refresh the site. The first path in `src/data/projects.ts` is the cover.

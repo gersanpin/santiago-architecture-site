@@ -1,19 +1,30 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import { useTranslations } from "next-intl";
+import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
+import { usePushFromPointer } from "@/hooks/usePushFromPointer";
+import { ExpandImageButton, ProjectLightbox } from "./ProjectLightbox";
 import styles from "./ProjectGallery.module.css";
 
 type Props = {
   images: string[];
   alt: string;
+  children?: ReactNode;
 };
 
-export function ProjectGallery({ images, alt }: Props) {
+export function ProjectGallery({ images, alt, children }: Props) {
   const t = useTranslations("Projects");
   const [index, setIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const total = images.length;
+  const src = images[index] ?? images[0];
 
   const goTo = useCallback(
     (next: number) => {
@@ -25,80 +36,102 @@ export function ProjectGallery({ images, alt }: Props) {
 
   const previous = useCallback(() => goTo(index - 1), [goTo, index]);
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
+  const { style: pushStyle, handlers: pushHandlers } = usePushFromPointer({
+    maxTilt: 10,
+  });
 
   useEffect(() => {
+    if (lightboxOpen) return;
+
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "ArrowLeft") previous();
       if (event.key === "ArrowRight") next();
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [next, previous]);
+  }, [next, previous, lightboxOpen]);
 
   if (total === 0) return null;
 
   return (
     <div className={styles.gallery}>
-      <div className={styles.stage}>
-        {images.map((src, i) => (
-          <div
-            key={src}
-            className={`${styles.slide} ${i === index ? styles.active : ""}`}
-            aria-hidden={i !== index}
-          >
+      <div className={styles.column}>
+        <div className={styles.media} {...pushHandlers}>
+          {src ? (
             <Image
+              key={src}
               src={src}
-              alt={`${alt} — ${i + 1}`}
-              fill
-              priority={i === 0}
+              alt={`${alt} — ${index + 1}`}
+              width={1920}
+              height={1080}
+              priority
+              quality={IMAGE_QUALITY}
+              unoptimized={IMAGE_UNOPTIMIZED}
               sizes="100vw"
               className={styles.image}
+              style={{ width: "auto", height: "auto", ...pushStyle }}
             />
-          </div>
-        ))}
+          ) : null}
 
-        {total > 1 ? (
-          <>
-            <button
-              type="button"
-              className={`${styles.nav} ${styles.prev}`}
-              onClick={previous}
-              aria-label={t("previousImage")}
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              className={`${styles.nav} ${styles.next}`}
-              onClick={next}
-              aria-label={t("nextImage")}
-            >
-              →
-            </button>
-          </>
-        ) : null}
-      </div>
+          <ExpandImageButton
+            onClick={() => {
+              setLightboxOpen(true);
+            }}
+          />
 
-      <div className={styles.controls}>
-        <p className={styles.counter}>
-          {index + 1} / {total}
-        </p>
-        {total > 1 ? (
-          <div className={styles.dots} role="tablist" aria-label={t("gallery")}>
-            {images.map((src, i) => (
+          {total > 1 ? (
+            <>
               <button
-                key={src}
                 type="button"
-                role="tab"
-                aria-selected={i === index}
-                className={i === index ? styles.dotActive : undefined}
-                onClick={() => goTo(i)}
-                aria-label={`${t("image")} ${i + 1}`}
-              />
-            ))}
-          </div>
-        ) : null}
+                className={`${styles.hit} ${styles.hitPrev}`}
+                onClick={previous}
+                aria-label={t("previousImage")}
+              >
+                <span className={styles.arrow} aria-hidden="true">
+                  ←
+                </span>
+              </button>
+              <button
+                type="button"
+                className={`${styles.hit} ${styles.hitNext}`}
+                onClick={next}
+                aria-label={t("nextImage")}
+              >
+                <span className={styles.arrow} aria-hidden="true">
+                  →
+                </span>
+              </button>
+              <div
+                className={styles.dots}
+                role="tablist"
+                aria-label={t("gallery")}
+              >
+                {images.map((image, i) => (
+                  <button
+                    key={image}
+                    type="button"
+                    role="tab"
+                    aria-selected={i === index}
+                    className={i === index ? styles.dotActive : undefined}
+                    onClick={() => goTo(i)}
+                    aria-label={`${t("image")} ${i + 1}`}
+                  />
+                ))}
+              </div>
+            </>
+          ) : null}
+        </div>
+
+        {children ? <div className={styles.caption}>{children}</div> : null}
       </div>
+
+      <ProjectLightbox
+        images={images}
+        alt={alt}
+        initialIndex={index}
+        open={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+      />
     </div>
   );
 }
