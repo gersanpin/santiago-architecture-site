@@ -1,5 +1,3 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { HomeHero } from "@/components/HomeHero";
 import { projects } from "@/data/projects";
@@ -9,12 +7,6 @@ import type { Locale } from "@/i18n/routing";
 type Props = {
   params: Promise<{ locale: string }>;
 };
-
-function isAvailableCover(src: string) {
-  if (src.startsWith("http://") || src.startsWith("https://")) return true;
-  if (!src.startsWith("/")) return false;
-  return existsSync(path.join(process.cwd(), "public", src.slice(1)));
-}
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
@@ -33,7 +25,7 @@ export default async function HomePage({ params }: Props) {
 
   const covers = projects
     .map((project) => project.images[0])
-    .filter((src): src is string => Boolean(src) && isAvailableCover(src));
+    .filter((src): src is string => Boolean(src));
 
   return <HomeHero covers={covers} />;
 }
