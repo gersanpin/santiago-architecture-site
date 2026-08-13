@@ -100,6 +100,17 @@
   line-height: 1.05;
 }
 
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--duration-ui) var(--ease-soft);
+}
+
+.titleLink:hover,
+.titleLink:focus-visible {
+  opacity: 0.72;
+}
+
 .details {
   margin: 0;
   display: grid;

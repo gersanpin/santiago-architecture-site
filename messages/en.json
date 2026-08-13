@@ -30,10 +30,9 @@
   "Projects": {
     "title": "Projects",
     "selected": "Selected Projects",
-    "gridView": "Grid View",
-    "listView": "List View",
-    "globeView": "Globe View",
-    "viewProject": "View Project",
+    "gridView": "Grid",
+    "listView": "List",
+    "globeView": "Globe",
     "nextProject": "Next Project",
     "gallery": "Project gallery",
     "image": "Image",
@@ -46,11 +45,12 @@
       "residential": "Residential",
       "hospitality": "Hospitality",
       "masterplan": "Masterplan",
-      "commercial": "Commercial",
-      "interior": "Interior",
-      "concept": "Concept"
+      "workplace": "Workplace",
+      "pavilion": "Pavilion",
+      "interior": "Interior"
     },
     "labels": {
+      "project": "Project",
       "location": "Location",
       "typology": "Typology",
       "year": "Year",

@@ -50,8 +50,13 @@ const FAN_RADIUS_YUCATAN_MIN_DEG = 1.25;
 const FAN_RADIUS_YUCATAN_MAX_DEG = 1.9;
 /** Radial lift between stacked cluster mates (globe-normal, world units). */
 const PIN_LIFT_STEP = 0.048;
-/** Compact hit spheres so nearby land pins stay separately clickable. */
-const PIN_HIT_RADIUS = 0.008;
+/** Generous invisible hit sphere — easier to aim without needing pixel precision. */
+const PIN_HIT_RADIUS = 0.048;
+/** Selected pin accent — clear signal on the globe. */
+const PIN_SELECTED_CORE = "#e53935";
+const PIN_SELECTED_GLOW = "#c62828";
+const PIN_IDLE_CORE = "#efe9df";
+const PIN_IDLE_GLOW = "#a8b39e";
 
 type GlobeProject = Project & { globeLift?: number };
 
@@ -338,33 +343,32 @@ function AppleEarth() {
 }
 
 function MapPinMesh({ selected }: { selected: boolean }) {
-  const scale = selected ? 1.28 : 1;
-  const core = selected ? "#faf7f2" : "#efe9df";
-  const glow = selected ? "#5e6b57" : "#a8b39e";
+  const scale = selected ? 1.45 : 1.08;
+  const core = selected ? PIN_SELECTED_CORE : PIN_IDLE_CORE;
+  const glow = selected ? PIN_SELECTED_GLOW : PIN_IDLE_GLOW;
 
   return (
     <group scale={scale}>
       <mesh position={[0, 0.002, 0]} rotation={[-Math.PI / 2, 0, 0]} raycast={() => null}>
-        {/* Compact rings so fanned neighbors read as separate dots */}
-        <ringGeometry args={[0.016, 0.026, 48]} />
+        <ringGeometry args={[0.02, 0.034, 48]} />
         <meshBasicMaterial
           color={glow}
           transparent
-          opacity={selected ? 0.85 : 0.45}
+          opacity={selected ? 0.95 : 0.5}
           depthWrite={false}
           toneMapped={false}
         />
       </mesh>
-      <mesh position={[0, 0.01, 0]} raycast={() => null}>
-        <sphereGeometry args={[0.012, 32, 32]} />
+      <mesh position={[0, 0.012, 0]} raycast={() => null}>
+        <sphereGeometry args={[0.016, 32, 32]} />
         <meshBasicMaterial color={core} toneMapped={false} />
       </mesh>
-      <mesh position={[0, 0.01, 0]} raycast={() => null}>
-        <sphereGeometry args={[0.019, 32, 32]} />
+      <mesh position={[0, 0.012, 0]} raycast={() => null}>
+        <sphereGeometry args={[0.026, 32, 32]} />
         <meshBasicMaterial
           color={glow}
           transparent
-          opacity={selected ? 0.35 : 0.18}
+          opacity={selected ? 0.42 : 0.2}
           depthWrite={false}
           toneMapped={false}
         />
@@ -398,8 +402,9 @@ function ProjectPin({
 
   return (
     <group position={position} quaternion={quaternion}>
+      {/* Large invisible target aligned with the visible pin */}
       <mesh
-        position={[0, 0.04, 0]}
+        position={[0, 0.012, 0]}
         onPointerDown={(event) => {
           event.stopPropagation();
           onSelect(project.slug);
@@ -687,7 +692,14 @@ export function ProjectGlobe({ projects, selectedSlug, onSelect }: Props) {
           <>
             <GlobePreview key={selected.slug} project={selected} locale={locale} />
             <p className={styles.kicker}>{t(`filters.${selected.category}`)}</p>
-            <h2>{getLocalized(selected.name, locale)}</h2>
+            <h2>
+              <Link
+                href={`/projects/${selected.slug}`}
+                className={styles.titleLink}
+              >
+                {getLocalized(selected.name, locale)}
+              </Link>
+            </h2>
             <dl className={styles.details}>
               <div>
                 <dt>{t("labels.location")}</dt>
@@ -698,12 +710,6 @@ export function ProjectGlobe({ projects, selectedSlug, onSelect }: Props) {
                 <dd>{t(`filters.${selected.category}`)}</dd>
               </div>
             </dl>
-            <Link
-              href={`/projects/${selected.slug}`}
-              className="btn btn-primary"
-            >
-              {t("viewProject")}
-            </Link>
           </>
         ) : (
           <>

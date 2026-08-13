@@ -35,6 +35,7 @@ function ProjectListEntry({ project, locale, priority }: EntryProps) {
   const images = project.images;
   const total = images.length;
   const name = getLocalized(project.name, locale);
+  const place = formatPlace(project, locale);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const { style: pushStyle, handlers: pushHandlers } = usePushFromPointer({
@@ -52,20 +53,26 @@ function ProjectListEntry({ project, locale, priority }: EntryProps) {
         <div className={styles.media} {...pushHandlers}>
           {src ? (
             <div className={styles.imageShell}>
-              <div className={styles.pushFrame} style={pushStyle}>
-                <Image
-                  key={src}
-                  src={src}
-                  alt={`${name} — ${index + 1}`}
-                  width={1920}
-                  height={1080}
-                  priority={priority}
-                  quality={IMAGE_QUALITY}
-                  unoptimized={IMAGE_UNOPTIMIZED}
-                  sizes="100vw"
-                  className={styles.image}
-                />
-              </div>
+              <Link
+                href={`/projects/${project.slug}`}
+                className={styles.imageLink}
+                aria-label={name}
+              >
+                <div className={styles.pushFrame} style={pushStyle}>
+                  <Image
+                    key={src}
+                    src={src}
+                    alt={`${name} — ${index + 1}`}
+                    width={1920}
+                    height={1080}
+                    priority={priority}
+                    quality={IMAGE_QUALITY}
+                    unoptimized={IMAGE_UNOPTIMIZED}
+                    sizes="100vw"
+                    className={styles.image}
+                  />
+                </div>
+              </Link>
               <ExpandImageButton
                 variant="ghost"
                 onClick={() => {
@@ -98,19 +105,33 @@ function ProjectListEntry({ project, locale, priority }: EntryProps) {
         </div>
 
         <div className={styles.meta}>
-          <div className={styles.copy}>
-            <p className={styles.kicker}>{t(`filters.${project.category}`)}</p>
-            <h2 className={styles.name}>
-              <Link href={`/projects/${project.slug}`}>{name}</Link>
-            </h2>
-            <p className={styles.detail}>{formatPlace(project, locale)}</p>
-            <p className={styles.summary}>
-              {getLocalized(project.description, locale)}
-            </p>
+          <div className={styles.index}>
+            <span className={`${styles.indexItem} ${styles.indexProject}`}>
+              <span className={styles.indexLabel}>{t("labels.project")}</span>
+              <Link
+                href={`/projects/${project.slug}`}
+                className={styles.indexValueLink}
+              >
+                {name}
+              </Link>
+            </span>
+            {place ? (
+              <span className={styles.indexItem}>
+                <span className={styles.indexLabel}>{t("labels.location")}</span>
+                <span className={styles.indexValue}>{place}</span>
+              </span>
+            ) : null}
+            <span className={styles.indexItem}>
+              <span className={styles.indexLabel}>{t("labels.typology")}</span>
+              <span className={styles.indexValue}>
+                {t(`filters.${project.category}`)}
+              </span>
+            </span>
+            <span className={styles.indexItem}>
+              <span className={styles.indexLabel}>{t("labels.year")}</span>
+              <span className={styles.indexValue}>{project.year}</span>
+            </span>
           </div>
-          <Link href={`/projects/${project.slug}`} className={styles.cta}>
-            {t("viewProject")}
-          </Link>
         </div>
       </div>
       <ProjectLightbox

@@ -117,6 +117,7 @@ function ProjectTile({
   locale,
   priority,
 }: TileProps) {
+  const t = useTranslations("Projects");
   const pool = getImagePool(project, shape);
   const name = getLocalized(project.name, locale);
   const { style: pushStyle, handlers: pushHandlers } = usePushFromPointer({
@@ -163,6 +164,7 @@ function ProjectTile({
           </div>
         ) : null}
         <div className={styles.meta}>
+          <p className={styles.category}>{t(`filters.${project.category}`)}</p>
           <h2>{name}</h2>
           <p>{formatPlace(project, locale)}</p>
         </div>

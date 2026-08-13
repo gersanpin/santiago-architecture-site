@@ -2,9 +2,9 @@ export const categories = [
   "residential",
   "hospitality",
   "masterplan",
-  "commercial",
+  "workplace",
+  "pavilion",
   "interior",
-  "concept",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -28,6 +28,8 @@ export type Project = {
   city: LocalizedString;
   country: LocalizedString;
   description: LocalizedString;
+  /** Optional credit / collaboration line shown after the description. */
+  credit?: LocalizedString;
   seoTitle: LocalizedString;
   seoDescription: LocalizedString;
 };
@@ -62,7 +64,7 @@ export function getImagePool(
 const projectsData: Project[] = [
   {
     slug: "tiny-home-costa-rica",
-    year: 2025,
+    year: 2024,
     latitude: 10.471,
     longitude: -84.645,
     area: "85 m²",
@@ -93,16 +95,16 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "A prefabricated two-level retreat with curved roofs and warm wood — designed to be replicated and transported fully assembled.",
-      es: "Refugio prefabricado de dos niveles con cubiertas curvas y madera cálida — pensado para replicarse y transportarse ya armado.",
+      en: "A two-level prefabricated retreat of 85 m² with curved roofs and warm wood, designed to be transported fully assembled.",
+      es: "Un refugio prefabricado de dos niveles y 85 m² con cubiertas curvas y madera cálida, pensado para transportarse ya armado.",
     },
     seoTitle: {
       en: "Tiny Home Costa Rica | Architecture Portfolio",
       es: "Tiny Home Costa Rica | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Prefabricated Tiny Home Costa Rica — replicable and transportable fully assembled.",
-      es: "Tiny Home Costa Rica prefabricada — replicable y transportable ya armada.",
+      en: "Tiny Home Costa Rica — a two-level prefabricated retreat with curved roofs and warm wood.",
+      es: "Tiny Home Costa Rica — refugio prefabricado de dos niveles con cubiertas curvas y madera cálida.",
     },
   },
   {
@@ -126,7 +128,7 @@ const projectsData: Project[] = [
     coverFocus: "50% 48%",
     name: {
       en: "Tiny Home 1 Bedroom",
-      es: "Tiny Home 1 Recámara",
+      es: "Tiny Home 1 Bedroom",
     },
     city: {
       en: "",
@@ -137,16 +139,16 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "A prefabricated one-bedroom tropical cabin with a curved timber roof — built to be replicated and moved already assembled.",
-      es: "Cabaña tropical prefabricada de una recámara con cubierta de madera curva — hecha para replicarse y moverse ya armada.",
+      en: "A compact one-bedroom cabin of 42 m² under a curved timber roof, conceived as a tropical living unit that can be moved already assembled.",
+      es: "Una cabaña compacta de una recámara y 42 m² bajo una cubierta de madera curva, concebida como unidad habitacional tropical que puede moverse ya armada.",
     },
     seoTitle: {
       en: "Tiny Home 1 Bedroom | Architecture Portfolio",
-      es: "Tiny Home 1 Recámara | Portafolio de arquitectura",
+      es: "Tiny Home 1 Bedroom | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Prefabricated Tiny Home 1 Bedroom — replicable and transportable fully assembled.",
-      es: "Tiny Home 1 Recámara prefabricada — replicable y transportable ya armada.",
+      en: "Tiny Home 1 Bedroom — a compact one-bedroom cabin with a curved timber roof.",
+      es: "Tiny Home 1 Bedroom — cabaña compacta de una recámara con cubierta de madera curva.",
     },
   },
   {
@@ -175,21 +177,21 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "A prefabricated jungle studio with a curved timber roof — compact, replicable, and transportable fully assembled.",
-      es: "Estudio prefabricado en la selva con cubierta de madera curva — compacto, replicable y transportable ya armado.",
+      en: "A 28 m² prefabricated studio with a curved timber roof — the most compact unit in the series, sized for essential living.",
+      es: "Un estudio prefabricado de 28 m² con cubierta de madera curva — la unidad más compacta de la serie, dimensionada para lo esencial.",
     },
     seoTitle: {
       en: "Tiny House Costa Rica | Architecture Portfolio",
       es: "Tiny House Costa Rica | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Prefabricated Tiny House Costa Rica — replicable and transportable fully assembled.",
-      es: "Tiny House Costa Rica prefabricada — replicable y transportable ya armada.",
+      en: "Tiny House Costa Rica — a compact 28 m² prefabricated studio with a curved timber roof.",
+      es: "Tiny House Costa Rica — estudio prefabricado compacto de 28 m² con cubierta de madera curva.",
     },
   },
   {
     slug: "casa-manglar",
-    year: 2025,
+    year: 2026,
     latitude: 21.1619,
     longitude: -86.8515,
     area: "550 m²",
@@ -221,16 +223,20 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "Currently under construction in Cancún — pre-sale. Project by Carlo Ávila; façade by Santiago Architecture.",
-      es: "En construcción en Cancún — preventa. Proyecto de Carlo Ávila; fachada por Santiago Architecture.",
+      en: "Façade design for a residential project in Cancún, conceived as a continuous architectural skin of curved balconies, vegetation and horizontal layers.",
+      es: "Diseño de fachada para un proyecto residencial en Cancún, concebida como una envolvente continua de balcones curvos, vegetación y capas horizontales.",
+    },
+    credit: {
+      en: "Project by Carlo Ávila; façade by Santiago Architecture.",
+      es: "Proyecto de Carlo Ávila; fachada por Santiago Architecture.",
     },
     seoTitle: {
       en: "Casa Manglar | Architecture Portfolio",
       es: "Casa Manglar | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Casa Manglar in Cancún — under construction, pre-sale. Project by Carlo Ávila; façade by Santiago Architecture.",
-      es: "Casa Manglar en Cancún — en construcción, preventa. Proyecto de Carlo Ávila; fachada por Santiago Architecture.",
+      en: "Casa Manglar in Cancún — façade design by Santiago Architecture; project by Carlo Ávila.",
+      es: "Casa Manglar en Cancún — diseño de fachada por Santiago Architecture; proyecto de Carlo Ávila.",
     },
   },
   {
@@ -253,8 +259,8 @@ const projectsData: Project[] = [
     ],
     coverFocus: "50% 42%",
     name: {
-      en: "El Eden Tulum",
-      es: "El Edén en Tulum",
+      en: "El Edén Tulum",
+      es: "El Edén Tulum",
     },
     city: {
       en: "Tulum",
@@ -265,16 +271,16 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "A jungle gateway and site framework of curved canopies, stone walls, and water woven into the forest.",
-      es: "Acceso y marco de sitio en la selva con cubiertas curvas, muros de piedra y agua integrada al bosque.",
+      en: "Remodeling of the entrance sequence to a residential development in Tulum, shaped by curved canopies, stone walls and water as the threshold between the road and the site.",
+      es: "Remodelación del acceso a un fraccionamiento en Tulum, definida por cubiertas curvas, muros de piedra y agua como umbral entre la vialidad y el predio.",
     },
     seoTitle: {
-      en: "El Eden Tulum | Architecture Portfolio",
-      es: "El Edén en Tulum | Portafolio de arquitectura",
+      en: "El Edén Tulum | Architecture Portfolio",
+      es: "El Edén Tulum | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "El Eden Tulum — masterplan and entrance architecture in the jungle.",
-      es: "El Edén en Tulum — plan maestro y acceso en la selva.",
+      en: "El Edén Tulum — remodeling of the access to a residential development in Tulum.",
+      es: "El Edén Tulum — remodelación del acceso a un fraccionamiento en Tulum.",
     },
   },
   {
@@ -299,16 +305,20 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "A jungle masterplan of white organic volumes and green roofs woven through retained forest canopy.",
-      es: "Plan maestro en la selva con volúmenes orgánicos blancos y cubiertas verdes entre el dosel forestal existente.",
+      en: "Collaboration on the conceptualization of an eight-hectare masterplan in Uh May, arranged as white volumes with green roofs within retained forest canopy.",
+      es: "Colaboración en la conceptualización de un plan maestro de ocho hectáreas en Uh May, organizado como volúmenes blancos con cubiertas verdes dentro del dosel forestal retenido.",
+    },
+    credit: {
+      en: "In collaboration with Rodrigo Lepez Vela and other architects.",
+      es: "En colaboración con Rodrigo Lepez Vela y otros arquitectos.",
     },
     seoTitle: {
       en: "Aldea Uh May Masterplan | Architecture Portfolio",
       es: "Plan Maestro Aldea Uh May | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Aldea Uh May — masterplan concept in Tulum’s jungle.",
-      es: "Aldea Uh May — concepto de plan maestro en la selva de Tulum.",
+      en: "Aldea Uh May — collaborative conceptualization of an eight-hectare masterplan within retained forest canopy.",
+      es: "Aldea Uh May — colaboración en la conceptualización de un plan maestro de ocho hectáreas dentro del dosel forestal retenido.",
     },
   },
   {
@@ -333,7 +343,7 @@ const projectsData: Project[] = [
     ],
     coverFocus: "50% 48%",
     name: {
-      en: "Sisal House",
+      en: "Casa Sisal",
       es: "Casa Sisal",
     },
     city: {
@@ -345,25 +355,25 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "A coastal residence of organic white volumes, sunken living, and indoor-outdoor rooms open to sea breeze.",
-      es: "Residencia costera de volúmenes orgánicos blancos, estar hundido y espacios interior-exterior abiertos a la brisa.",
+      en: "A beachfront residence shaped by sculpted white volumes, curved walls and a sunken living area, with indoor-outdoor rooms open to sea breeze and a continuous relationship to the Yucatán coast.",
+      es: "Una residencia frente al mar definida por volúmenes blancos esculpidos, muros curvos y una sala hundida, con espacios interior-exterior abiertos a la brisa y una relación continua con la costa de Yucatán.",
     },
     seoTitle: {
-      en: "Sisal House | Architecture Portfolio",
+      en: "Casa Sisal | Architecture Portfolio",
       es: "Casa Sisal | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Casa Sisal — coastal residential architecture in Yucatán.",
-      es: "Casa Sisal — arquitectura residencial costera en Yucatán.",
+      en: "Casa Sisal — beachfront residential architecture on the Yucatán coast.",
+      es: "Casa Sisal — arquitectura residencial frente al mar en la costa de Yucatán.",
     },
   },
   {
     slug: "hexodome-cancun",
-    year: 2025,
+    year: 2024,
     latitude: 21.079,
     longitude: -86.851,
     area: "65 m²",
-    category: "concept",
+    category: "pavilion",
     images: [
       "/projects/hexodome-cancun/01.png",
       "/projects/hexodome-cancun/02.png",
@@ -373,7 +383,7 @@ const projectsData: Project[] = [
     ],
     coverFocus: "50% 52%",
     name: {
-      en: "Hexodome Cancun",
+      en: "Hexodome Cancún",
       es: "Hexodome Cancún",
     },
     city: {
@@ -385,16 +395,16 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "A biomorphic pavilion with a white cellular shell and timber screens, woven into the jungle canopy.",
-      es: "Pabellón biomórfico con cascarón celular blanco y celosías de madera, integrado al dosel de la selva.",
+      en: "A pavilion defined by a white cellular shell, curved geometry and timber screens that filter light while creating a distinctive spatial enclosure.",
+      es: "Un pabellón definido por una envolvente celular blanca, geometrías curvas y celosías de madera que filtran la luz y construyen un recinto espacial distintivo.",
     },
     seoTitle: {
-      en: "Hexodome Cancun | Architecture Portfolio",
+      en: "Hexodome Cancún | Architecture Portfolio",
       es: "Hexodome Cancún | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Hexodome Cancun — organic pavilion concept in the jungle.",
-      es: "Hexodome Cancún — concepto de pabellón orgánico en la selva.",
+      en: "Hexodome Cancún — pavilion with a cellular shell and timber screens.",
+      es: "Hexodome Cancún — pabellón con envolvente celular y celosías de madera.",
     },
   },
   {
@@ -415,7 +425,7 @@ const projectsData: Project[] = [
     coverFocus: "50% 48%",
     name: {
       en: "Tiny Home Spain",
-      es: "Tiny Home España",
+      es: "Tiny Home Spain",
     },
     city: {
       en: "",
@@ -426,21 +436,21 @@ const projectsData: Project[] = [
       es: "España",
     },
     description: {
-      en: "A prefabricated coastal tiny home with a curved white shell — designed to be replicated and transported fully assembled.",
-      es: "Tiny home costera prefabricada con cascarón blanco curvo — pensada para replicarse y transportarse ya armada.",
+      en: "A 32 m² coastal tiny home defined by a curved white shell, designed as a compact prefabricated dwelling.",
+      es: "Una tiny home costera de 32 m² definida por un cascarón blanco curvo, concebida como vivienda prefabricada compacta.",
     },
     seoTitle: {
       en: "Tiny Home Spain | Architecture Portfolio",
-      es: "Tiny Home España | Portafolio de arquitectura",
+      es: "Tiny Home Spain | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Prefabricated Tiny Home Spain — replicable and transportable fully assembled.",
-      es: "Tiny Home España prefabricada — replicable y transportable ya armada.",
+      en: "Tiny Home Spain — a coastal prefabricated dwelling with a curved white shell.",
+      es: "Tiny Home Spain — vivienda prefabricada costera con cascarón blanco curvo.",
     },
   },
   {
     slug: "casa-nosara",
-    year: 2025,
+    year: 2024,
     latitude: 9.974,
     longitude: -85.649,
     area: "180 m²",
@@ -451,7 +461,7 @@ const projectsData: Project[] = [
     ],
     coverFocus: "50% 48%",
     name: {
-      en: "Nosara House",
+      en: "Casa Nosara",
       es: "Casa Nosara",
     },
     city: {
@@ -463,21 +473,21 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "A jungle residence with earthen walls, a thatched roof, and a raised timber walkway woven into the forest.",
-      es: "Residencia en la selva con muros de tierra, techo de palapa y pasarela de madera elevada entre el bosque.",
+      en: "A tropical residence combining earth walls, a lightweight palapa roof and elevated timber walkways that connect the different living spaces through the site.",
+      es: "Una residencia tropical que combina muros de tierra, una cubierta ligera de palapa y pasarelas elevadas de madera que conectan los distintos espacios habitables a través del sitio.",
     },
     seoTitle: {
-      en: "Nosara House | Architecture Portfolio",
+      en: "Casa Nosara | Architecture Portfolio",
       es: "Casa Nosara | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Casa Nosara — tropical residential architecture in Costa Rica.",
-      es: "Casa Nosara — arquitectura residencial tropical en Costa Rica.",
+      en: "Casa Nosara — tropical residence with earth walls and a palapa roof in Costa Rica.",
+      es: "Casa Nosara — residencia tropical con muros de tierra y cubierta de palapa en Costa Rica.",
     },
   },
   {
     slug: "restaurante-nosara",
-    year: 2025,
+    year: 2024,
     latitude: 9.981,
     longitude: -85.661,
     area: "320 m²",
@@ -486,7 +496,7 @@ const projectsData: Project[] = [
     portraitImages: ["/projects/restaurante-nosara/01.png"],
     coverFocus: "50% 48%",
     name: {
-      en: "Nosara Restaurant",
+      en: "Restaurante Nosara",
       es: "Restaurante Nosara",
     },
     city: {
@@ -498,21 +508,21 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "An organic hospitality pavilion of curved shells and timber screens woven into the jungle.",
-      es: "Pabellón hospitality orgánico de cascarones curvos y celosías de madera integrado a la selva.",
+      en: "A restaurant pavilion defined by curved geometry, timber screens and open-air spaces responding to Nosara's tropical climate.",
+      es: "Un pabellón para restaurante definido por geometrías curvas, celosías de madera y espacios abiertos que responden al clima tropical de Nosara.",
     },
     seoTitle: {
-      en: "Nosara Restaurant | Architecture Portfolio",
+      en: "Restaurante Nosara | Architecture Portfolio",
       es: "Restaurante Nosara | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Restaurante Nosara — organic hospitality architecture in Costa Rica.",
-      es: "Restaurante Nosara — arquitectura hospitality orgánica en Costa Rica.",
+      en: "Restaurante Nosara — restaurant pavilion with curved geometry in Costa Rica.",
+      es: "Restaurante Nosara — pabellón para restaurante con geometrías curvas en Costa Rica.",
     },
   },
   {
     slug: "villa-nosara",
-    year: 2025,
+    year: 2024,
     latitude: 9.986,
     longitude: -85.654,
     area: "260 m²",
@@ -542,25 +552,25 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "A biomorphic jungle villa of sculpted earth volumes, with living trees rising through the structure.",
-      es: "Villa biomórfica en la selva de volúmenes de tierra esculpidos, con árboles vivos atravesando la estructura.",
+      en: "A jungle villa composed of sculpted earth-toned volumes, open living spaces and existing trees that rise through the architecture.",
+      es: "Una villa en la selva compuesta por volúmenes esculpidos en tonos tierra, espacios abiertos y árboles existentes que atraviesan la arquitectura.",
     },
     seoTitle: {
       en: "Villa Nosara | Architecture Portfolio",
       es: "Villa Nosara | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Villa Nosara — organic residential architecture in Costa Rica.",
-      es: "Villa Nosara — arquitectura residencial orgánica en Costa Rica.",
+      en: "Villa Nosara — jungle villa with sculpted earth-toned volumes in Costa Rica.",
+      es: "Villa Nosara — villa en la selva con volúmenes esculpidos en tonos tierra en Costa Rica.",
     },
   },
   {
     slug: "oficinas-mountain-nazca",
-    year: 2023,
+    year: 2017,
     latitude: 19.4326,
     longitude: -99.1332,
     area: "480 m²",
-    category: "commercial",
+    category: "workplace",
     images: [
       "/projects/oficinas-mountain-nazca/01.png",
       "/projects/oficinas-mountain-nazca/02.png",
@@ -579,7 +589,7 @@ const projectsData: Project[] = [
     coverFocus: "50% 48%",
     name: {
       en: "Mountain Nazca Offices",
-      es: "Oficinas Mountain Nazca",
+      es: "Mountain Nazca Offices",
     },
     city: {
       en: "Mexico City",
@@ -590,21 +600,25 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "An open-plan workplace of plywood, concrete, and parametric timber screens — in collaboration with Esteban Sepúlveda and Rodolfo Anaya.",
-      es: "Oficina abierta de plywood, concreto y celosías paramétricas de madera — en colaboración con Esteban Sepúlveda y Rodolfo Anaya.",
+      en: "A workplace defined by plywood, exposed concrete and parametric timber screens, balancing a raw material palette with precise geometric interventions.",
+      es: "Un espacio de trabajo definido por madera contrachapada, concreto aparente y celosías paramétricas de madera, combinando una paleta material cruda con intervenciones geométricas precisas.",
+    },
+    credit: {
+      en: "In collaboration with Esteban Sepúlveda and Rodolfo Anaya.",
+      es: "En colaboración con Esteban Sepúlveda y Rodolfo Anaya.",
     },
     seoTitle: {
       en: "Mountain Nazca Offices | Architecture Portfolio",
-      es: "Oficinas Mountain Nazca | Portafolio de arquitectura",
+      es: "Mountain Nazca Offices | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Mountain Nazca offices in Mexico City — commercial interior architecture with Esteban Sepúlveda and Rodolfo Anaya.",
-      es: "Oficinas Mountain Nazca en Ciudad de México — arquitectura de interiores comerciales con Esteban Sepúlveda y Rodolfo Anaya.",
+      en: "Mountain Nazca Offices in Mexico City — workplace interior with Esteban Sepúlveda and Rodolfo Anaya.",
+      es: "Mountain Nazca Offices en Ciudad de México — interior de trabajo con Esteban Sepúlveda y Rodolfo Anaya.",
     },
   },
   {
     slug: "cabin-tulum",
-    year: 2025,
+    year: 2023,
     latitude: 20.178,
     longitude: -87.455,
     area: "95 m²",
@@ -633,21 +647,21 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "A thatched jungle cabin of woven timber, stone, and glass — organic volumes woven into the tropical canopy.",
-      es: "Cabaña de paja en la selva con madera tejida, piedra y vidrio — volúmenes orgánicos integrados al dosel tropical.",
+      en: "A compact thatched retreat defined by an expressive timber framework, stone, glass and curved geometry, set in close relation to the tropical canopy.",
+      es: "Un refugio compacto de cubierta de paja definido por un entramado expresivo de madera, piedra, vidrio y geometrías curvas, en relación cercana con el dosel tropical.",
     },
     seoTitle: {
       en: "Cabin Tulum | Architecture Portfolio",
       es: "Cabin Tulum | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Cabin Tulum — organic thatched residential architecture in the jungle.",
-      es: "Cabin Tulum — arquitectura residencial orgánica de paja en la selva.",
+      en: "Cabin Tulum — compact retreat with an expressive timber framework.",
+      es: "Cabin Tulum — refugio compacto con entramado expresivo de madera.",
     },
   },
   {
     slug: "bali-resort",
-    year: 2026,
+    year: 2024,
     latitude: -8.5069,
     longitude: 115.2625,
     area: "—",
@@ -666,7 +680,7 @@ const projectsData: Project[] = [
     coverFocus: "48% 42%",
     name: {
       en: "Bali Resort",
-      es: "Resort Bali",
+      es: "Bali Resort",
     },
     city: {
       en: "Bali",
@@ -677,16 +691,16 @@ const projectsData: Project[] = [
       es: "Indonesia",
     },
     description: {
-      en: "A bamboo eco-resort of elevated pods, woven canopies, and terraced pools woven into the Balinese jungle.",
-      es: "Eco-resort de bambú con pods elevados, cubiertas tejidas y piscinas terrazadas integradas a la selva de Bali.",
+      en: "A bamboo eco-resort composed of elevated pavilions, woven canopies and terraced pools distributed through the Balinese landscape.",
+      es: "Un eco-resort de bambú compuesto por pabellones elevados, cubiertas tejidas y piscinas en terrazas distribuidas a través del paisaje balinés.",
     },
     seoTitle: {
       en: "Bali Resort | Architecture Portfolio",
-      es: "Resort Bali | Portafolio de arquitectura",
+      es: "Bali Resort | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Bali Resort — bamboo eco-resort hospitality architecture in Indonesia.",
-      es: "Resort Bali — arquitectura hospitality de eco-resort en bambú en Indonesia.",
+      en: "Bali Resort — bamboo eco-resort of elevated pavilions in Indonesia.",
+      es: "Bali Resort — eco-resort de bambú con pabellones elevados en Indonesia.",
     },
   },
   {
@@ -734,16 +748,16 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "An organic sculptural residence in the Tulum jungle — sand and stone forms, soft curves, and vegetation woven through the architecture.",
-      es: "Residencia escultórica orgánica en la selva de Tulum — formas de arena y piedra, curvas suaves y vegetación integrada a la arquitectura.",
+      en: "A residence of sand-toned surfaces, stone and soft geometries designed around shaded courtyards and tropical vegetation in Tulum.",
+      es: "Una residencia de superficies en tonos arena, piedra y geometrías suaves organizada alrededor de patios sombreados y vegetación tropical en Tulum.",
     },
     seoTitle: {
       en: "Jungle House Tulum | Architecture Portfolio",
       es: "Jungle House Tulum | Portafolio de arquitectura",
     },
     seoDescription: {
-      en: "Jungle House Tulum — organic sculptural residential architecture in the jungle.",
-      es: "Jungle House Tulum — arquitectura residencial escultórica orgánica en la selva.",
+      en: "Jungle House Tulum — residence of sand-toned surfaces and soft geometries.",
+      es: "Jungle House Tulum — residencia de superficies en tonos arena y geometrías suaves.",
     },
   },
 ];
@@ -793,13 +807,32 @@ export function getLocalized(
   return value[locale] ?? value.en;
 }
 
-/** Display as "country, city". */
+/** Display as "city, country". */
 export function formatPlace(project: Project, locale: LocaleCode): string {
   const country = getLocalized(project.country, locale).trim();
   const city = getLocalized(project.city, locale).trim();
   if (!city) return country;
   if (!country) return city;
-  return `${country}, ${city}`;
+  return `${city}, ${country}`;
+}
+
+/** True when area should appear in the UI (omit placeholders like "—"). */
+export function hasDisplayArea(area: string): boolean {
+  const value = area.trim();
+  return Boolean(value) && value !== "—" && value !== "-" && value !== "–";
+}
+
+/** Location · Year · Area — omits missing parts. */
+export function formatProjectFacts(
+  project: Project,
+  locale: LocaleCode,
+): string {
+  const parts: string[] = [];
+  const place = formatPlace(project, locale);
+  if (place) parts.push(place);
+  if (project.year) parts.push(String(project.year));
+  if (hasDisplayArea(project.area)) parts.push(project.area.trim());
+  return parts.join(" · ");
 }
 
 export function getNextProject(slug: string): Project | undefined {

@@ -30,10 +30,9 @@
   "Projects": {
     "title": "Proyectos",
     "selected": "Proyectos seleccionados",
-    "gridView": "Vista de proyectos",
-    "listView": "Vista lista",
-    "globeView": "Vista global",
-    "viewProject": "Ver proyecto",
+    "gridView": "Cuadrícula",
+    "listView": "Lista",
+    "globeView": "Globo",
     "nextProject": "Siguiente proyecto",
     "gallery": "Galería del proyecto",
     "image": "Imagen",
@@ -46,11 +45,12 @@
       "residential": "Residencial",
       "hospitality": "Hospitalidad",
       "masterplan": "Plan maestro",
-      "commercial": "Comercial",
-      "interior": "Interior",
-      "concept": "Conceptual"
+      "workplace": "Oficinas",
+      "pavilion": "Pabellón",
+      "interior": "Interiorismo"
     },
     "labels": {
+      "project": "Proyecto",
       "location": "Ubicación",
       "typology": "Tipología",
       "year": "Año",
