@@ -91,15 +91,47 @@
   flex-wrap: wrap;
   gap: 0.85rem;
   justify-self: end;
+  align-items: center;
   padding-bottom: 0.2rem;
+}
+
+.credit {
+  position: absolute;
+  right: clamp(1.25rem, 3.2vw, 2.75rem);
+  bottom: clamp(1.1rem, 3vh, 1.75rem);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  text-decoration: none;
+  color: rgba(250, 247, 242, 0.72);
+  transition: color var(--duration-ui) var(--ease-soft);
+}
+
+.credit:hover {
+  color: var(--white);
+}
+
+.creditName {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.creditPlace {
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
 }
 
 @keyframes hero-drift {
   from {
-    transform: scale(1.06) translate3d(0, 0, 0);
+    transform: scale(1.04) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.1) translate3d(-1.4%, -1%, 0);
+    transform: scale(1.07) translate3d(-0.8%, -0.5%, 0);
   }
 }
 

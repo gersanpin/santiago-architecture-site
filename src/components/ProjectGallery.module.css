@@ -20,8 +20,6 @@
   max-width: 100%;
   overflow: hidden;
   border-radius: var(--image-radius);
-  perspective: 900px;
-  transform-style: preserve-3d;
   box-shadow: none;
   filter: none;
 }
@@ -41,10 +39,6 @@
   pointer-events: none;
   user-select: none;
   border-radius: var(--image-radius);
-  transform-origin: center center;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   box-shadow: none;
   filter: none;
   background: var(--bg-deep);

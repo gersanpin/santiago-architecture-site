@@ -41,6 +41,7 @@ export async function generateMetadata({ params }: Props) {
     pathname: `/${locale}/projects/${slug}`,
     title: getLocalized(project.seoTitle, lang),
     description: getLocalized(project.seoDescription, lang),
+    image: project.images[0] ?? null,
   });
 }
 

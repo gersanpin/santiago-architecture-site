@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/Reveal";
 import { buildMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
@@ -34,11 +35,19 @@ export default async function AboutPage({ params }: Props) {
           <hr className={styles.rule} />
           <p className={styles.statement}>{t("lead")}</p>
           {intro.map((text, i) => (
-            <Reveal key={text} as="p" className={styles.body} delay={(Math.min(i + 1, 3) as 1 | 2 | 3)}>
+            <Reveal
+              key={text}
+              as="p"
+              className={styles.body}
+              delay={(Math.min(i + 1, 3) as 1 | 2 | 3)}
+            >
               {text}
             </Reveal>
           ))}
         </Reveal>
+
+        {/* Reserved for a future founder / studio / process photograph. */}
+        <div className={styles.aboutMedia} aria-hidden="true" />
 
         <Reveal as="section" className={styles.aboutSection} delay={1}>
           <h2 className={styles.sectionLabel}>{t("approachTitle")}</h2>
@@ -52,6 +61,16 @@ export default async function AboutPage({ params }: Props) {
               {text}
             </Reveal>
           ))}
+        </Reveal>
+
+        <Reveal as="p" className={styles.factLine} delay={1}>
+          {t("fact")}
+        </Reveal>
+
+        <Reveal className={styles.pageCta} delay={2}>
+          <Link href="/contact?start=1" className={styles.pageCtaLink}>
+            {t("cta")}
+          </Link>
         </Reveal>
       </div>
     </div>

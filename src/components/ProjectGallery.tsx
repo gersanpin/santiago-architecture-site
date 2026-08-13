@@ -9,7 +9,6 @@ import {
 } from "react";
 import { useTranslations } from "next-intl";
 import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
-import { usePushFromPointer } from "@/hooks/usePushFromPointer";
 import { ExpandImageButton, ProjectLightbox } from "./ProjectLightbox";
 import styles from "./ProjectGallery.module.css";
 
@@ -36,9 +35,6 @@ export function ProjectGallery({ images, alt, children }: Props) {
 
   const previous = useCallback(() => goTo(index - 1), [goTo, index]);
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
-  const { style: pushStyle, handlers: pushHandlers } = usePushFromPointer({
-    maxTilt: 10,
-  });
 
   useEffect(() => {
     if (lightboxOpen) return;
@@ -56,7 +52,7 @@ export function ProjectGallery({ images, alt, children }: Props) {
   return (
     <div className={styles.gallery}>
       <div className={styles.column}>
-        <div className={styles.media} {...pushHandlers}>
+        <div className={styles.media}>
           {src ? (
             <Image
               key={src}
@@ -69,7 +65,7 @@ export function ProjectGallery({ images, alt, children }: Props) {
               unoptimized={IMAGE_UNOPTIMIZED}
               sizes="100vw"
               className={styles.image}
-              style={{ width: "auto", height: "auto", ...pushStyle }}
+              style={{ width: "auto", height: "auto" }}
             />
           ) : null}
 

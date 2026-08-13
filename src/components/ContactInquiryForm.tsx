@@ -15,7 +15,6 @@ type FormState = {
   area: string;
   hasSite: string;
   stage: string;
-  budget: string;
   message: string;
 };
 
@@ -51,7 +50,6 @@ const INITIAL: FormState = {
   area: "",
   hasSite: "yes",
   stage: "idea",
-  budget: "",
   message: "",
 };
 
@@ -83,8 +81,10 @@ export function ContactInquiryForm({ studioEmail }: Props) {
   );
   const [values, setValues] = useState<FormState>(INITIAL);
   const [meeting, setMeeting] = useState<MeetingState>(INITIAL_MEETING);
-  const [attachmentNames, setAttachmentNames] = useState<string[]>([]);
+  const [attachments, setAttachments] = useState<File[]>([]);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [formStartedAt] = useState(() => Date.now());
 
   const projectTypes = useMemo(
     () =>
@@ -119,79 +119,80 @@ export function ContactInquiryForm({ studioEmail }: Props) {
     setMeeting((current) => ({ ...current, [key]: value }));
   }
 
-  function buildInquiryBody() {
-    const typeLabel = t(`types.${values.projectType}`);
-    const stageLabel = t(`stages.${values.stage}`);
-    const hasSiteLabel = t(`hasSiteOptions.${values.hasSite}`);
-
-    return [
-      t("mailIntro"),
-      "",
-      `${t("fields.name")}: ${values.name}`,
-      `${t("fields.contact")}: ${values.contact}`,
-      `${t("fields.location")}: ${values.location}`,
-      `${t("fields.projectType")}: ${typeLabel}`,
-      values.area ? `${t("fields.area")}: ${values.area}` : null,
-      `${t("fields.hasSite")}: ${hasSiteLabel}`,
-      `${t("fields.stage")}: ${stageLabel}`,
-      values.budget ? `${t("fields.budget")}: ${values.budget}` : null,
-      "",
-      `${t("fields.message")}:`,
-      values.message,
-      attachmentNames.length
-        ? `\n${t("mailAttachmentIntent", { files: attachmentNames.join(", ") })}`
-        : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
+  async function postContact(payload: FormData) {
+    payload.set("formStartedAt", String(formStartedAt));
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      body: payload,
+    });
+    const data = (await response.json().catch(() => null)) as {
+      ok?: boolean;
+      error?: string;
+    } | null;
+    if (!response.ok || !data?.ok) {
+      throw new Error(data?.error || t("sendError"));
+    }
   }
 
-  function handleInquirySubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleInquirySubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError(null);
     setSending(true);
 
-    const subject = t("mailSubject", { name: values.name });
-    const mailto = `mailto:${studioEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildInquiryBody())}`;
-    window.location.href = mailto;
-
-    window.setTimeout(() => {
-      setSending(false);
+    try {
+      const formEl = event.currentTarget;
+      const honeypot = String(new FormData(formEl).get("website") ?? "");
+      const payload = new FormData();
+      payload.set("kind", "inquiry");
+      payload.set("website", honeypot);
+      payload.set("name", values.name);
+      payload.set("contact", values.contact);
+      payload.set("location", values.location);
+      payload.set("projectType", values.projectType);
+      payload.set("area", values.area);
+      payload.set("hasSite", values.hasSite);
+      payload.set("stage", values.stage);
+      payload.set("message", values.message);
+      for (const file of attachments) {
+        payload.append("attachments", file);
+      }
+      await postContact(payload);
       setFromInquiry(true);
       setStep("meeting");
-    }, 250);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t("sendError"));
+    } finally {
+      setSending(false);
+    }
   }
 
-  function handleMeetingSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleMeetingSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError(null);
     setSending(true);
 
-    const reasonLabel = meetingReason
-      ? t(`meeting.reasons.${meetingReason}`)
-      : null;
-    const subject = t("meeting.mailSubject", { name: values.name });
-    const body = [
-      fromInquiry ? t("meeting.mailIntro") : t("meeting.mailIntroDirect"),
-      "",
-      reasonLabel
-        ? `${t("meeting.fields.reason")}: ${reasonLabel}`
-        : null,
-      `${t("fields.name")}: ${values.name}`,
-      `${t("fields.contact")}: ${values.contact}`,
-      "",
-      `${t("meeting.fields.date")}: ${meeting.date}`,
-      `${t("meeting.fields.time")}: ${meeting.time}`,
-      meeting.notes ? `${t("meeting.fields.notes")}:\n${meeting.notes}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    const mailto = `mailto:${studioEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-
-    window.setTimeout(() => {
-      setSending(false);
+    try {
+      const formEl = event.currentTarget;
+      const honeypot = String(new FormData(formEl).get("website") ?? "");
+      const payload = new FormData();
+      payload.set("kind", "meeting");
+      payload.set("website", honeypot);
+      payload.set("name", values.name);
+      payload.set("contact", values.contact);
+      payload.set("date", meeting.date);
+      payload.set("time", meeting.time);
+      payload.set("notes", meeting.notes);
+      payload.set("fromInquiry", fromInquiry ? "1" : "0");
+      if (meetingReason) {
+        payload.set("reason", t(`meeting.reasons.${meetingReason}`));
+      }
+      await postContact(payload);
       setStep("done");
-    }, 250);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t("sendError"));
+    } finally {
+      setSending(false);
+    }
   }
 
   function openMeetingDirect() {
@@ -215,7 +216,8 @@ export function ContactInquiryForm({ studioEmail }: Props) {
   function resetAll() {
     setValues(INITIAL);
     setMeeting(INITIAL_MEETING);
-    setAttachmentNames([]);
+    setAttachments([]);
+    setError(null);
     setFromInquiry(false);
     setMeetingReason(null);
     setFormOrigin("project");
@@ -379,6 +381,15 @@ export function ContactInquiryForm({ studioEmail }: Props) {
             />
           </label>
 
+          <input
+            className={styles.honeypot}
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
+
           <div className={styles.actions}>
             <button
               type="submit"
@@ -395,6 +406,7 @@ export function ContactInquiryForm({ studioEmail }: Props) {
               {fromInquiry ? t("meeting.skip") : t("cancel")}
             </button>
           </div>
+          {error ? <p className={styles.formError}>{error}</p> : null}
         </form>
       </div>
     );
@@ -457,7 +469,16 @@ export function ContactInquiryForm({ studioEmail }: Props) {
           projectTypes={projectTypes}
           stages={stages}
           hasSiteOptions={hasSiteOptions}
-          onAttachmentsChange={setAttachmentNames}
+          onAttachmentsChange={setAttachments}
+        />
+
+        <input
+          className={styles.honeypot}
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
         />
 
         <div className={styles.actions}>
@@ -468,6 +489,7 @@ export function ContactInquiryForm({ studioEmail }: Props) {
             {t("cancel")}
           </button>
         </div>
+        {error ? <p className={styles.formError}>{error}</p> : null}
       </form>
       <ContactMeta studioEmail={studioEmail} />
     </div>
@@ -480,7 +502,7 @@ type ProjectInquiryFieldsProps = {
   projectTypes: readonly string[];
   stages: readonly string[];
   hasSiteOptions: readonly string[];
-  onAttachmentsChange: (names: string[]) => void;
+  onAttachmentsChange: (files: File[]) => void;
 };
 
 function ProjectInquiryFields({
@@ -594,16 +616,6 @@ function ProjectInquiryFields({
             ))}
           </select>
         </label>
-        <label className={styles.field}>
-          <span className={styles.label}>{t("fields.budget")}</span>
-          <input
-            className={styles.input}
-            name="budget"
-            placeholder={t("placeholders.budget")}
-            value={values.budget}
-            onChange={(event) => update("budget", event.target.value)}
-          />
-        </label>
       </div>
 
       <label className={styles.field}>
@@ -625,11 +637,10 @@ function ProjectInquiryFields({
           type="file"
           name="attachments"
           multiple
+          accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.zip,image/*,application/pdf"
           onChange={(event) => {
             const files = event.target.files;
-            onAttachmentsChange(
-              files ? Array.from(files).map((file) => file.name) : [],
-            );
+            onAttachmentsChange(files ? Array.from(files) : []);
           }}
         />
         <span className={styles.hint}>{t("attachmentNote")}</span>

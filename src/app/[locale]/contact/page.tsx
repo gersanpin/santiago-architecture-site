@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ContactInquiryForm } from "@/components/ContactInquiryForm";
 import { Reveal } from "@/components/Reveal";
 import { buildMetadata } from "@/lib/seo";
+import { siteConfig } from "@/lib/site";
 import type { Locale } from "@/i18n/routing";
 import styles from "../content.module.css";
 
@@ -38,7 +39,7 @@ export default async function ContactPage({ params }: Props) {
         </Reveal>
         <Reveal delay={1} className={styles.contactForm}>
           <Suspense fallback={null}>
-            <ContactInquiryForm studioEmail={t("email")} />
+            <ContactInquiryForm studioEmail={siteConfig.email} />
           </Suspense>
         </Reveal>
       </div>

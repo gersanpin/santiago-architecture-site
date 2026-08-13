@@ -1,15 +1,15 @@
 {
   "Meta": {
     "siteName": "Santiago Architecture",
-    "homeTitle": "Santiago Architecture | Architecture Studio",
+    "homeTitle": "Architecture Studio",
     "homeDescription": "Architecture studio designing residential, hospitality, and cultural spaces.",
-    "projectsTitle": "Projects | Santiago Architecture",
+    "projectsTitle": "Projects",
     "projectsDescription": "Selected architecture projects across residential, hospitality, and masterplan work.",
-    "aboutTitle": "About | Santiago Architecture",
+    "aboutTitle": "About",
     "aboutDescription": "Architecture shaped by place, nature, and experience. A studio founded by Gerardo Santiago Pineda.",
-    "servicesTitle": "Services | Santiago Architecture",
+    "servicesTitle": "Services",
     "servicesDescription": "From the first idea through construction: architecture, design + build, residential, hospitality, masterplanning, and development.",
-    "contactTitle": "Contact | Santiago Architecture",
+    "contactTitle": "Contact",
     "contactDescription": "Tell us about your project, site, or development idea. We work with private clients, developers, and investors internationally."
   },
   "Nav": {
@@ -25,7 +25,11 @@
     "headline": "Architecture shaped by place.",
     "support": "Residential, hospitality, and cultural work with a quiet material focus.",
     "exploreProjects": "Explore Projects",
-    "startProject": "Start a Project"
+    "startProject": "Start a Project",
+    "selectedTitle": "Selected Projects",
+    "readAbout": "About the studio",
+    "viewServices": "View services",
+    "contactLead": "Have a site, a brief, or an idea in progress."
   },
   "Projects": {
     "title": "Projects",
@@ -54,9 +58,12 @@
       "location": "Location",
       "typology": "Typology",
       "year": "Year",
-      "area": "Area"
+      "area": "Area",
+      "status": "Status",
+      "scope": "Scope"
     },
-    "empty": "No projects in this category."
+    "empty": "No projects in this category.",
+    "globeLoading": "Loading globe…"
   },
   "About": {
     "title": "About",
@@ -67,7 +74,9 @@
     "p4": "We aim to create architecture with its own identity: contemporary, sensitive to context, and designed to be experienced.",
     "approachTitle": "Approach",
     "approach1": "We do not understand architecture as an isolated object. Every project begins with place: its climate, landscape, light, vegetation, materials, and ways of living.",
-    "approach2": "Three-dimensional modeling is part of the design process from the earliest stages, allowing us to explore spaces, geometries, and relationships that could hardly be developed in plan alone."
+    "approach2": "Three-dimensional modeling is part of the design process from the earliest stages, allowing us to explore spaces, geometries, and relationships that could hardly be developed in plan alone.",
+    "fact": "Founded by Gerardo Santiago Pineda. Projects across Mexico, Costa Rica, Indonesia, and Europe.",
+    "cta": "Discuss a project →"
   },
   "Services": {
     "title": "Services",
@@ -85,7 +94,7 @@
       },
       "residential": {
         "title": "Residential",
-        "body": "We design singular residences shaped by place, the client’s way of living, and the specific conditions of each site."
+        "body": "We design singular residences shaped by place, the client's way of living, and the specific conditions of each site."
       },
       "hospitality": {
         "title": "Hospitality",
@@ -98,8 +107,15 @@
       "development": {
         "title": "Development & Investment",
         "body": "We work with developers and investors to turn land and real-estate opportunities into projects with identity, defining their architectural vision and spatial strategy."
+      },
+      "largeScale": {
+        "title": "Large-scale Development",
+        "body": "We work on larger territorial and investment-driven projects, aligning architecture, landscape, and growth strategy."
       }
-    }
+    },
+    "doTitle": "What we do",
+    "whereTitle": "Where we work",
+    "cta": "Start a project →"
   },
   "Contact": {
     "title": "Contact",
@@ -109,31 +125,26 @@
     "instagramLabel": "Instagram",
     "cta": "Start a Project",
     "ctaMeeting": "Request Meeting",
-    "email": "studio@santiago.architecture",
+    "email": "hello@santiago-architecture.com",
     "submit": "Send inquiry",
-    "sending": "Opening mail…",
+    "sending": "Sending…",
     "cancel": "Cancel",
-    "success": "Thanks — your inquiry is ready to send. Next, schedule a meeting so we can talk through the project.",
+    "success": "Thanks — your inquiry was sent. Next, schedule a meeting so we can talk through the project.",
+    "sendError": "We could not send your message. Please try again in a moment.",
     "sendAnother": "Start another inquiry",
-    "mailSubject": "Project inquiry from {name}",
-    "mailIntro": "New project inquiry from the Santiago Architecture site:",
-    "attachmentNote": "Email cannot attach files automatically. If you selected files, add them to the message before sending, or send them in a follow-up.",
-    "mailAttachmentIntent": "Files to attach (add manually to the email): {files}",
+    "attachmentNote": "Optional. PDF or images, up to 5 files / 4 MB each (under 4.5 MB total).",
     "meeting": {
       "title": "Schedule a meeting",
       "lead": "Pick a preferred date and time. We'll confirm or suggest an alternative.",
       "reasonTitle": "Meeting reason",
-      "reasonLead": "Tell us what you’d like to meet about.",
+      "reasonLead": "Tell us what you'd like to meet about.",
       "projectTitle": "Tell us about the project",
-      "projectLead": "Complete the same project inquiry details; then we’ll schedule the meeting.",
+      "projectLead": "Complete the same project inquiry details; then we'll schedule the meeting.",
       "openCalendar": "Open booking calendar",
       "submit": "Request meeting",
-      "sending": "Opening mail…",
+      "sending": "Sending…",
       "skip": "Skip for now",
-      "done": "Thanks — your meeting request is ready to send. We'll confirm shortly.",
-      "mailSubject": "Meeting request from {name}",
-      "mailIntro": "Meeting request following a project inquiry:",
-      "mailIntroDirect": "Meeting request from the Santiago Architecture site:",
+      "done": "Thanks — your meeting request was sent. We'll confirm soon.",
       "fields": {
         "reason": "Reason",
         "date": "Preferred date",
@@ -159,15 +170,14 @@
       "area": "Approximate land area (sqm)",
       "hasSite": "Do you already have a site?",
       "stage": "Current stage",
-      "budget": "Approximate budget — optional",
       "message": "Brief project description",
-      "attachments": "Attach site, plans, references, or brief"
+      "attachments": "Attach site, plans, references, or brief",
+      "attachmentNote": "Optional. PDF or images, up to 5 files / 4 MB each (under 4.5 MB total)."
     },
     "placeholders": {
       "contact": "email or WhatsApp",
       "location": "City, region, or country",
       "area": "e.g. 450 m² land",
-      "budget": "Approximate range, if you like",
       "message": "Site context, program, goals, or references."
     },
     "hasSiteOptions": {

@@ -172,7 +172,8 @@
   padding-bottom: 0;
 }
 
-.serviceList h2 {
+.serviceList h2,
+.serviceList h3 {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
@@ -185,6 +186,51 @@
   letter-spacing: -0.028em;
   line-height: 1.15;
   text-align: center;
+}
+
+.serviceGroup {
+  width: 100%;
+  margin-top: var(--space-services);
+}
+
+.serviceGroup .sectionLabel {
+  margin-bottom: 1.5rem;
+}
+
+.aboutMedia {
+  width: min(100%, 28rem);
+  aspect-ratio: 4 / 5;
+  margin: var(--space-about-gap) auto 0;
+  border-radius: var(--image-radius);
+  background: color-mix(in srgb, var(--bg-deep) 80%, var(--wood) 8%);
+}
+
+.factLine {
+  margin: clamp(3rem, 8vh, 5rem) 0 0;
+  max-width: 28rem;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.pageCta {
+  margin-top: clamp(2.5rem, 7vh, 4rem);
+}
+
+.pageCtaLink {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 0.15rem;
+}
+
+.pageCtaLink:hover {
+  border-color: var(--ink);
 }
 
 .serviceIndex {

@@ -78,3 +78,11 @@
   padding: 0;
   background: transparent;
 }
+
+.globeLoading {
+  margin: 0;
+  padding: 4rem var(--page-pad);
+  color: var(--ink-muted);
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+}

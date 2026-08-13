@@ -26,3 +26,36 @@
   width: 100%;
   color: var(--ink);
 }
+
+.seoIndex {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.seoIndex ul,
+.fallbackIndex ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem var(--page-pad) 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.15rem;
+}
+
+.seoIndex a,
+.fallbackIndex a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  font-size: 0.84rem;
+}
+
+.fallbackIndex a:hover {
+  color: var(--ink);
+}

@@ -7,13 +7,21 @@ type BuildMetadataInput = {
   pathname: string;
   title: string;
   description: string;
+  image?: string | null;
 };
+
+function absoluteUrl(path: string) {
+  if (!path) return siteConfig.url;
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  return `${siteConfig.url}${path.startsWith("/") ? path : `/${path}`}`;
+}
 
 export function buildMetadata({
   locale,
   pathname,
   title,
   description,
+  image,
 }: BuildMetadataInput): Metadata {
   const normalizedPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
   const pathWithoutLocale =
@@ -25,9 +33,10 @@ export function buildMetadata({
   const esPath = `/es${pathWithoutLocale || ""}`;
   const canonicalPath = `/${locale}${pathWithoutLocale || ""}`;
 
-  const canonical = `${siteConfig.url}${canonicalPath === "/en" || canonicalPath === "/es" ? canonicalPath : canonicalPath}`;
-  const enUrl = `${siteConfig.url}${enPath === "/en" ? "/en" : enPath}`;
-  const esUrl = `${siteConfig.url}${esPath === "/es" ? "/es" : esPath}`;
+  const canonical = absoluteUrl(canonicalPath);
+  const enUrl = absoluteUrl(enPath);
+  const esUrl = absoluteUrl(esPath);
+  const ogImage = image ? absoluteUrl(image) : absoluteUrl(siteConfig.ogImage);
 
   return {
     title,
@@ -48,6 +57,20 @@ export function buildMetadata({
       locale: locale === "es" ? "es_ES" : "en_US",
       alternateLocale: locale === "es" ? ["en_US"] : ["es_ES"],
       type: "website",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }

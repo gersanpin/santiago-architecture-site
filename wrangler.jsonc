@@ -21,5 +21,17 @@
   },
   "observability": {
     "enabled": true
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "remote": true,
+      "destination_address": "gersantiago.arch@gmail.com",
+      "allowed_sender_addresses": ["hello@santiago-architecture.com"]
+    }
+  ],
+  "vars": {
+    "CONTACT_TO_EMAIL": "gersantiago.arch@gmail.com",
+    "CONTACT_FROM_EMAIL": "hello@santiago-architecture.com"
   }
 }

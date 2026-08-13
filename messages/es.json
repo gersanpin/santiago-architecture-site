@@ -1,15 +1,15 @@
 {
   "Meta": {
     "siteName": "Santiago Architecture",
-    "homeTitle": "Santiago Architecture | Estudio de arquitectura",
-    "homeDescription": "Estudio de arquitectura para proyectos residenciales, hospitality y culturales.",
-    "projectsTitle": "Proyectos | Santiago Architecture",
+    "homeTitle": "Estudio de arquitectura",
+    "homeDescription": "Estudio de arquitectura para proyectos residenciales, de hospitalidad y culturales.",
+    "projectsTitle": "Proyectos",
     "projectsDescription": "Proyectos de arquitectura seleccionados en residencial, hospitalidad y plan maestro.",
-    "aboutTitle": "Acerca de | Santiago Architecture",
+    "aboutTitle": "Acerca de",
     "aboutDescription": "Arquitectura moldeada por el lugar, la naturaleza y la experiencia. Estudio fundado por Gerardo Santiago Pineda.",
-    "servicesTitle": "Servicios | Santiago Architecture",
-    "servicesDescription": "Desde la primera idea hasta la construcción: arquitectura, diseño + construcción, residencial, hospitality, masterplanning y desarrollos.",
-    "contactTitle": "Contacto | Santiago Architecture",
+    "servicesTitle": "Servicios",
+    "servicesDescription": "Desde la primera idea hasta la construcción: arquitectura, diseño + construcción, residencial, hospitalidad, planes maestros y desarrollos.",
+    "contactTitle": "Contacto",
     "contactDescription": "Cuéntanos sobre tu proyecto, terreno o idea de desarrollo. Trabajamos con clientes privados, desarrolladores e inversionistas a nivel internacional."
   },
   "Nav": {
@@ -25,7 +25,11 @@
     "headline": "Arquitectura moldeada por el lugar.",
     "support": "Obra residencial, hospitality y cultural con un enfoque material sobrio.",
     "exploreProjects": "Explorar proyectos",
-    "startProject": "Iniciar un proyecto"
+    "startProject": "Iniciar un proyecto",
+    "selectedTitle": "Proyectos seleccionados",
+    "readAbout": "Acerca del estudio",
+    "viewServices": "Ver servicios",
+    "contactLead": "¿Tienes un terreno, un brief o una idea en curso?"
   },
   "Projects": {
     "title": "Proyectos",
@@ -54,20 +58,25 @@
       "location": "Ubicación",
       "typology": "Tipología",
       "year": "Año",
-      "area": "Área"
+      "area": "Área",
+      "status": "Estado",
+      "scope": "Alcance"
     },
-    "empty": "No hay proyectos en esta categoría."
+    "empty": "No hay proyectos en esta categoría.",
+    "globeLoading": "Cargando globo…"
   },
   "About": {
     "title": "Acerca de",
     "lead": "Arquitectura moldeada por el lugar, la naturaleza y la experiencia.",
     "p1": "Santiago Architecture es un estudio de arquitectura y diseño fundado por Gerardo Santiago Pineda, con una visión internacional.",
-    "p2": "Trabajamos desde residencias y proyectos de hospitality hasta desarrollos de mayor escala.",
+    "p2": "Trabajamos desde residencias y proyectos de hospitalidad hasta desarrollos de mayor escala.",
     "p3": "Nuestro proceso combina diseño arquitectónico, exploración espacial y modelado 3D avanzado para desarrollar proyectos que respondan al clima, la materialidad y la forma de habitar.",
     "p4": "Buscamos crear una arquitectura con identidad propia: contemporánea, sensible a su contexto y diseñada para ser experimentada.",
     "approachTitle": "Enfoque",
     "approach1": "No entendemos la arquitectura como un objeto aislado. Cada proyecto parte del lugar: su clima, paisaje, luz, vegetación, materiales y forma de habitar.",
-    "approach2": "El modelado tridimensional forma parte del proceso de diseño desde sus primeras etapas, permitiéndonos explorar espacios, geometrías y relaciones que difícilmente podrían desarrollarse únicamente en planta."
+    "approach2": "El modelado tridimensional forma parte del proceso de diseño desde sus primeras etapas, permitiéndonos explorar espacios, geometrías y relaciones que difícilmente podrían desarrollarse únicamente en planta.",
+    "fact": "Fundado por Gerardo Santiago Pineda. Proyectos en México, Costa Rica, Indonesia y Europa.",
+    "cta": "Conversar sobre un proyecto →"
   },
   "Services": {
     "title": "Servicios",
@@ -88,18 +97,25 @@
         "body": "Diseñamos residencias únicas a partir del lugar, el estilo de vida del cliente y las condiciones específicas de cada sitio."
       },
       "hospitality": {
-        "title": "Hospitality",
+        "title": "Hospitalidad",
         "body": "Diseñamos hoteles, resorts, villas y espacios de hospitalidad donde arquitectura, paisaje y experiencia forman parte de una misma visión."
       },
       "masterplan": {
-        "title": "Masterplanning",
+        "title": "Plan maestro",
         "body": "Desarrollamos planes maestros para proyectos de gran escala, integrando arquitectura, paisaje, circulaciones, vistas, privacidad, amenidades y crecimiento futuro dentro de una estrategia integral."
       },
       "development": {
         "title": "Desarrollos e Inversión",
         "body": "Trabajamos con desarrolladores e inversionistas para transformar terrenos y oportunidades inmobiliarias en proyectos con identidad, definiendo su visión arquitectónica y estrategia espacial."
+      },
+      "largeScale": {
+        "title": "Desarrollos de gran escala",
+        "body": "Trabajamos en proyectos territoriales y de inversión de mayor escala, alineando arquitectura, paisaje y estrategia de crecimiento."
       }
-    }
+    },
+    "doTitle": "Qué hacemos",
+    "whereTitle": "Dónde trabajamos",
+    "cta": "Iniciar un proyecto →"
   },
   "Contact": {
     "title": "Contacto",
@@ -109,16 +125,14 @@
     "instagramLabel": "Instagram",
     "cta": "Iniciar un proyecto",
     "ctaMeeting": "Solicitar reunión",
-    "email": "studio@santiago.architecture",
+    "email": "hello@santiago-architecture.com",
     "submit": "Enviar consulta",
-    "sending": "Abriendo correo…",
+    "sending": "Enviando…",
     "cancel": "Cancelar",
-    "success": "Gracias — tu consulta está lista para enviarse. Ahora agenda una reunión para hablar del proyecto.",
+    "success": "Gracias — tu consulta fue enviada. Ahora agenda una reunión para hablar del proyecto.",
+    "sendError": "No pudimos enviar tu mensaje. Inténtalo de nuevo en un momento.",
     "sendAnother": "Nueva consulta",
-    "mailSubject": "Consulta de proyecto de {name}",
-    "mailIntro": "Nueva consulta de proyecto desde el sitio de Santiago Architecture:",
-    "attachmentNote": "El correo no puede adjuntar archivos automáticamente. Si seleccionaste archivos, añádelos al mensaje antes de enviarlo, o envíalos en una respuesta.",
-    "mailAttachmentIntent": "Archivos a adjuntar (añadir manualmente al correo): {files}",
+    "attachmentNote": "Opcional. PDF o imágenes, hasta 5 archivos / 4 MB cada uno (máx. 4.5 MB en total).",
     "meeting": {
       "title": "Agenda una reunión",
       "lead": "Elige una fecha y hora preferidas. Confirmamos o proponemos otra opción.",
@@ -128,12 +142,9 @@
       "projectLead": "Completa los mismos datos de una consulta de proyecto; después agendamos la reunión.",
       "openCalendar": "Abrir calendario",
       "submit": "Solicitar reunión",
-      "sending": "Abriendo correo…",
+      "sending": "Enviando…",
       "skip": "Ahora no",
-      "done": "Gracias — tu solicitud de reunión está lista para enviarse. Te confirmamos pronto.",
-      "mailSubject": "Solicitud de reunión de {name}",
-      "mailIntro": "Solicitud de reunión después de una consulta de proyecto:",
-      "mailIntroDirect": "Solicitud de reunión desde el sitio de Santiago Architecture:",
+      "done": "Gracias — tu solicitud de reunión fue enviada. Te confirmamos pronto.",
       "fields": {
         "reason": "Motivo",
         "date": "Fecha preferida",
@@ -147,7 +158,7 @@
         "project": "Hablar de un proyecto",
         "studio": "Conocer el estudio",
         "collaboration": "Colaboración",
-        "press": "Prensa o partnership",
+        "press": "Prensa o alianza",
         "other": "Otro"
       }
     },
@@ -159,15 +170,14 @@
       "area": "Superficie aproximada del terreno",
       "hasSite": "¿Ya cuentas con terreno?",
       "stage": "Etapa actual",
-      "budget": "Presupuesto aproximado — opcional",
       "message": "Cuéntanos brevemente sobre el proyecto",
-      "attachments": "Adjuntar sitio, planos, referencias o brief"
+      "attachments": "Adjuntar sitio, planos, referencias o brief",
+      "attachmentNote": "Opcional. PDF o imágenes, hasta 5 archivos / 4 MB cada uno (máx. 4.5 MB en total)."
     },
     "placeholders": {
       "contact": "correo o WhatsApp",
       "location": "Ciudad, región o país",
       "area": "p. ej. 450 m² de terreno",
-      "budget": "Rango aproximado, si lo deseas",
       "message": "Contexto del sitio, programa, objetivos o referencias."
     },
     "hasSiteOptions": {

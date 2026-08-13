@@ -709,6 +709,10 @@ export function ProjectGlobe({ projects, selectedSlug, onSelect }: Props) {
                 <dt>{t("labels.typology")}</dt>
                 <dd>{t(`filters.${selected.category}`)}</dd>
               </div>
+              <div>
+                <dt>{t("labels.year")}</dt>
+                <dd>{selected.year}</dd>
+              </div>
             </dl>
           </>
         ) : (

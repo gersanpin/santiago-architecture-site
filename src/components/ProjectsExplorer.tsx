@@ -1,14 +1,17 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, lazy, Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import type { Project } from "@/data/projects";
 import { ProjectGrid } from "./ProjectGrid";
-import { ProjectGlobe } from "./ProjectGlobe";
 import { ProjectList } from "./ProjectList";
 import styles from "./ProjectsExplorer.module.css";
+
+const ProjectGlobe = lazy(() =>
+  import("./ProjectGlobe").then((mod) => ({ default: mod.ProjectGlobe })),
+);
 
 type ViewMode = "grid" | "list" | "globe";
 
@@ -100,11 +103,13 @@ export function ProjectsExplorer({ projects }: Props) {
 
       {view === "globe" ? (
         <div className={styles.globeWrap}>
-          <ProjectGlobe
-            projects={projects}
-            selectedSlug={selectedSlug}
-            onSelect={(slug) => updateParams({ project: slug })}
-          />
+          <Suspense fallback={<p className={styles.globeLoading}>{t("globeLoading")}</p>}>
+            <ProjectGlobe
+              projects={projects}
+              selectedSlug={selectedSlug}
+              onSelect={(slug) => updateParams({ project: slug })}
+            />
+          </Suspense>
         </div>
       ) : null}
     </div>

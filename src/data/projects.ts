@@ -30,6 +30,10 @@ export type Project = {
   description: LocalizedString;
   /** Optional credit / collaboration line shown after the description. */
   credit?: LocalizedString;
+  /** Optional status (e.g. under construction) — only when real. */
+  status?: LocalizedString;
+  /** Optional scope when the studio contributed only part of the work. */
+  scope?: LocalizedString;
   seoTitle: LocalizedString;
   seoDescription: LocalizedString;
 };
@@ -99,8 +103,8 @@ const projectsData: Project[] = [
       es: "Un refugio prefabricado de dos niveles y 85 m² con cubiertas curvas y madera cálida, pensado para transportarse ya armado.",
     },
     seoTitle: {
-      en: "Tiny Home Costa Rica | Architecture Portfolio",
-      es: "Tiny Home Costa Rica | Portafolio de arquitectura",
+      en: "Tiny Home Costa Rica",
+      es: "Tiny Home Costa Rica",
     },
     seoDescription: {
       en: "Tiny Home Costa Rica — a two-level prefabricated retreat with curved roofs and warm wood.",
@@ -143,8 +147,8 @@ const projectsData: Project[] = [
       es: "Una cabaña compacta de una recámara y 42 m² bajo una cubierta de madera curva, concebida como unidad habitacional tropical que puede moverse ya armada.",
     },
     seoTitle: {
-      en: "Tiny Home 1 Bedroom | Architecture Portfolio",
-      es: "Tiny Home 1 Bedroom | Portafolio de arquitectura",
+      en: "Tiny Home 1 Bedroom",
+      es: "Tiny Home 1 Bedroom",
     },
     seoDescription: {
       en: "Tiny Home 1 Bedroom — a compact one-bedroom cabin with a curved timber roof.",
@@ -181,8 +185,8 @@ const projectsData: Project[] = [
       es: "Un estudio prefabricado de 28 m² con cubierta de madera curva — la unidad más compacta de la serie, dimensionada para lo esencial.",
     },
     seoTitle: {
-      en: "Tiny House Costa Rica | Architecture Portfolio",
-      es: "Tiny House Costa Rica | Portafolio de arquitectura",
+      en: "Tiny House Costa Rica",
+      es: "Tiny House Costa Rica",
     },
     seoDescription: {
       en: "Tiny House Costa Rica — a compact 28 m² prefabricated studio with a curved timber roof.",
@@ -230,9 +234,13 @@ const projectsData: Project[] = [
       en: "Project by Carlo Ávila; façade by Santiago Architecture.",
       es: "Proyecto de Carlo Ávila; fachada por Santiago Architecture.",
     },
+    scope: {
+      en: "Façade design",
+      es: "Diseño de fachada",
+    },
     seoTitle: {
-      en: "Casa Manglar | Architecture Portfolio",
-      es: "Casa Manglar | Portafolio de arquitectura",
+      en: "Casa Manglar",
+      es: "Casa Manglar",
     },
     seoDescription: {
       en: "Casa Manglar in Cancún — façade design by Santiago Architecture; project by Carlo Ávila.",
@@ -274,9 +282,13 @@ const projectsData: Project[] = [
       en: "Remodeling of the entrance sequence to a residential development in Tulum, shaped by curved canopies, stone walls and water as the threshold between the road and the site.",
       es: "Remodelación del acceso a un fraccionamiento en Tulum, definida por cubiertas curvas, muros de piedra y agua como umbral entre la vialidad y el predio.",
     },
+    scope: {
+      en: "Access remodeling",
+      es: "Remodelación de acceso",
+    },
     seoTitle: {
-      en: "El Edén Tulum | Architecture Portfolio",
-      es: "El Edén Tulum | Portafolio de arquitectura",
+      en: "El Edén Tulum",
+      es: "El Edén Tulum",
     },
     seoDescription: {
       en: "El Edén Tulum — remodeling of the access to a residential development in Tulum.",
@@ -312,9 +324,13 @@ const projectsData: Project[] = [
       en: "In collaboration with Rodrigo Lepez Vela and other architects.",
       es: "En colaboración con Rodrigo Lepez Vela y otros arquitectos.",
     },
+    scope: {
+      en: "Masterplan conceptualization",
+      es: "Conceptualización del plan maestro",
+    },
     seoTitle: {
-      en: "Aldea Uh May Masterplan | Architecture Portfolio",
-      es: "Plan Maestro Aldea Uh May | Portafolio de arquitectura",
+      en: "Aldea Uh May",
+      es: "Aldea Uh May",
     },
     seoDescription: {
       en: "Aldea Uh May — collaborative conceptualization of an eight-hectare masterplan within retained forest canopy.",
@@ -359,8 +375,8 @@ const projectsData: Project[] = [
       es: "Una residencia frente al mar definida por volúmenes blancos esculpidos, muros curvos y una sala hundida, con espacios interior-exterior abiertos a la brisa y una relación continua con la costa de Yucatán.",
     },
     seoTitle: {
-      en: "Casa Sisal | Architecture Portfolio",
-      es: "Casa Sisal | Portafolio de arquitectura",
+      en: "Casa Sisal",
+      es: "Casa Sisal",
     },
     seoDescription: {
       en: "Casa Sisal — beachfront residential architecture on the Yucatán coast.",
@@ -399,8 +415,8 @@ const projectsData: Project[] = [
       es: "Un pabellón definido por una envolvente celular blanca, geometrías curvas y celosías de madera que filtran la luz y construyen un recinto espacial distintivo.",
     },
     seoTitle: {
-      en: "Hexodome Cancún | Architecture Portfolio",
-      es: "Hexodome Cancún | Portafolio de arquitectura",
+      en: "Hexodome Cancún",
+      es: "Hexodome Cancún",
     },
     seoDescription: {
       en: "Hexodome Cancún — pavilion with a cellular shell and timber screens.",
@@ -440,8 +456,8 @@ const projectsData: Project[] = [
       es: "Una tiny home costera de 32 m² definida por un cascarón blanco curvo, concebida como vivienda prefabricada compacta.",
     },
     seoTitle: {
-      en: "Tiny Home Spain | Architecture Portfolio",
-      es: "Tiny Home Spain | Portafolio de arquitectura",
+      en: "Tiny Home Spain",
+      es: "Tiny Home Spain",
     },
     seoDescription: {
       en: "Tiny Home Spain — a coastal prefabricated dwelling with a curved white shell.",
@@ -477,8 +493,8 @@ const projectsData: Project[] = [
       es: "Una residencia tropical que combina muros de tierra, una cubierta ligera de palapa y pasarelas elevadas de madera que conectan los distintos espacios habitables a través del sitio.",
     },
     seoTitle: {
-      en: "Casa Nosara | Architecture Portfolio",
-      es: "Casa Nosara | Portafolio de arquitectura",
+      en: "Casa Nosara",
+      es: "Casa Nosara",
     },
     seoDescription: {
       en: "Casa Nosara — tropical residence with earth walls and a palapa roof in Costa Rica.",
@@ -512,8 +528,8 @@ const projectsData: Project[] = [
       es: "Un pabellón para restaurante definido por geometrías curvas, celosías de madera y espacios abiertos que responden al clima tropical de Nosara.",
     },
     seoTitle: {
-      en: "Restaurante Nosara | Architecture Portfolio",
-      es: "Restaurante Nosara | Portafolio de arquitectura",
+      en: "Restaurante Nosara",
+      es: "Restaurante Nosara",
     },
     seoDescription: {
       en: "Restaurante Nosara — restaurant pavilion with curved geometry in Costa Rica.",
@@ -556,8 +572,8 @@ const projectsData: Project[] = [
       es: "Una villa en la selva compuesta por volúmenes esculpidos en tonos tierra, espacios abiertos y árboles existentes que atraviesan la arquitectura.",
     },
     seoTitle: {
-      en: "Villa Nosara | Architecture Portfolio",
-      es: "Villa Nosara | Portafolio de arquitectura",
+      en: "Villa Nosara",
+      es: "Villa Nosara",
     },
     seoDescription: {
       en: "Villa Nosara — jungle villa with sculpted earth-toned volumes in Costa Rica.",
@@ -608,8 +624,8 @@ const projectsData: Project[] = [
       es: "En colaboración con Esteban Sepúlveda y Rodolfo Anaya.",
     },
     seoTitle: {
-      en: "Mountain Nazca Offices | Architecture Portfolio",
-      es: "Mountain Nazca Offices | Portafolio de arquitectura",
+      en: "Mountain Nazca Offices",
+      es: "Mountain Nazca Offices",
     },
     seoDescription: {
       en: "Mountain Nazca Offices in Mexico City — workplace interior with Esteban Sepúlveda and Rodolfo Anaya.",
@@ -651,8 +667,8 @@ const projectsData: Project[] = [
       es: "Un refugio compacto de cubierta de paja definido por un entramado expresivo de madera, piedra, vidrio y geometrías curvas, en relación cercana con el dosel tropical.",
     },
     seoTitle: {
-      en: "Cabin Tulum | Architecture Portfolio",
-      es: "Cabin Tulum | Portafolio de arquitectura",
+      en: "Cabin Tulum",
+      es: "Cabin Tulum",
     },
     seoDescription: {
       en: "Cabin Tulum — compact retreat with an expressive timber framework.",
@@ -695,8 +711,8 @@ const projectsData: Project[] = [
       es: "Un eco-resort de bambú compuesto por pabellones elevados, cubiertas tejidas y piscinas en terrazas distribuidas a través del paisaje balinés.",
     },
     seoTitle: {
-      en: "Bali Resort | Architecture Portfolio",
-      es: "Bali Resort | Portafolio de arquitectura",
+      en: "Bali Resort",
+      es: "Bali Resort",
     },
     seoDescription: {
       en: "Bali Resort — bamboo eco-resort of elevated pavilions in Indonesia.",
@@ -752,8 +768,8 @@ const projectsData: Project[] = [
       es: "Una residencia de superficies en tonos arena, piedra y geometrías suaves organizada alrededor de patios sombreados y vegetación tropical en Tulum.",
     },
     seoTitle: {
-      en: "Jungle House Tulum | Architecture Portfolio",
-      es: "Jungle House Tulum | Portafolio de arquitectura",
+      en: "Jungle House Tulum",
+      es: "Jungle House Tulum",
     },
     seoDescription: {
       en: "Jungle House Tulum — residence of sand-toned surfaces and soft geometries.",
@@ -822,7 +838,7 @@ export function hasDisplayArea(area: string): boolean {
   return Boolean(value) && value !== "—" && value !== "-" && value !== "–";
 }
 
-/** Location · Year · Area — omits missing parts. */
+/** Location · Year · Area · Status · Scope — omits missing parts. */
 export function formatProjectFacts(
   project: Project,
   locale: LocaleCode,
@@ -832,6 +848,8 @@ export function formatProjectFacts(
   if (place) parts.push(place);
   if (project.year) parts.push(String(project.year));
   if (hasDisplayArea(project.area)) parts.push(project.area.trim());
+  if (project.status) parts.push(getLocalized(project.status, locale));
+  if (project.scope) parts.push(getLocalized(project.scope, locale));
   return parts.join(" · ");
 }
 

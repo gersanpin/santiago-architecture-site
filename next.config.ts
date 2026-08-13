@@ -8,12 +8,10 @@ const nextConfig: NextConfig = {
     root: __dirname,
   },
   images: {
-    // Exact source files — no resize/recompress of project photography.
-    unoptimized: true,
-    // Allow quality={100} on next/image (Next 15 defaults to [75] only).
-    qualities: [75, 100],
+    // Optimized AVIF/WebP via Next + Cloudflare Images binding when deployed.
+    qualities: [75, 90, 92, 100],
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560, 3840],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560],
     imageSizes: [64, 96, 128, 256, 384, 512],
     remotePatterns: [
       {
@@ -26,4 +24,4 @@ const nextConfig: NextConfig = {
 
 export default withNextIntl(nextConfig);
 
-import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
+import("@opennextjs/cloudflare").then((m) => m.initOpenNextCloudflareForDev());

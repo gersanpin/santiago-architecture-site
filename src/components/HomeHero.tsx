@@ -4,55 +4,57 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
+import { IMAGE_QUALITY_HERO, IMAGE_UNOPTIMIZED } from "@/lib/images";
 import styles from "./HomeHero.module.css";
 
-const INTERVAL_MS = 5000;
+const INTERVAL_MS = 6500;
 
-type Props = {
-  covers: string[];
+export type HomeSlide = {
+  src: string;
+  name: string;
+  place: string;
+  href: string;
 };
 
-export function HomeHero({ covers }: Props) {
+type Props = {
+  slides: HomeSlide[];
+};
+
+export function HomeHero({ slides }: Props) {
   const t = useTranslations("Home");
-  const slides = covers.length > 0 ? covers : ["/projects/casa-manglar/01.jpg"];
+  const items =
+    slides.length > 0
+      ? slides
+      : [
+          {
+            src: "/projects/casa-sisal/01.png",
+            name: "Casa Sisal",
+            place: "Sisal, Mexico",
+            href: "/projects/casa-sisal",
+          },
+        ];
   const [active, setActive] = useState(0);
+  const current = items[active] ?? items[0];
 
   useEffect(() => {
-    const html = document.documentElement;
-    const { body } = document;
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = body.style.overflow;
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
-
-    return () => {
-      html.style.overflow = prevHtmlOverflow;
-      body.style.overflow = prevBodyOverflow;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (slides.length < 2) return;
-
+    if (items.length < 2) return;
     const id = window.setInterval(() => {
-      setActive((current) => (current + 1) % slides.length);
+      setActive((value) => (value + 1) % items.length);
     }, INTERVAL_MS);
-
     return () => window.clearInterval(id);
-  }, [slides.length]);
+  }, [items.length]);
 
   return (
     <section className={styles.hero}>
       <div className={styles.slides} aria-hidden="true">
-        {slides.map((src, index) => (
+        {items.map((slide, index) => (
           <Image
-            key={src}
-            src={src}
+            key={slide.src}
+            src={slide.src}
             alt=""
             fill
             priority={index === 0}
-            quality={IMAGE_QUALITY}
+            quality={IMAGE_QUALITY_HERO}
             unoptimized={IMAGE_UNOPTIMIZED}
             className={`${styles.heroImage} ${
               index === active ? styles.heroImageActive : ""
@@ -81,6 +83,14 @@ export function HomeHero({ covers }: Props) {
           </Link>
         </div>
       </div>
+      {current ? (
+        <Link href={current.href} className={styles.credit}>
+          <span className={styles.creditName}>{current.name}</span>
+          {current.place ? (
+            <span className={styles.creditPlace}>{current.place}</span>
+          ) : null}
+        </Link>
+      ) : null}
     </section>
   );
 }
