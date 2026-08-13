@@ -35,8 +35,7 @@
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
   gap: 0.85rem;
-  width: fit-content;
-  max-width: 100%;
+  width: min(100%, 88rem);
   height: 100%;
   min-width: 0;
   min-height: 0;
@@ -47,8 +46,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
   min-height: 0;
   padding: clamp(0.75rem, 2.5vh, 1.75rem) 0;
   box-sizing: border-box;

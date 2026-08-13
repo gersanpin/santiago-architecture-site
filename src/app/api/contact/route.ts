@@ -10,8 +10,11 @@ export const runtime = "nodejs";
 
 type Kind = "inquiry" | "meeting";
 
-function bad(message: string, status = 400) {
-  return Response.json({ ok: false, error: message }, { status });
+function bad(message: string, status = 400, code?: string) {
+  return Response.json(
+    { ok: false, error: message, ...(code ? { code } : {}) },
+    { status },
+  );
 }
 
 export async function POST(request: Request) {
@@ -44,12 +47,20 @@ export async function POST(request: Request) {
   }
 
   const name = String(form.get("name") ?? "").trim();
-  const contact = String(form.get("contact") ?? "").trim();
-  if (!name || !contact) {
-    return bad("Name and contact are required.");
+  const email = String(form.get("email") ?? "").trim();
+  const whatsapp = String(form.get("whatsapp") ?? "").trim();
+  if (!name || !email) {
+    return bad("Name and email are required.");
   }
-  if (name.length > 120 || contact.length > 200) {
+  if (
+    name.length > 120 ||
+    email.length > 200 ||
+    whatsapp.length > 50
+  ) {
     return bad("Input is too long.");
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return bad("Enter a valid email address.");
   }
 
   const files = form
@@ -76,7 +87,7 @@ export async function POST(request: Request) {
 
   let subject = "";
   let text = "";
-  const replyTo = contact.includes("@") ? contact : undefined;
+  const replyTo = email;
 
   if (kind === "inquiry") {
     const location = String(form.get("location") ?? "").trim();
@@ -93,7 +104,8 @@ export async function POST(request: Request) {
       "New project inquiry from the website.",
       "",
       `Name: ${name}`,
-      `Contact: ${contact}`,
+      `Email: ${email}`,
+      whatsapp ? `WhatsApp: ${whatsapp}` : null,
       `Location: ${location}`,
       `Project type: ${projectType}`,
       area ? `Area: ${area}` : null,
@@ -125,7 +137,8 @@ export async function POST(request: Request) {
       "",
       reason ? `Reason: ${reason}` : null,
       `Name: ${name}`,
-      `Contact: ${contact}`,
+      `Email: ${email}`,
+      whatsapp ? `WhatsApp: ${whatsapp}` : null,
       `Date: ${date}`,
       `Time: ${time}`,
       notes ? `\nNotes:\n${notes}` : null,
@@ -167,6 +180,17 @@ export async function POST(request: Request) {
     return Response.json({ ok: true });
   } catch (error) {
     console.error("Contact email failed", error);
+    if (
+      files.length > 0 &&
+      error instanceof Error &&
+      error.message.includes("Cannot serialize value: [object ArrayBuffer]")
+    ) {
+      return bad(
+        "Binary attachments cannot be sent by the local Cloudflare simulator.",
+        422,
+        "LOCAL_ATTACHMENT_UNSUPPORTED",
+      );
+    }
     return bad("Unable to send the message right now.", 502);
   }
 }

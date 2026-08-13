@@ -134,6 +134,7 @@
     "cancel": "Cancel",
     "success": "Thanks — your inquiry was sent. Next, schedule a meeting so we can talk through the project.",
     "sendError": "We could not send your message. Please try again in a moment.",
+    "attachmentLocalError": "Cloudflare cannot send binary attachments from localhost. Remove the attachment to test locally; attachments work on the deployed site.",
     "sendAnother": "Start another inquiry",
     "attachmentNote": "Optional. PDF or images, up to 5 files / 4 MB each (under 4.5 MB total).",
     "meeting": {
@@ -167,7 +168,8 @@
     },
     "fields": {
       "name": "Name",
-      "contact": "Email / WhatsApp",
+      "email": "Email",
+      "whatsapp": "WhatsApp (optional)",
       "location": "Project location",
       "projectType": "Project type",
       "area": "Approximate land area (sqm)",
@@ -178,7 +180,8 @@
       "attachmentNote": "Optional. PDF or images, up to 5 files / 4 MB each (under 4.5 MB total)."
     },
     "placeholders": {
-      "contact": "email or WhatsApp",
+      "email": "you@example.com",
+      "whatsapp": "+1 555 000 0000",
       "location": "City, region, or country",
       "area": "e.g. 450 m² land",
       "message": "Site context, program, goals, or references."

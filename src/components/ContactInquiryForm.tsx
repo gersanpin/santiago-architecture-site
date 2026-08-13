@@ -9,7 +9,8 @@ import styles from "./ContactInquiryForm.module.css";
 
 type FormState = {
   name: string;
-  contact: string;
+  email: string;
+  whatsapp: string;
   location: string;
   projectType: string;
   area: string;
@@ -44,7 +45,8 @@ const MEETING_REASONS = [
 
 const INITIAL: FormState = {
   name: "",
-  contact: "",
+  email: "",
+  whatsapp: "",
   location: "",
   projectType: "residential",
   area: "",
@@ -128,8 +130,12 @@ export function ContactInquiryForm({ studioEmail }: Props) {
     const data = (await response.json().catch(() => null)) as {
       ok?: boolean;
       error?: string;
+      code?: string;
     } | null;
     if (!response.ok || !data?.ok) {
+      if (data?.code === "LOCAL_ATTACHMENT_UNSUPPORTED") {
+        throw new Error(t("attachmentLocalError"));
+      }
       throw new Error(data?.error || t("sendError"));
     }
   }
@@ -146,7 +152,8 @@ export function ContactInquiryForm({ studioEmail }: Props) {
       payload.set("kind", "inquiry");
       payload.set("website", honeypot);
       payload.set("name", values.name);
-      payload.set("contact", values.contact);
+      payload.set("email", values.email);
+      payload.set("whatsapp", values.whatsapp);
       payload.set("location", values.location);
       payload.set("projectType", values.projectType);
       payload.set("area", values.area);
@@ -178,7 +185,8 @@ export function ContactInquiryForm({ studioEmail }: Props) {
       payload.set("kind", "meeting");
       payload.set("website", honeypot);
       payload.set("name", values.name);
-      payload.set("contact", values.contact);
+      payload.set("email", values.email);
+      payload.set("whatsapp", values.whatsapp);
       payload.set("date", meeting.date);
       payload.set("time", meeting.time);
       payload.set("notes", meeting.notes);
@@ -331,18 +339,34 @@ export function ContactInquiryForm({ studioEmail }: Props) {
                 />
               </label>
               <label className={styles.field}>
-                <span className={styles.label}>{t("fields.contact")}</span>
+                <span className={styles.label}>{t("fields.email")}</span>
                 <input
                   className={styles.input}
-                  name="contact"
+                  type="email"
+                  name="email"
                   autoComplete="email"
                   required
-                  placeholder={t("placeholders.contact")}
-                  value={values.contact}
-                  onChange={(event) => update("contact", event.target.value)}
+                  placeholder={t("placeholders.email")}
+                  value={values.email}
+                  onChange={(event) => update("email", event.target.value)}
                 />
               </label>
             </div>
+          ) : null}
+
+          {!fromInquiry ? (
+            <label className={styles.field}>
+              <span className={styles.label}>{t("fields.whatsapp")}</span>
+              <input
+                className={styles.input}
+                type="tel"
+                name="whatsapp"
+                autoComplete="tel"
+                placeholder={t("placeholders.whatsapp")}
+                value={values.whatsapp}
+                onChange={(event) => update("whatsapp", event.target.value)}
+              />
+            </label>
           ) : null}
 
           <div className={styles.row}>
@@ -530,18 +554,32 @@ function ProjectInquiryFields({
           />
         </label>
         <label className={styles.field}>
-          <span className={styles.label}>{t("fields.contact")}</span>
+          <span className={styles.label}>{t("fields.email")}</span>
           <input
             className={styles.input}
-            name="contact"
+            type="email"
+            name="email"
             autoComplete="email"
             required
-            placeholder={t("placeholders.contact")}
-            value={values.contact}
-            onChange={(event) => update("contact", event.target.value)}
+            placeholder={t("placeholders.email")}
+            value={values.email}
+            onChange={(event) => update("email", event.target.value)}
           />
         </label>
       </div>
+
+      <label className={styles.field}>
+        <span className={styles.label}>{t("fields.whatsapp")}</span>
+        <input
+          className={styles.input}
+          type="tel"
+          name="whatsapp"
+          autoComplete="tel"
+          placeholder={t("placeholders.whatsapp")}
+          value={values.whatsapp}
+          onChange={(event) => update("whatsapp", event.target.value)}
+        />
+      </label>
 
       <div className={styles.row}>
         <label className={styles.field}>

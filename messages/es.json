@@ -134,6 +134,7 @@
     "cancel": "Cancelar",
     "success": "Gracias — tu consulta fue enviada. Ahora agenda una reunión para hablar del proyecto.",
     "sendError": "No pudimos enviar tu mensaje. Inténtalo de nuevo en un momento.",
+    "attachmentLocalError": "Cloudflare no puede enviar archivos binarios desde localhost. Quita el adjunto para probar en local; los adjuntos funcionan en el sitio publicado.",
     "sendAnother": "Nueva consulta",
     "attachmentNote": "Opcional. PDF o imágenes, hasta 5 archivos / 4 MB cada uno (máx. 4.5 MB en total).",
     "meeting": {
@@ -167,7 +168,8 @@
     },
     "fields": {
       "name": "Nombre",
-      "contact": "Email / WhatsApp",
+      "email": "Correo electrónico",
+      "whatsapp": "WhatsApp (opcional)",
       "location": "Ubicación del proyecto",
       "projectType": "Tipo de proyecto",
       "area": "Superficie aproximada del terreno",
@@ -178,7 +180,8 @@
       "attachmentNote": "Opcional. PDF o imágenes, hasta 5 archivos / 4 MB cada uno (máx. 4.5 MB en total)."
     },
     "placeholders": {
-      "contact": "correo o WhatsApp",
+      "email": "tu@correo.com",
+      "whatsapp": "+52 55 0000 0000",
       "location": "Ciudad, región o país",
       "area": "p. ej. 450 m² de terreno",
       "message": "Contexto del sitio, programa, objetivos o referencias."
