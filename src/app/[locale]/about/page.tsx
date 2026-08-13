@@ -63,10 +63,6 @@ export default async function AboutPage({ params }: Props) {
           ))}
         </Reveal>
 
-        <Reveal as="p" className={styles.factLine} delay={1}>
-          {t("fact")}
-        </Reveal>
-
         <Reveal className={styles.pageCta} delay={2}>
           <Link href="/contact?start=1" className={styles.pageCtaLink}>
             {t("cta")}

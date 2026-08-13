@@ -175,31 +175,6 @@
   color: var(--ink);
 }
 
-.sectors {
-  margin-top: clamp(2.5rem, 6vh, 3.75rem);
-}
-
-.sectorsLabel {
-  margin: 0 0 0.65rem;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-}
-
-.sectorsList {
-  margin: 0;
-  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
-  color: var(--ink-muted);
-  letter-spacing: 0.01em;
-}
-
-.sectorSep {
-  margin: 0 0.55rem;
-  opacity: 0.55;
-}
-
 /* —— Shared link + CTA close —— */
 .textLink {
   position: relative;

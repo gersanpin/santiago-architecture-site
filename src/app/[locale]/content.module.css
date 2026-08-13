@@ -205,15 +205,6 @@
   background: color-mix(in srgb, var(--bg-deep) 80%, var(--wood) 8%);
 }
 
-.factLine {
-  margin: clamp(3rem, 8vh, 5rem) 0 0;
-  max-width: 28rem;
-  color: var(--ink-muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  text-align: center;
-}
-
 .pageCta {
   margin-top: clamp(2.5rem, 7vh, 4rem);
 }

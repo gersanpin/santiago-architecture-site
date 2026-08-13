@@ -40,8 +40,6 @@ const SERVICE_DO_KEYS = [
   "development",
 ] as const;
 
-const SECTOR_KEYS = ["residential", "hospitality"] as const;
-
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
@@ -163,21 +161,6 @@ export default async function HomePage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <div className={styles.sectors}>
-            <p className={styles.sectorsLabel}>{tHome("sectorsTitle")}</p>
-            <p className={styles.sectorsList}>
-              {SECTOR_KEYS.map((key, index) => (
-                <span key={key}>
-                  {index > 0 ? (
-                    <span className={styles.sectorSep} aria-hidden="true">
-                      ·
-                    </span>
-                  ) : null}
-                  {tServices(`items.${key}.title`)}
-                </span>
-              ))}
-            </p>
-          </div>
           <Link href="/services" className={styles.textLink}>
             {tHome("viewServices")}
           </Link>
