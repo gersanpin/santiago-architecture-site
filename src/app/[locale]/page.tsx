@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { HomeHero } from "@/components/HomeHero";
@@ -8,6 +9,7 @@ import {
   getProjectBySlug,
   type LocaleCode,
 } from "@/data/projects";
+import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
 import { buildMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
 import styles from "./home.module.css";
@@ -30,6 +32,15 @@ const SELECTED_SLUGS = [
   "villa-nosara",
   "bali-resort",
 ] as const;
+
+const SERVICE_DO_KEYS = [
+  "architecture",
+  "designBuild",
+  "masterplan",
+  "development",
+] as const;
+
+const SECTOR_KEYS = ["residential", "hospitality"] as const;
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
@@ -70,49 +81,103 @@ export default async function HomePage({ params }: Props) {
     <div className={styles.home}>
       <HomeHero slides={slides} />
 
-      <section className={styles.section}>
+      <section className={styles.selectedSection}>
         <Reveal>
           <p className={styles.kicker}>{tHome("selectedTitle")}</p>
         </Reveal>
         <ul className={styles.selected}>
-          {selected.map((project, index) => (
-            <Reveal
-              key={project.slug}
-              as="li"
-              delay={(Math.min(index + 1, 3) as 1 | 2 | 3)}
-            >
-              <Link
-                href={`/projects/${project.slug}`}
-                className={styles.selectedLink}
-              >
-                <span className={styles.selectedName}>
-                  {getLocalized(project.name, lang)}
-                </span>
-                <span className={styles.selectedPlace}>
-                  {formatPlace(project, lang)}
-                </span>
-              </Link>
-            </Reveal>
-          ))}
-        </ul>
-      </section>
+          {selected.map((project, index) => {
+            const cover = project.images[0];
+            if (!cover) return null;
+            const name = getLocalized(project.name, lang);
+            const place = formatPlace(project, lang);
+            const align =
+              index % 2 === 0 ? styles.selectedItemStart : styles.selectedItemEnd;
 
-      <section className={styles.section}>
-        <Reveal>
-          <p className={styles.kicker}>{tAbout("title")}</p>
-          <p className={styles.statement}>{tAbout("lead")}</p>
-          <p className={styles.body}>{tAbout("p1")}</p>
-          <Link href="/about" className={styles.textLink}>
-            {tHome("readAbout")}
+            return (
+              <Reveal
+                key={project.slug}
+                as="li"
+                className={`${styles.selectedItem} ${align}`}
+                delay={(Math.min(index + 1, 3) as 1 | 2 | 3)}
+                image
+              >
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className={styles.selectedLink}
+                >
+                  <div className={styles.selectedMedia}>
+                    <Image
+                      src={cover}
+                      alt=""
+                      fill
+                      sizes="(max-width: 700px) 92vw, (max-width: 1100px) 78vw, 72vw"
+                      quality={IMAGE_QUALITY}
+                      unoptimized={IMAGE_UNOPTIMIZED}
+                      className={styles.selectedImage}
+                      style={{
+                        objectPosition: project.coverFocus ?? "50% 45%",
+                      }}
+                    />
+                  </div>
+                  <div className={styles.selectedMeta}>
+                    <span className={styles.selectedName}>{name}</span>
+                    {place ? (
+                      <span className={styles.selectedPlace}>{place}</span>
+                    ) : null}
+                  </div>
+                </Link>
+              </Reveal>
+            );
+          })}
+        </ul>
+        <Reveal className={styles.allProjects} delay={1}>
+          <Link href="/projects" className={styles.textLink}>
+            {tHome("viewAllProjects")}
           </Link>
         </Reveal>
       </section>
 
       <section className={styles.section}>
         <Reveal>
+          <p className={styles.kicker}>{tAbout("title")}</p>
+          <p className={styles.body}>{tHome("aboutP1")}</p>
+          <p className={styles.body}>{tHome("aboutP2")}</p>
+          <div className={styles.aboutMedia} aria-hidden="true" />
+          <Link href="/about" className={styles.textLink}>
+            {tHome("readAbout")}
+          </Link>
+        </Reveal>
+      </section>
+
+      <section className={`${styles.section} ${styles.servicesSection}`}>
+        <Reveal>
           <p className={styles.kicker}>{tServices("title")}</p>
-          <p className={styles.statement}>{tServices("lead")}</p>
-          <p className={styles.body}>{tServices("intro")}</p>
+          <p className={styles.servicesLead}>{tServices("lead")}</p>
+          <ul className={styles.serviceDo}>
+            {SERVICE_DO_KEYS.map((key) => (
+              <li key={key}>
+                {key === "development"
+                  ? tHome("development")
+                  : tServices(`items.${key}.title`)}
+              </li>
+            ))}
+          </ul>
+          <div className={styles.sectors}>
+            <p className={styles.sectorsLabel}>{tHome("sectorsTitle")}</p>
+            <p className={styles.sectorsList}>
+              {SECTOR_KEYS.map((key, index) => (
+                <span key={key}>
+                  {index > 0 ? (
+                    <span className={styles.sectorSep} aria-hidden="true">
+                      ·
+                    </span>
+                  ) : null}
+                  {tServices(`items.${key}.title`)}
+                </span>
+              ))}
+            </p>
+          </div>
           <Link href="/services" className={styles.textLink}>
             {tHome("viewServices")}
           </Link>
@@ -121,7 +186,7 @@ export default async function HomePage({ params }: Props) {
 
       <section className={`${styles.section} ${styles.ctaSection}`}>
         <Reveal>
-          <p className={styles.statement}>{tHome("contactLead")}</p>
+          <p className={styles.ctaLead}>{tHome("contactLead")}</p>
           <Link href="/contact?start=1" className={styles.textLink}>
             {tHome("startProject")} →
           </Link>

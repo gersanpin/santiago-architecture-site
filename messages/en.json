@@ -2,7 +2,7 @@
   "Meta": {
     "siteName": "Santiago Architecture",
     "homeTitle": "Architecture Studio",
-    "homeDescription": "Architecture studio designing residential, hospitality, and cultural spaces.",
+    "homeDescription": "Architecture studio designing and building for private clients, developers, and investors — from concept to construction.",
     "projectsTitle": "Projects",
     "projectsDescription": "Selected architecture projects across residential, hospitality, and masterplan work.",
     "aboutTitle": "About",
@@ -22,12 +22,17 @@
   },
   "Home": {
     "brand": "Santiago Architecture",
-    "headline": "Architecture shaped by place.",
-    "support": "Residential, hospitality, and cultural work with a quiet material focus.",
+    "headline": "Architecture that belongs to its landscape.",
+    "support": "From concept to construction — for private clients, developers, and investors.",
     "exploreProjects": "Explore Projects",
     "startProject": "Start a Project",
     "selectedTitle": "Selected Projects",
+    "viewAllProjects": "View all projects",
+    "aboutP1": "Santiago Architecture is the studio of Gerardo Santiago Pineda. We design and build — staying with each project from early decisions through construction.",
+    "aboutP2": "The work is international: residences, hospitality, and developments for private clients, developers, and investors.",
     "readAbout": "About the studio",
+    "sectorsTitle": "Sectors",
+    "development": "Development",
     "viewServices": "View services",
     "contactLead": "Have a site, a brief, or an idea in progress."
   },

@@ -99,16 +99,16 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "A two-level prefabricated retreat of 85 m² with curved roofs and warm wood, designed to be transported fully assembled.",
-      es: "Un refugio prefabricado de dos niveles y 85 m² con cubiertas curvas y madera cálida, pensado para transportarse ya armado.",
+      en: "A two-level prefabricated retreat of 85 m² with curved roofs and warm wood, transported as separate upper and lower modules and assembled on site.",
+      es: "Un refugio prefabricado de dos niveles y 85 m² con cubiertas curvas y madera cálida, transportado en dos módulos —superior e inferior— y ensamblado en sitio.",
     },
     seoTitle: {
       en: "Tiny Home Costa Rica",
       es: "Tiny Home Costa Rica",
     },
     seoDescription: {
-      en: "Tiny Home Costa Rica — a two-level prefabricated retreat with curved roofs and warm wood.",
-      es: "Tiny Home Costa Rica — refugio prefabricado de dos niveles con cubiertas curvas y madera cálida.",
+      en: "Tiny Home Costa Rica — a two-level prefabricated retreat transported in two modules and assembled on site.",
+      es: "Tiny Home Costa Rica — refugio prefabricado de dos niveles transportado en dos módulos y ensamblado en sitio.",
     },
   },
   {
@@ -143,16 +143,16 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "A compact one-bedroom cabin of 42 m² under a curved timber roof, conceived as a tropical living unit that can be moved already assembled.",
-      es: "Una cabaña compacta de una recámara y 42 m² bajo una cubierta de madera curva, concebida como unidad habitacional tropical que puede moverse ya armada.",
+      en: "A compact one-bedroom home of 42 m² under a curved timber roof, designed as a modular system that can grow over time by adding more rooms.",
+      es: "Una vivienda compacta de una recámara y 42 m² bajo una cubierta de madera curva, diseñada como un sistema modular que puede crecer con el tiempo al añadir más habitaciones.",
     },
     seoTitle: {
       en: "Tiny Home 1 Bedroom",
       es: "Tiny Home 1 Bedroom",
     },
     seoDescription: {
-      en: "Tiny Home 1 Bedroom — a compact one-bedroom cabin with a curved timber roof.",
-      es: "Tiny Home 1 Bedroom — cabaña compacta de una recámara con cubierta de madera curva.",
+      en: "Tiny Home 1 Bedroom — a compact modular home designed to grow by adding rooms over time.",
+      es: "Tiny Home 1 Bedroom — vivienda modular compacta diseñada para crecer al añadir habitaciones con el tiempo.",
     },
   },
   {
@@ -317,8 +317,8 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "Collaboration on the conceptualization of an eight-hectare masterplan in Uh May, arranged as white volumes with green roofs within retained forest canopy.",
-      es: "Colaboración en la conceptualización de un plan maestro de ocho hectáreas en Uh May, organizado como volúmenes blancos con cubiertas verdes dentro del dosel forestal retenido.",
+      en: "Collaboration on the conceptualization of an eight-hectare masterplan in Uh May, arranged as white volumes with green roofs within retained jungle canopy.",
+      es: "Colaboración en la conceptualización de un plan maestro de ocho hectáreas en Uh May, organizado como volúmenes blancos con cubiertas verdes dentro del dosel de la selva conservado.",
     },
     credit: {
       en: "In collaboration with Rodrigo Lepez Vela and other architects.",
@@ -333,8 +333,8 @@ const projectsData: Project[] = [
       es: "Aldea Uh May",
     },
     seoDescription: {
-      en: "Aldea Uh May — collaborative conceptualization of an eight-hectare masterplan within retained forest canopy.",
-      es: "Aldea Uh May — colaboración en la conceptualización de un plan maestro de ocho hectáreas dentro del dosel forestal retenido.",
+      en: "Aldea Uh May — collaborative conceptualization of an eight-hectare masterplan within retained jungle canopy.",
+      es: "Aldea Uh May — colaboración en la conceptualización de un plan maestro de ocho hectáreas dentro del dosel de la selva conservado.",
     },
   },
   {
@@ -452,16 +452,16 @@ const projectsData: Project[] = [
       es: "España",
     },
     description: {
-      en: "A 32 m² coastal tiny home defined by a curved white shell, designed as a compact prefabricated dwelling.",
-      es: "Una tiny home costera de 32 m² definida por un cascarón blanco curvo, concebida como vivienda prefabricada compacta.",
+      en: "A 32 m² tiny home defined by a curved white shell, designed to be towed by car and relocated to a new site.",
+      es: "Una tiny home de 32 m² definida por un cascarón blanco curvo, diseñada para ser remolcada por un automóvil y trasladada a otro lugar.",
     },
     seoTitle: {
       en: "Tiny Home Spain",
       es: "Tiny Home Spain",
     },
     seoDescription: {
-      en: "Tiny Home Spain — a coastal prefabricated dwelling with a curved white shell.",
-      es: "Tiny Home Spain — vivienda prefabricada costera con cascarón blanco curvo.",
+      en: "Tiny Home Spain — a towable 32 m² dwelling with a curved white shell.",
+      es: "Tiny Home Spain — vivienda móvil de 32 m² con cascarón blanco curvo.",
     },
   },
   {
@@ -489,16 +489,16 @@ const projectsData: Project[] = [
       es: "Costa Rica",
     },
     description: {
-      en: "A tropical residence combining earth walls, a lightweight palapa roof and elevated timber walkways that connect the different living spaces through the site.",
-      es: "Una residencia tropical que combina muros de tierra, una cubierta ligera de palapa y pasarelas elevadas de madera que conectan los distintos espacios habitables a través del sitio.",
+      en: "A sustainable tropical residence built with locally sourced stone, adobe, palm thatch and wood, with elevated walkways connecting its living spaces through the site.",
+      es: "Una residencia tropical sostenible construida con materiales locales —piedra, adobe, paja de palma y madera—, con pasarelas elevadas que conectan sus espacios habitables a través del sitio.",
     },
     seoTitle: {
       en: "Casa Nosara",
       es: "Casa Nosara",
     },
     seoDescription: {
-      en: "Casa Nosara — tropical residence with earth walls and a palapa roof in Costa Rica.",
-      es: "Casa Nosara — residencia tropical con muros de tierra y cubierta de palapa en Costa Rica.",
+      en: "Casa Nosara — sustainable tropical residence built with local stone, adobe, palm thatch and wood.",
+      es: "Casa Nosara — residencia tropical sostenible construida con piedra, adobe, paja de palma y madera locales.",
     },
   },
   {
@@ -616,8 +616,12 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "A workplace defined by plywood, exposed concrete and parametric timber screens, balancing a raw material palette with precise geometric interventions.",
-      es: "Un espacio de trabajo definido por madera contrachapada, concreto aparente y celosías paramétricas de madera, combinando una paleta material cruda con intervenciones geométricas precisas.",
+      en: "Santiago Architecture designed and oversaw the fabrication of the prefabricated furniture for this workplace. Each plywood piece was produced off site and assembled through joinery alone, without screws or glue.",
+      es: "Santiago Architecture diseñó y supervisó la fabricación del mobiliario prefabricado para este espacio de trabajo. Cada pieza de madera contrachapada se produjo fuera de sitio y se armó únicamente mediante ensambles, sin tornillos ni pegamento.",
+    },
+    scope: {
+      en: "Furniture design and fabrication",
+      es: "Diseño y fabricación de mobiliario",
     },
     credit: {
       en: "In collaboration with Esteban Sepúlveda and Rodolfo Anaya.",
@@ -628,8 +632,8 @@ const projectsData: Project[] = [
       es: "Mountain Nazca Offices",
     },
     seoDescription: {
-      en: "Mountain Nazca Offices in Mexico City — workplace interior with Esteban Sepúlveda and Rodolfo Anaya.",
-      es: "Mountain Nazca Offices en Ciudad de México — interior de trabajo con Esteban Sepúlveda y Rodolfo Anaya.",
+      en: "Mountain Nazca Offices — prefabricated furniture designed for assembly without screws or glue.",
+      es: "Mountain Nazca Offices — mobiliario prefabricado diseñado para armarse sin tornillos ni pegamento.",
     },
   },
   {
@@ -764,16 +768,16 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "A residence of sand-toned surfaces, stone and soft geometries designed around shaded courtyards and tropical vegetation in Tulum.",
-      es: "Una residencia de superficies en tonos arena, piedra y geometrías suaves organizada alrededor de patios sombreados y vegetación tropical en Tulum.",
+      en: "A residence defined by chukum finishes and soft geometries, designed around shaded courtyards and tropical vegetation in Tulum.",
+      es: "Una residencia definida por acabados de chukum y geometrías suaves, organizada alrededor de patios sombreados y vegetación tropical en Tulum.",
     },
     seoTitle: {
       en: "Jungle House Tulum",
       es: "Jungle House Tulum",
     },
     seoDescription: {
-      en: "Jungle House Tulum — residence of sand-toned surfaces and soft geometries.",
-      es: "Jungle House Tulum — residencia de superficies en tonos arena y geometrías suaves.",
+      en: "Jungle House Tulum — residence with chukum finishes and soft geometries.",
+      es: "Jungle House Tulum — residencia con acabados de chukum y geometrías suaves.",
     },
   },
 ];

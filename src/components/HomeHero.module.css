@@ -15,6 +15,7 @@
   inset: 0;
   overflow: hidden;
   border-radius: 0;
+  pointer-events: none;
 }
 
 .heroImage {
@@ -23,6 +24,7 @@
   transform: scale(1.06);
   transition: opacity 1.4s var(--ease-organic);
   border-radius: 0;
+  pointer-events: none;
 }
 
 .heroImageActive {
@@ -36,6 +38,7 @@
   z-index: 1;
   border-radius: 0;
   background: var(--hero-overlay);
+  pointer-events: none;
 }
 
 .content {
@@ -44,17 +47,21 @@
   width: 100%;
   max-width: none;
   margin-inline: auto;
-  padding: 0 clamp(1.25rem, 3.2vw, 2.75rem) clamp(3.75rem, 9vh, 6.5rem);
+  /* Extra bottom room so CTAs never sit under the project credit */
+  padding: 0 clamp(1.25rem, 3.2vw, 2.75rem) clamp(4.75rem, 12vh, 7.75rem);
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
   gap: clamp(1.5rem, 5vw, 5rem);
   align-items: end;
   box-sizing: border-box;
+  /* Let clicks pass through empty grid/padding to the credit link */
+  pointer-events: none;
 }
 
 .copy {
   min-width: 0;
   max-width: 42rem;
+  pointer-events: auto;
 }
 
 .brand {
@@ -87,12 +94,15 @@
 }
 
 .actions {
+  position: relative;
+  z-index: 4;
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
   justify-self: end;
   align-items: center;
   padding-bottom: 0.2rem;
+  pointer-events: auto;
 }
 
 .credit {
@@ -107,6 +117,7 @@
   text-decoration: none;
   color: rgba(250, 247, 242, 0.72);
   transition: color var(--duration-ui) var(--ease-soft);
+  pointer-events: auto;
 }
 
 .credit:hover {
@@ -141,7 +152,7 @@
     gap: 1.5rem;
     width: 100%;
     padding-inline: clamp(1.15rem, 4.5vw, 1.75rem);
-    padding-bottom: clamp(3rem, 8vh, 4.5rem);
+    padding-bottom: clamp(4rem, 10vh, 5.5rem);
   }
 
   .copy {
