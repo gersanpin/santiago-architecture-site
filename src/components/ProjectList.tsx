@@ -63,7 +63,11 @@ function ProjectListEntry({ project, locale, priority }: EntryProps) {
                     <Image
                       key={src}
                       src={src}
-                      alt={`${name} — ${index + 1}`}
+                      alt={
+                        place
+                          ? `${name} — ${place} — ${index + 1}`
+                          : `${name} — ${index + 1}`
+                      }
                       width={1920}
                       height={1080}
                       priority={priority}
@@ -138,7 +142,7 @@ function ProjectListEntry({ project, locale, priority }: EntryProps) {
       </div>
       <ProjectLightbox
         images={images}
-        alt={name}
+        alt={place ? `${name} — ${place}` : name}
         initialIndex={lightboxIndex}
         open={lightboxOpen}
         onClose={() => setLightboxOpen(false)}

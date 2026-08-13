@@ -12,6 +12,17 @@ export type LocaleCode = "en" | "es";
 
 export type LocalizedString = Record<LocaleCode, string>;
 
+export type ProjectCaseStudy = {
+  context?: LocalizedString;
+  site?: LocalizedString;
+  designApproach?: LocalizedString;
+  materials?: LocalizedString;
+  landscapeStrategy?: LocalizedString;
+  sustainability?: LocalizedString;
+  construction?: LocalizedString;
+  scope?: LocalizedString;
+};
+
 export type Project = {
   slug: string;
   year: number;
@@ -34,6 +45,8 @@ export type Project = {
   status?: LocalizedString;
   /** Optional scope when the studio contributed only part of the work. */
   scope?: LocalizedString;
+  /** Optional editorial sections for future, fact-checked case studies. */
+  caseStudy?: ProjectCaseStudy;
   seoTitle: LocalizedString;
   seoDescription: LocalizedString;
 };

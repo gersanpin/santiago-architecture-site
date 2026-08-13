@@ -7,6 +7,10 @@ import {
   type LocaleCode,
 } from "@/data/projects";
 import { ProjectsExplorer } from "@/components/ProjectsExplorer";
+import {
+  buildBreadcrumbStructuredData,
+  StructuredData,
+} from "@/components/StructuredData";
 import { buildMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
 import styles from "./page.module.css";
@@ -34,6 +38,12 @@ export default async function ProjectsPage({ params }: Props) {
 
   return (
     <div className={styles.page}>
+      <StructuredData
+        data={buildBreadcrumbStructuredData([
+          { name: t("home"), path: `/${locale}` },
+          { name: t("title"), path: `/${locale}/projects` },
+        ])}
+      />
       <header className={styles.top}>
         <h1 className={styles.title}>{t("title")}</h1>
       </header>

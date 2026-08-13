@@ -8,6 +8,8 @@ type BuildMetadataInput = {
   title: string;
   description: string;
   image?: string | null;
+  imageAlt?: string;
+  absoluteTitle?: boolean;
 };
 
 function absoluteUrl(path: string) {
@@ -22,6 +24,8 @@ export function buildMetadata({
   title,
   description,
   image,
+  imageAlt,
+  absoluteTitle = false,
 }: BuildMetadataInput): Metadata {
   const normalizedPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
   const pathWithoutLocale =
@@ -39,7 +43,7 @@ export function buildMetadata({
   const ogImage = image ? absoluteUrl(image) : absoluteUrl(siteConfig.ogImage);
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: {
       canonical,
@@ -60,9 +64,7 @@ export function buildMetadata({
       images: [
         {
           url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: title,
+          alt: imageAlt ?? title,
         },
       ],
     },

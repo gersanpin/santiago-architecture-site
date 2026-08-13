@@ -572,7 +572,7 @@ function GlobePreview({
           fill
           quality={IMAGE_QUALITY}
           unoptimized={IMAGE_UNOPTIMIZED}
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 34rem"
           className={styles.previewImage}
           style={pushStyle}
         />
@@ -648,7 +648,7 @@ export function ProjectGlobe({ projects, selectedSlug, onSelect }: Props) {
       <div className={styles.canvas}>
         <Canvas
           camera={{ position: [0, 0.15, CAMERA_DISTANCE], fov: CAMERA_FOV }}
-          dpr={[1, 2.5]}
+          dpr={[1, 2]}
           gl={{
             alpha: true,
             antialias: true,

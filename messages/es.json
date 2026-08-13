@@ -1,14 +1,14 @@
 {
   "Meta": {
     "siteName": "Santiago Architecture",
-    "homeTitle": "Estudio de arquitectura",
-    "homeDescription": "Estudio de arquitectura que diseña y construye para clientes privados, desarrolladores e inversionistas — del concepto a la obra.",
-    "projectsTitle": "Proyectos",
-    "projectsDescription": "Proyectos de arquitectura seleccionados en residencial, hospitalidad y plan maestro.",
-    "aboutTitle": "Acerca de",
-    "aboutDescription": "Arquitectura moldeada por el lugar, la naturaleza y la experiencia. Estudio fundado por Gerardo Santiago Pineda.",
-    "servicesTitle": "Servicios",
-    "servicesDescription": "Desde la primera idea hasta la construcción: arquitectura, diseño + construcción, residencial, hospitalidad, planes maestros y desarrollos.",
+    "homeTitle": "Santiago Architecture — Arquitectura orgánica y estudio de diseño",
+    "homeDescription": "Santiago Architecture es un estudio internacional de arquitectura orgánica integrada al paisaje para proyectos residenciales, de hospitalidad y desarrollo.",
+    "projectsTitle": "Proyectos de arquitectura",
+    "projectsDescription": "Proyectos residenciales, villas, hospitalidad, resorts y planes maestros definidos por el paisaje, el clima y la materialidad.",
+    "aboutTitle": "Acerca del estudio",
+    "aboutDescription": "Santiago Architecture es un estudio internacional fundado por Gerardo Santiago Pineda que trabaja del diseño arquitectónico a la construcción.",
+    "servicesTitle": "Servicios de arquitectura",
+    "servicesDescription": "Arquitectura, diseño + construcción, planes maestros y desarrollo para clientes privados, desarrolladores e inversionistas a nivel internacional.",
     "contactTitle": "Contacto",
     "contactDescription": "Cuéntanos sobre tu proyecto, terreno o idea de desarrollo. Trabajamos con clientes privados, desarrolladores e inversionistas a nivel internacional."
   },
@@ -36,6 +36,7 @@
     "contactLead": "¿Tienes un terreno, un brief o una idea en curso?"
   },
   "Projects": {
+    "home": "Inicio",
     "title": "Proyectos",
     "selected": "Proyectos seleccionados",
     "gridView": "Cuadrícula",
@@ -57,6 +58,14 @@
       "pavilion": "Pabellón",
       "interior": "Interiorismo"
     },
+    "seoTypes": {
+      "residential": "Arquitectura residencial",
+      "hospitality": "Arquitectura de hospitalidad",
+      "masterplan": "Plan maestro",
+      "workplace": "Diseño de espacios de trabajo",
+      "pavilion": "Arquitectura de pabellón",
+      "interior": "Diseño de interiores"
+    },
     "labels": {
       "project": "Proyecto",
       "location": "Ubicación",
@@ -71,10 +80,10 @@
   },
   "About": {
     "title": "Acerca de",
-    "lead": "Arquitectura moldeada por el lugar, la naturaleza y la experiencia.",
-    "p1": "Santiago Architecture es un estudio de arquitectura y diseño fundado por Gerardo Santiago Pineda, con una visión internacional.",
-    "p2": "Trabajamos desde residencias y proyectos de hospitalidad hasta desarrollos de mayor escala.",
-    "p3": "Nuestro proceso combina diseño arquitectónico, exploración espacial y modelado 3D avanzado para desarrollar proyectos que respondan al clima, la materialidad y la forma de habitar.",
+    "lead": "Arquitectura orgánica definida por el lugar, el paisaje y la experiencia.",
+    "p1": "Santiago Architecture es un estudio internacional de arquitectura y diseño fundado por Gerardo Santiago Pineda.",
+    "p2": "Trabajamos con clientes privados, desarrolladores e inversionistas en residencias, villas, proyectos de hospitalidad y desarrollos de mayor escala.",
+    "p3": "Nuestro proceso combina diseño arquitectónico, conocimiento constructivo, exploración espacial y modelado 3D avanzado para llevar los proyectos desde sus primeras ideas hacia su realización.",
     "p4": "Buscamos crear una arquitectura con identidad propia: contemporánea, sensible a su contexto y diseñada para ser experimentada.",
     "approachTitle": "Enfoque",
     "approach1": "No entendemos la arquitectura como un objeto aislado. Cada proyecto parte del lugar: su clima, paisaje, luz, vegetación, materiales y forma de habitar.",
@@ -117,7 +126,7 @@
       }
     },
     "doTitle": "Qué hacemos",
-    "whereTitle": "Dónde trabajamos",
+    "whereTitle": "Sectores",
     "cta": "Iniciar un proyecto →"
   },
   "Contact": {

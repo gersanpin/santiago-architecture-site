@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const path of staticPaths) {
       entries.push({
         url: `${siteConfig.url}/${locale}${path}`,
-        lastModified: new Date(),
         changeFrequency: path === "" ? "weekly" : "monthly",
         priority: path === "" ? 1 : 0.7,
         alternates: {
@@ -29,9 +28,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const path = `/projects/${project.slug}`;
       entries.push({
         url: `${siteConfig.url}/${locale}${path}`,
-        lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.6,
+        images: project.images.map((image) => `${siteConfig.url}${image}`),
         alternates: {
           languages: {
             en: `${siteConfig.url}/en${path}`,

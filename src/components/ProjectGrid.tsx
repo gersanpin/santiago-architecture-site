@@ -120,6 +120,7 @@ function ProjectTile({
   const t = useTranslations("Projects");
   const pool = getImagePool(project, shape);
   const name = getLocalized(project.name, locale);
+  const place = formatPlace(project, locale);
   const { style: pushStyle, handlers: pushHandlers } = usePushFromPointer({
     maxTilt: 12,
   });
@@ -136,6 +137,12 @@ function ProjectTile({
     shape === "portrait"
       ? (project.coverFocus ?? "50% 42%")
       : (project.coverFocus ?? "50% 45%");
+  const sizes =
+    className === "tileFeatured"
+      ? "(max-width: 899px) 100vw, 67vw"
+      : shape === "landscape"
+        ? "(max-width: 899px) 100vw, 50vw"
+        : "(max-width: 899px) 50vw, 34vw";
 
   return (
     <li
@@ -152,9 +159,9 @@ function ProjectTile({
             <Image
               key={src}
               src={src}
-              alt={name}
+              alt={place ? `${name} — ${place}` : name}
               fill
-              sizes="100vw"
+              sizes={sizes}
               quality={IMAGE_QUALITY}
               unoptimized={IMAGE_UNOPTIMIZED}
               className={styles.image}
@@ -166,7 +173,7 @@ function ProjectTile({
         <div className={styles.meta}>
           <p className={styles.category}>{t(`filters.${project.category}`)}</p>
           <h2>{name}</h2>
-          <p>{formatPlace(project, locale)}</p>
+          <p>{place}</p>
         </div>
       </Link>
     </li>
@@ -191,7 +198,7 @@ export function ProjectGrid({ projects }: Props) {
           className={className}
           shape={shape}
           locale={locale}
-          priority={index < 6}
+          priority={index < 2}
         />
       ))}
     </ul>

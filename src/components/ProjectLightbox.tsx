@@ -196,7 +196,6 @@ export function ProjectLightbox({
               unoptimized={IMAGE_UNOPTIMIZED}
               sizes="100vw"
               className={styles.image}
-              priority
             />
           ) : null}
 

@@ -49,6 +49,8 @@ export async function generateMetadata({ params }: Props) {
     title: t("homeTitle"),
     description: t("homeDescription"),
     image: "/projects/casa-sisal/01.png",
+    imageAlt: "Casa Sisal — Santiago Architecture",
+    absoluteTitle: true,
   });
 }
 
@@ -81,7 +83,7 @@ export default async function HomePage({ params }: Props) {
 
       <section className={styles.selectedSection}>
         <Reveal>
-          <p className={styles.kicker}>{tHome("selectedTitle")}</p>
+          <h2 className={styles.kicker}>{tHome("selectedTitle")}</h2>
         </Reveal>
         <ul className={styles.selected}>
           {selected.map((project, index) => {
@@ -107,7 +109,7 @@ export default async function HomePage({ params }: Props) {
                   <div className={styles.selectedMedia}>
                     <Image
                       src={cover}
-                      alt=""
+                      alt={place ? `${name} — ${place}` : name}
                       fill
                       sizes="(max-width: 700px) 92vw, (max-width: 1100px) 78vw, 72vw"
                       quality={IMAGE_QUALITY}
@@ -138,7 +140,7 @@ export default async function HomePage({ params }: Props) {
 
       <section className={styles.section}>
         <Reveal>
-          <p className={styles.kicker}>{tAbout("title")}</p>
+          <h2 className={styles.kicker}>{tAbout("title")}</h2>
           <p className={styles.body}>{tHome("aboutP1")}</p>
           <p className={styles.body}>{tHome("aboutP2")}</p>
           <div className={styles.aboutMedia} aria-hidden="true" />
@@ -150,7 +152,7 @@ export default async function HomePage({ params }: Props) {
 
       <section className={`${styles.section} ${styles.servicesSection}`}>
         <Reveal>
-          <p className={styles.kicker}>{tServices("title")}</p>
+          <h2 className={styles.kicker}>{tServices("title")}</h2>
           <p className={styles.servicesLead}>{tServices("lead")}</p>
           <ul className={styles.serviceDo}>
             {SERVICE_DO_KEYS.map((key) => (

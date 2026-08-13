@@ -7,6 +7,10 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PageFade } from "@/components/PageFade";
+import {
+  buildSiteStructuredData,
+  StructuredData,
+} from "@/components/StructuredData";
 import { siteConfig } from "@/lib/site";
 import "@/styles/globals.css";
 
@@ -36,9 +40,12 @@ export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   return {
     metadataBase: new URL(siteConfig.url),
+    applicationName: siteConfig.name,
+    creator: siteConfig.name,
+    publisher: siteConfig.name,
     title: {
       default: siteConfig.name,
-      template: `%s | ${siteConfig.name}`,
+      template: `%s — ${siteConfig.name}`,
     },
     alternates: {
       languages: {
@@ -67,6 +74,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} className={`${syne.variable} ${plex.variable}`}>
       <body>
+        <StructuredData data={buildSiteStructuredData()} />
         <NextIntlClientProvider messages={messages}>
           <Suspense fallback={null}>
             <SiteHeader />

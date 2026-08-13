@@ -12,6 +12,10 @@ import {
   type LocaleCode,
 } from "@/data/projects";
 import { ProjectGallery } from "@/components/ProjectGallery";
+import {
+  buildBreadcrumbStructuredData,
+  StructuredData,
+} from "@/components/StructuredData";
 import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
 import { buildMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
@@ -36,12 +40,18 @@ export async function generateMetadata({ params }: Props) {
   if (!project) return {};
 
   const lang = locale as LocaleCode;
+  const name = getLocalized(project.name, lang);
+  const place = formatPlace(project, lang);
+  const t = await getTranslations({ locale, namespace: "Projects" });
   return buildMetadata({
     locale: locale as Locale,
     pathname: `/${locale}/projects/${slug}`,
-    title: getLocalized(project.seoTitle, lang),
+    title: `${getLocalized(project.seoTitle, lang)} — ${t(
+      `seoTypes.${project.category}`,
+    )}`,
     description: getLocalized(project.seoDescription, lang),
     image: project.images[0] ?? null,
+    imageAlt: place ? `${name} — ${place}` : name,
   });
 }
 
@@ -62,10 +72,19 @@ export default async function ProjectDetailPage({ params }: Props) {
   const nextName = next ? getLocalized(next.name, lang) : null;
   const nextPlace = next ? formatPlace(next, lang) : null;
   const nextImage = next?.images[0] ?? null;
+  const place = formatPlace(project, lang);
+  const galleryAlt = place ? `${name} — ${place}` : name;
 
   return (
     <article className={styles.article}>
-      <ProjectGallery images={project.images} alt={name}>
+      <StructuredData
+        data={buildBreadcrumbStructuredData([
+          { name: t("home"), path: `/${locale}` },
+          { name: t("title"), path: `/${locale}/projects` },
+          { name, path: `/${locale}/projects/${slug}` },
+        ])}
+      />
+      <ProjectGallery images={project.images} alt={galleryAlt}>
         <header className={styles.intro}>
           <p className={styles.kicker}>{t(`filters.${project.category}`)}</p>
           <h1 className={styles.title}>{name}</h1>
@@ -87,7 +106,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className={styles.nextMedia}>
             <Image
               src={nextImage}
-              alt=""
+              alt={nextPlace ? `${nextName} — ${nextPlace}` : nextName}
               fill
               sizes="(max-width: 700px) 88vw, (max-width: 1100px) 68vw, 62vw"
               quality={IMAGE_QUALITY}

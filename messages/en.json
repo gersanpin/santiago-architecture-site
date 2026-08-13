@@ -1,14 +1,14 @@
 {
   "Meta": {
     "siteName": "Santiago Architecture",
-    "homeTitle": "Architecture Studio",
-    "homeDescription": "Architecture studio designing and building for private clients, developers, and investors — from concept to construction.",
-    "projectsTitle": "Projects",
-    "projectsDescription": "Selected architecture projects across residential, hospitality, and masterplan work.",
-    "aboutTitle": "About",
-    "aboutDescription": "Architecture shaped by place, nature, and experience. A studio founded by Gerardo Santiago Pineda.",
-    "servicesTitle": "Services",
-    "servicesDescription": "From the first idea through construction: architecture, design + build, residential, hospitality, masterplanning, and development.",
+    "homeTitle": "Santiago Architecture — Organic Architecture & Design Studio",
+    "homeDescription": "Santiago Architecture is an international studio creating organic architecture integrated with landscape for residential, hospitality, and development projects.",
+    "projectsTitle": "Architecture Projects",
+    "projectsDescription": "Residential, villa, hospitality, resort, and masterplanning projects shaped by landscape, climate, and material.",
+    "aboutTitle": "About the Studio",
+    "aboutDescription": "Santiago Architecture is an international studio founded by Gerardo Santiago Pineda, working from architectural design through construction.",
+    "servicesTitle": "Architecture Services",
+    "servicesDescription": "Architecture, design + build, masterplanning, and development for private clients, developers, and investors internationally.",
     "contactTitle": "Contact",
     "contactDescription": "Tell us about your project, site, or development idea. We work with private clients, developers, and investors internationally."
   },
@@ -36,6 +36,7 @@
     "contactLead": "Have a site, a brief, or an idea in progress."
   },
   "Projects": {
+    "home": "Home",
     "title": "Projects",
     "selected": "Selected Projects",
     "gridView": "Grid",
@@ -57,6 +58,14 @@
       "pavilion": "Pavilion",
       "interior": "Interior"
     },
+    "seoTypes": {
+      "residential": "Residential Architecture",
+      "hospitality": "Hospitality Architecture",
+      "masterplan": "Masterplanning",
+      "workplace": "Workplace Design",
+      "pavilion": "Pavilion Architecture",
+      "interior": "Interior Design"
+    },
     "labels": {
       "project": "Project",
       "location": "Location",
@@ -71,10 +80,10 @@
   },
   "About": {
     "title": "About",
-    "lead": "Architecture shaped by place, nature, and experience.",
-    "p1": "Santiago Architecture is an architecture and design studio founded by Gerardo Santiago Pineda, with an international outlook.",
-    "p2": "We work across residences and hospitality projects through to larger-scale developments.",
-    "p3": "Our process combines architectural design, spatial exploration, and advanced 3D modeling to develop projects that respond to climate, materiality, and ways of living.",
+    "lead": "Organic architecture shaped by place, landscape, and experience.",
+    "p1": "Santiago Architecture is an international architecture and design studio founded by Gerardo Santiago Pineda.",
+    "p2": "We work with private clients, developers, and investors on residences, villas, hospitality projects, and larger-scale developments.",
+    "p3": "Our process combines architectural design, construction knowledge, spatial exploration, and advanced 3D modeling, allowing us to carry projects from early concepts toward realization.",
     "p4": "We aim to create architecture with its own identity: contemporary, sensitive to context, and designed to be experienced.",
     "approachTitle": "Approach",
     "approach1": "We do not understand architecture as an isolated object. Every project begins with place: its climate, landscape, light, vegetation, materials, and ways of living.",
@@ -117,7 +126,7 @@
       }
     },
     "doTitle": "What we do",
-    "whereTitle": "Where we work",
+    "whereTitle": "Sectors",
     "cta": "Start a project →"
   },
   "Contact": {

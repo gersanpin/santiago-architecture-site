@@ -54,6 +54,7 @@ export function HomeHero({ slides }: Props) {
             alt=""
             fill
             priority={index === 0}
+            fetchPriority={index === 0 ? "high" : "low"}
             quality={IMAGE_QUALITY_HERO}
             unoptimized={IMAGE_UNOPTIMIZED}
             className={`${styles.heroImage} ${
