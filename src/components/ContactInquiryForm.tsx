@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { InstagramLink } from "./InstagramLink";
@@ -22,6 +22,7 @@ type FormState = {
 type MeetingState = {
   date: string;
   time: string;
+  timezone: string;
   notes: string;
 };
 
@@ -58,8 +59,13 @@ const INITIAL: FormState = {
 const INITIAL_MEETING: MeetingState = {
   date: "",
   time: "",
+  timezone: "",
   notes: "",
 };
+
+function detectedTimezone() {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+}
 
 type Props = {
   studioEmail: string;
@@ -87,6 +93,15 @@ export function ContactInquiryForm({ studioEmail }: Props) {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formStartedAt] = useState(() => Date.now());
+
+  useEffect(() => {
+    const timezone = detectedTimezone();
+    if (timezone) {
+      setMeeting((current) =>
+        current.timezone ? current : { ...current, timezone },
+      );
+    }
+  }, []);
 
   const projectTypes = useMemo(
     () =>
@@ -189,6 +204,7 @@ export function ContactInquiryForm({ studioEmail }: Props) {
       payload.set("whatsapp", values.whatsapp);
       payload.set("date", meeting.date);
       payload.set("time", meeting.time);
+      payload.set("timezone", meeting.timezone);
       payload.set("notes", meeting.notes);
       payload.set("fromInquiry", fromInquiry ? "1" : "0");
       if (meetingReason) {
@@ -223,7 +239,7 @@ export function ContactInquiryForm({ studioEmail }: Props) {
 
   function resetAll() {
     setValues(INITIAL);
-    setMeeting(INITIAL_MEETING);
+    setMeeting({ ...INITIAL_MEETING, timezone: detectedTimezone() });
     setAttachments([]);
     setError(null);
     setFromInquiry(false);
@@ -393,6 +409,22 @@ export function ContactInquiryForm({ studioEmail }: Props) {
               />
             </label>
           </div>
+
+          <label className={styles.field}>
+            <span className={styles.label}>
+              {t("meeting.fields.timezone")}
+            </span>
+            <input
+              className={styles.input}
+              name="meetingTimezone"
+              required
+              placeholder={t("meeting.placeholders.timezone")}
+              value={meeting.timezone}
+              onChange={(event) =>
+                updateMeeting("timezone", event.target.value)
+              }
+            />
+          </label>
 
           <label className={styles.field}>
             <span className={styles.label}>{t("meeting.fields.notes")}</span>

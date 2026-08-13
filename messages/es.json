@@ -132,7 +132,7 @@
     "submit": "Enviar consulta",
     "sending": "Enviando…",
     "cancel": "Cancelar",
-    "success": "Gracias — tu consulta fue enviada. Ahora agenda una reunión para hablar del proyecto.",
+    "success": "Tu mensaje ha sido enviado. Me pondré en contacto contigo lo antes posible.",
     "sendError": "No pudimos enviar tu mensaje. Inténtalo de nuevo en un momento.",
     "attachmentLocalError": "Cloudflare no puede enviar archivos binarios desde localhost. Quita el adjunto para probar en local; los adjuntos funcionan en el sitio publicado.",
     "sendAnother": "Nueva consulta",
@@ -153,10 +153,12 @@
         "reason": "Motivo",
         "date": "Fecha preferida",
         "time": "Hora preferida",
+        "timezone": "Zona horaria",
         "notes": "Notas"
       },
       "placeholders": {
-        "notes": "Zona horaria, videollamada o presencial, o lo que debamos saber."
+        "timezone": "p. ej. America/Mexico_City",
+        "notes": "Videollamada o presencial, o lo que debamos saber."
       },
       "reasons": {
         "project": "Hablar de un proyecto",

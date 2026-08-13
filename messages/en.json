@@ -132,7 +132,7 @@
     "submit": "Send inquiry",
     "sending": "Sending…",
     "cancel": "Cancel",
-    "success": "Thanks — your inquiry was sent. Next, schedule a meeting so we can talk through the project.",
+    "success": "Your message has been sent. I’ll get back to you as soon as possible.",
     "sendError": "We could not send your message. Please try again in a moment.",
     "attachmentLocalError": "Cloudflare cannot send binary attachments from localhost. Remove the attachment to test locally; attachments work on the deployed site.",
     "sendAnother": "Start another inquiry",
@@ -153,10 +153,12 @@
         "reason": "Reason",
         "date": "Preferred date",
         "time": "Preferred time",
+        "timezone": "Time zone",
         "notes": "Notes"
       },
       "placeholders": {
-        "notes": "Timezone, video vs. in-person, or anything we should know."
+        "timezone": "e.g. America/Mexico_City",
+        "notes": "Video vs. in-person, or anything we should know."
       },
       "reasons": {
         "project": "Discuss a project",

@@ -123,11 +123,15 @@ export async function POST(request: Request) {
   } else {
     const date = String(form.get("date") ?? "").trim();
     const time = String(form.get("time") ?? "").trim();
+    const timezone = String(form.get("timezone") ?? "").trim();
     const notes = String(form.get("notes") ?? "").trim();
     const reason = String(form.get("reason") ?? "").trim();
     const fromInquiry = String(form.get("fromInquiry") ?? "") === "1";
-    if (!date || !time) {
-      return bad("Meeting date and time are required.");
+    if (!date || !time || !timezone) {
+      return bad("Meeting date, time, and timezone are required.");
+    }
+    if (timezone.length > 100) {
+      return bad("Timezone is too long.");
     }
     subject = `Meeting request — ${name}`;
     text = [
@@ -141,6 +145,7 @@ export async function POST(request: Request) {
       whatsapp ? `WhatsApp: ${whatsapp}` : null,
       `Date: ${date}`,
       `Time: ${time}`,
+      `Timezone: ${timezone}`,
       notes ? `\nNotes:\n${notes}` : null,
     ]
       .filter(Boolean)
