@@ -4,7 +4,11 @@ import {
   allowContactSubmit,
   clientIp,
   isAllowedAttachment,
+  isAllowedContactOrigin,
+  looksLikeSpamText,
 } from "@/lib/contact";
+import { siteConfig } from "@/lib/site";
+import { verifyTurnstileToken } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
@@ -23,6 +27,10 @@ export async function POST(request: Request) {
     return bad("Too many requests. Please try again later.", 429);
   }
 
+  if (!isAllowedContactOrigin(request, siteConfig.url)) {
+    return bad("Invalid request origin.", 403);
+  }
+
   let form: FormData;
   try {
     form = await request.formData();
@@ -37,8 +45,33 @@ export async function POST(request: Request) {
   }
 
   const startedAt = Number(form.get("formStartedAt") ?? 0);
-  if (!startedAt || Date.now() - startedAt < 1200) {
+  if (!startedAt || Date.now() - startedAt < CONTACT_LIMITS.minFillMs) {
     return bad("Please take a moment before submitting.");
+  }
+
+  let turnstileSecret: string | undefined;
+  try {
+    const { env } = await getCloudflareContext({ async: true });
+    turnstileSecret = env.TURNSTILE_SECRET_KEY?.trim();
+  } catch {
+    turnstileSecret = process.env.TURNSTILE_SECRET_KEY?.trim();
+  }
+
+  // Fail closed in production when Turnstile is not configured.
+  if (!turnstileSecret) {
+    if (process.env.NODE_ENV === "production") {
+      return bad("Bot protection is not configured.", 503, "TURNSTILE_MISSING");
+    }
+  } else {
+    const turnstileToken = String(form.get("cf-turnstile-response") ?? "");
+    const verified = await verifyTurnstileToken({
+      token: turnstileToken,
+      secret: turnstileSecret,
+      ip,
+    });
+    if (!verified.ok) {
+      return bad("Please complete the security check and try again.", 403, "TURNSTILE");
+    }
   }
 
   const kind = String(form.get("kind") ?? "") as Kind;
@@ -99,6 +132,9 @@ export async function POST(request: Request) {
     if (!location || !message) {
       return bad("Location and message are required.");
     }
+    if (looksLikeSpamText(name, message, location)) {
+      return Response.json({ ok: true });
+    }
     subject = `Project inquiry — ${name}`;
     text = [
       "New project inquiry from the website.",
@@ -132,6 +168,9 @@ export async function POST(request: Request) {
     }
     if (timezone.length > 100) {
       return bad("Timezone is too long.");
+    }
+    if (looksLikeSpamText(name, notes, reason)) {
+      return Response.json({ ok: true });
     }
     subject = `Meeting request — ${name}`;
     text = [

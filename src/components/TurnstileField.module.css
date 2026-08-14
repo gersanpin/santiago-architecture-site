@@ -1,0 +1,9 @@
+.wrap {
+  width: 100%;
+  max-width: 36rem;
+  min-height: 0;
+}
+
+.host {
+  width: 100%;
+}

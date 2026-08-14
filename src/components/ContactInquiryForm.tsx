@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { InstagramLink } from "./InstagramLink";
+import { TurnstileField } from "./TurnstileField";
 import { siteConfig } from "@/lib/site";
 import styles from "./ContactInquiryForm.module.css";
 
@@ -69,9 +70,13 @@ function detectedTimezone() {
 
 type Props = {
   studioEmail: string;
+  turnstileSiteKey?: string;
 };
 
-export function ContactInquiryForm({ studioEmail }: Props) {
+export function ContactInquiryForm({
+  studioEmail,
+  turnstileSiteKey: turnstileSiteKeyProp = "",
+}: Props) {
   const t = useTranslations("Contact");
   const searchParams = useSearchParams();
   const shouldOpenForm = searchParams.get("start") === "1";
@@ -92,7 +97,12 @@ export function ContactInquiryForm({ studioEmail }: Props) {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [formStartedAt] = useState(() => Date.now());
+  const turnstileSiteKey =
+    turnstileSiteKeyProp.trim() ||
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ||
+    "";
 
   useEffect(() => {
     const timezone = detectedTimezone();
@@ -138,6 +148,12 @@ export function ContactInquiryForm({ studioEmail }: Props) {
 
   async function postContact(payload: FormData) {
     payload.set("formStartedAt", String(formStartedAt));
+    if (turnstileSiteKey) {
+      if (!turnstileToken) {
+        throw new Error(t("turnstileRequired"));
+      }
+      payload.set("cf-turnstile-response", turnstileToken);
+    }
     const response = await fetch("/api/contact", {
       method: "POST",
       body: payload,
@@ -151,8 +167,13 @@ export function ContactInquiryForm({ studioEmail }: Props) {
       if (data?.code === "LOCAL_ATTACHMENT_UNSUPPORTED") {
         throw new Error(t("attachmentLocalError"));
       }
+      if (data?.code === "TURNSTILE" || data?.code === "TURNSTILE_MISSING") {
+        setTurnstileToken(null);
+        throw new Error(t("turnstileRequired"));
+      }
       throw new Error(data?.error || t("sendError"));
     }
+    setTurnstileToken(null);
   }
 
   async function handleInquirySubmit(event: FormEvent<HTMLFormElement>) {
@@ -446,11 +467,18 @@ export function ContactInquiryForm({ studioEmail }: Props) {
             aria-hidden="true"
           />
 
+          {turnstileSiteKey ? (
+            <TurnstileField
+              siteKey={turnstileSiteKey}
+              onToken={setTurnstileToken}
+            />
+          ) : null}
+
           <div className={styles.actions}>
             <button
               type="submit"
               className="btn btn-primary"
-              disabled={sending}
+              disabled={sending || (Boolean(turnstileSiteKey) && !turnstileToken)}
             >
               {sending ? t("meeting.sending") : t("meeting.submit")}
             </button>
@@ -537,8 +565,19 @@ export function ContactInquiryForm({ studioEmail }: Props) {
           aria-hidden="true"
         />
 
+        {turnstileSiteKey ? (
+          <TurnstileField
+            siteKey={turnstileSiteKey}
+            onToken={setTurnstileToken}
+          />
+        ) : null}
+
         <div className={styles.actions}>
-          <button type="submit" className="btn btn-primary" disabled={sending}>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={sending || (Boolean(turnstileSiteKey) && !turnstileToken)}
+          >
             {sending ? t("sending") : t("submit")}
           </button>
           <button type="button" className="btn btn-line" onClick={cancelForm}>
