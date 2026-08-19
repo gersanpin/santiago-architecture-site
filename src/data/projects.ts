@@ -650,6 +650,43 @@ const projectsData: Project[] = [
     },
   },
   {
+    slug: "veleta-tulum",
+    year: 2025,
+    latitude: 20.2048,
+    longitude: -87.4574,
+    area: "—",
+    category: "residential",
+    images: [
+      "/projects/veleta-tulum/01.png",
+      "/projects/veleta-tulum/02.png",
+    ],
+    coverFocus: "50% 40%",
+    name: {
+      en: "Veleta Tulum",
+      es: "Veleta Tulum",
+    },
+    city: {
+      en: "Tulum",
+      es: "Tulum",
+    },
+    country: {
+      en: "Mexico",
+      es: "México",
+    },
+    description: {
+      en: "A residential building in Tulum defined by sculpted earth-toned volumes, curved balconies, a central spiral staircase and a sweeping bamboo roof canopy, integrated with tropical vegetation at every level.",
+      es: "Un edificio residencial en Tulum definido por volúmenes esculpidos en tonos tierra, balcones curvos, una escalera espiral central y una cubierta ondulante de bambú, integrado con vegetación tropical en cada nivel.",
+    },
+    seoTitle: {
+      en: "Veleta Tulum",
+      es: "Veleta Tulum",
+    },
+    seoDescription: {
+      en: "Veleta Tulum — residential building with sculpted earth-toned volumes and a bamboo canopy.",
+      es: "Veleta Tulum — edificio residencial con volúmenes esculpidos en tonos tierra y cubierta de bambú.",
+    },
+  },
+  {
     slug: "cabin-tulum",
     year: 2023,
     latitude: 20.178,
@@ -886,6 +923,7 @@ const ATTRACTIVENESS_ORDER = [
   "casa-sisal",
   "awen-tulum",
   "jungle-house-tulum",
+  "veleta-tulum",
   "cabin-tulum",
   "casa-manglar",
   "villa-nosara",
