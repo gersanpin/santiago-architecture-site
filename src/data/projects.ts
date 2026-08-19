@@ -315,8 +315,11 @@ const projectsData: Project[] = [
     longitude: -87.5903,
     area: "8 ha",
     category: "masterplan",
-    images: ["/projects/aldea-uh-may/01.png"],
-    coverFocus: "42% 48%",
+    images: [
+      "/projects/aldea-uh-may/01.png",
+      "/projects/aldea-uh-may/02.png",
+    ],
+    coverFocus: "50% 48%",
     name: {
       en: "Aldea Uh May",
       es: "Aldea Uh May",
