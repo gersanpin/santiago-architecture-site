@@ -737,6 +737,43 @@ const projectsData: Project[] = [
     },
   },
   {
+    slug: "awen-tulum",
+    year: 2025,
+    latitude: 20.1985,
+    longitude: -87.431,
+    area: "—",
+    category: "residential",
+    images: [
+      "/projects/awen-tulum/01.png",
+      "/projects/awen-tulum/02.png",
+    ],
+    coverFocus: "50% 42%",
+    name: {
+      en: "Awen Tulum",
+      es: "Awen Tulum",
+    },
+    city: {
+      en: "Tulum",
+      es: "Tulum",
+    },
+    country: {
+      en: "Mexico",
+      es: "México",
+    },
+    description: {
+      en: "An organic residential villa in The Awen at Soy Tulum, shaped by fluid white volumes, integrated greenery and curving balconies opening to pool terraces within the jungle.",
+      es: "Una villa residencial orgánica en The Awen, Soy Tulum, definida por volúmenes blancos fluidos, vegetación integrada y balcones curvos que se abren a terrazas y piscina en la selva.",
+    },
+    seoTitle: {
+      en: "Awen Tulum",
+      es: "Awen Tulum",
+    },
+    seoDescription: {
+      en: "Awen Tulum — organic residential villa in The Awen at Soy Tulum.",
+      es: "Awen Tulum — villa residencial orgánica en The Awen, Soy Tulum.",
+    },
+  },
+  {
     slug: "jungle-house-tulum",
     year: 2026,
     latitude: 20.195,
@@ -798,6 +835,7 @@ const projectsData: Project[] = [
 /** Most visually striking projects first (list, hero, next-project flow). */
 const ATTRACTIVENESS_ORDER = [
   "casa-sisal",
+  "awen-tulum",
   "jungle-house-tulum",
   "cabin-tulum",
   "casa-manglar",
