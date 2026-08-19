@@ -916,6 +916,44 @@ const projectsData: Project[] = [
       es: "Jungle House Tulum — residencia con acabados de chukum y geometrías suaves.",
     },
   },
+  {
+    slug: "concepts",
+    year: 2025,
+    latitude: 8.538,
+    longitude: -79.567,
+    area: "—",
+    category: "pavilion",
+    images: [
+      "/projects/concepts/01.png",
+      "/projects/concepts/02.png",
+      "/projects/concepts/03.png",
+    ],
+    coverFocus: "50% 48%",
+    name: {
+      en: "Concepts",
+      es: "Conceptos",
+    },
+    city: {
+      en: "",
+      es: "",
+    },
+    country: {
+      en: "",
+      es: "",
+    },
+    description: {
+      en: "A collection of conceptual explorations — a floating villa in Panama, an organic residence in the jungle, and a coastal masterplan in Saudi Arabia.",
+      es: "Una colección de exploraciones conceptuales — una villa flotante en Panamá, una residencia orgánica en la selva y un plan maestro costero en Arabia Saudita.",
+    },
+    seoTitle: {
+      en: "Concepts",
+      es: "Conceptos",
+    },
+    seoDescription: {
+      en: "Concepts — architectural explorations across floating villas, organic residences and coastal masterplans.",
+      es: "Conceptos — exploraciones arquitectónicas entre villas flotantes, residencias orgánicas y planes maestros costeros.",
+    },
+  },
 ];
 
 /** Most visually striking projects first (list, hero, next-project flow). */
@@ -939,6 +977,7 @@ const ATTRACTIVENESS_ORDER = [
   "tiny-home-spain",
   "tiny-home-1-bedroom",
   "tiny-house-costa-rica",
+  "concepts",
 ] as const;
 
 export const projects: Project[] = (() => {
