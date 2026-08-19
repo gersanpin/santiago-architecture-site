@@ -20,6 +20,10 @@ declare global {
     };
     CONTACT_TO_EMAIL?: string;
     CONTACT_FROM_EMAIL?: string;
+    /** Cloudflare Turnstile secret key (wrangler secret). */
+    TURNSTILE_SECRET_KEY?: string;
+    /** Public Turnstile site key (safe to expose; set as a Worker var). */
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY?: string;
   }
 }
 

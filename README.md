@@ -48,3 +48,25 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com
 - `npm run build` — production build
 - `npm run start` — start production server
 - `npm run lint` — ESLint
+
+## Contact spam protection
+
+The contact API uses:
+
+1. Cloudflare **Turnstile** (required in production)
+2. A honeypot field
+3. Minimum fill time
+4. Same-origin checks
+5. Per-IP rate limiting
+
+Create a Turnstile widget for `santiago-architecture.com` in the Cloudflare dashboard, then set:
+
+```bash
+# Public site key (also add under wrangler `vars` or Workers env)
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x...
+
+# Secret key — never commit; set as a Worker secret:
+npx wrangler secret put TURNSTILE_SECRET_KEY
+```
+
+Redeploy after setting both keys.

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { ContactInquiryForm } from "@/components/ContactInquiryForm";
 import { Reveal } from "@/components/Reveal";
 import { buildMetadata } from "@/lib/seo";
@@ -22,10 +23,22 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
+async function turnstileSiteKey() {
+  const fromEnv = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim();
+  if (fromEnv) return fromEnv;
+  try {
+    const { env } = await getCloudflareContext({ async: true });
+    return env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
+  } catch {
+    return "";
+  }
+}
+
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Contact");
+  const siteKey = await turnstileSiteKey();
 
   return (
     <div className={`${styles.stage} ${styles.contactStage}`}>
@@ -39,7 +52,10 @@ export default async function ContactPage({ params }: Props) {
         </Reveal>
         <Reveal delay={1} className={styles.contactForm}>
           <Suspense fallback={null}>
-            <ContactInquiryForm studioEmail={siteConfig.email} />
+            <ContactInquiryForm
+              studioEmail={siteConfig.email}
+              turnstileSiteKey={siteKey}
+            />
           </Suspense>
         </Reveal>
       </div>

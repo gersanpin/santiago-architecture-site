@@ -143,6 +143,7 @@
     "cancel": "Cancel",
     "success": "Your message has been sent. I’ll get back to you as soon as possible.",
     "sendError": "We could not send your message. Please try again in a moment.",
+    "turnstileRequired": "Please complete the security check and try again.",
     "attachmentLocalError": "Cloudflare cannot send binary attachments from localhost. Remove the attachment to test locally; attachments work on the deployed site.",
     "sendAnother": "Start another inquiry",
     "attachmentNote": "Optional. PDF or images, up to 5 files / 4 MB each (under 4.5 MB total).",
