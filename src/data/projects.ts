@@ -693,6 +693,55 @@ const projectsData: Project[] = [
     },
   },
   {
+    slug: "punta-cana",
+    year: 2025,
+    latitude: 18.582,
+    longitude: -68.404,
+    area: "—",
+    category: "hospitality",
+    images: [
+      "/projects/punta-cana/01.png",
+      "/projects/punta-cana/02.png",
+      "/projects/punta-cana/03.png",
+      "/projects/punta-cana/04.png",
+      "/projects/punta-cana/05.png",
+      "/projects/punta-cana/06.png",
+    ],
+    coverFocus: "50% 42%",
+    name: {
+      en: "Punta Cana",
+      es: "Punta Cana",
+    },
+    city: {
+      en: "Punta Cana",
+      es: "Punta Cana",
+    },
+    country: {
+      en: "Dominican Republic",
+      es: "República Dominicana",
+    },
+    description: {
+      en: "Collaboration on the conceptualization of the façade for a tropical resort in Punta Cana, shaped by flowing white balconies, integrated greenery and pools woven through the landscape.",
+      es: "Colaboración en la conceptualización de la fachada para un resort tropical en Punta Cana, definida por balcones blancos fluidos, vegetación integrada y piscinas entretejidas en el paisaje.",
+    },
+    credit: {
+      en: "In collaboration with Miguel Braun.",
+      es: "En colaboración con Miguel Braun.",
+    },
+    scope: {
+      en: "Façade conceptualization",
+      es: "Conceptualización de fachada",
+    },
+    seoTitle: {
+      en: "Punta Cana",
+      es: "Punta Cana",
+    },
+    seoDescription: {
+      en: "Punta Cana — collaborative façade conceptualization for a tropical resort in the Dominican Republic.",
+      es: "Punta Cana — colaboración en la conceptualización de fachada para un resort tropical en República Dominicana.",
+    },
+  },
+  {
     slug: "bali-resort",
     year: 2024,
     latitude: -8.5069,
@@ -805,6 +854,7 @@ const ATTRACTIVENESS_ORDER = [
   "oficinas-mountain-nazca",
   "el-eden-tulum",
   "hexodome-cancun",
+  "punta-cana",
   "bali-resort",
   "restaurante-nosara",
   "casa-nosara",
