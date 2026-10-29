@@ -26,6 +26,8 @@ declare global {
     META_CAPI_ACCESS_TOKEN?: string;
     META_GRAPH_API_VERSION?: string;
     META_TEST_EVENT_CODE?: string;
+    /** Public selected-works PDF. Not stored in git or Worker static assets. */
+    PORTFOLIO_BUCKET?: R2Bucket;
   }
 }
 

@@ -6,6 +6,7 @@ import {
   projects,
   type LocaleCode,
 } from "@/data/projects";
+import { PortfolioDownloadLink } from "@/components/PortfolioDownloadLink";
 import { ProjectsExplorer } from "@/components/ProjectsExplorer";
 import {
   buildBreadcrumbStructuredData,
@@ -69,6 +70,10 @@ export default async function ProjectsPage({ params, searchParams }: Props) {
       />
       <header className={styles.top}>
         <h1 className={styles.title}>{t("title")}</h1>
+        <PortfolioDownloadLink
+          className={styles.portfolioLink}
+          label={t("portfolioDownload")}
+        />
       </header>
 
       {/* Server-rendered project links for crawlers and no-JS. */}

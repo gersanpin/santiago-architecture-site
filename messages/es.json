@@ -121,7 +121,8 @@
       "scope": "Alcance"
     },
     "empty": "No hay proyectos en esta categoría.",
-    "globeLoading": "Cargando globo…"
+    "globeLoading": "Cargando globo…",
+    "portfolioDownload": "Descargar portfolio (PDF)"
   },
   "About": {
     "title": "Acerca de",
@@ -136,7 +137,7 @@
     "cta": "Conversar sobre un proyecto →",
     "portfolioTitle": "Una mirada más cercana",
     "portfolioBody": "Descarga una selección de nuestros proyectos y conoce nuestro enfoque de diseño.",
-    "portfolioDownload": "Descargar portfolio"
+    "portfolioDownload": "Descargar portfolio (PDF)"
   },
   "Services": {
     "title": "Servicios",
@@ -193,6 +194,7 @@
     "successBody": "La revisaremos y nos pondremos en contacto contigo al correo proporcionado.",
     "sendError": "No pudimos enviar tu mensaje. Inténtalo de nuevo en un momento.",
     "attachmentLocalError": "Cloudflare no puede enviar archivos binarios desde localhost. Quita el adjunto para probar en local; los adjuntos funcionan en el sitio publicado.",
+    "portfolioDownload": "Descargar portfolio (PDF)",
     "sendAnother": "Nueva consulta",
     "attachmentNote": "Opcional. PDF o imágenes, hasta 5 archivos / 4 MB cada uno (máx. 4.5 MB en total).",
     "meeting": {

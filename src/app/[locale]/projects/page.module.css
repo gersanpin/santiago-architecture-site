@@ -12,8 +12,29 @@
   width: 100%;
   max-width: none;
   box-sizing: border-box;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.25rem;
   padding: 0 var(--page-pad) 0.35rem;
   background: transparent;
+}
+
+.portfolioLink {
+  color: var(--ink-muted);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.2rem 0;
+  transition: color var(--duration-ui) var(--ease-soft);
+}
+
+.portfolioLink:hover,
+.portfolioLink:focus-visible {
+  color: var(--ink);
 }
 
 .title {

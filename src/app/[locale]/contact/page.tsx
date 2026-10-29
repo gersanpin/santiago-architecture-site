@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ContactInquiryForm } from "@/components/ContactInquiryForm";
+import { PortfolioDownloadLink } from "@/components/PortfolioDownloadLink";
 import { Reveal } from "@/components/Reveal";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -36,6 +37,10 @@ export default async function ContactPage({ params }: Props) {
           <p className={styles.lead}>{t("lead")}</p>
           <p className={styles.body}>{t("body")}</p>
           <p className={styles.body}>{t("bodySecondary")}</p>
+          <PortfolioDownloadLink
+            className={styles.portfolioLink}
+            label={t("portfolioDownload")}
+          />
         </Reveal>
         <Reveal delay={1} className={styles.contactForm}>
           <Suspense fallback={null}>

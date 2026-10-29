@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/Reveal";
 import { buildMetadata } from "@/lib/seo";
+import { PortfolioDownloadLink } from "@/components/PortfolioDownloadLink";
 import { getPortfolioPdf } from "@/lib/portfolio";
 import type { Locale } from "@/i18n/routing";
 import styles from "../content.module.css";
@@ -76,12 +77,10 @@ export default async function AboutPage({ params }: Props) {
             <h2 className={styles.portfolioTitle}>{t("portfolioTitle")}</h2>
             <hr className={styles.rule} />
             <p className={styles.body}>{t("portfolioBody")}</p>
-            <a
+            <PortfolioDownloadLink
               className={styles.portfolioLink}
-              href={portfolio.href}
-              download={portfolio.filename}
+              label={t("portfolioDownload")}
             >
-              {t("portfolioDownload")}
               <svg
                 className={styles.portfolioArrow}
                 viewBox="0 0 16 16"
@@ -97,7 +96,7 @@ export default async function AboutPage({ params }: Props) {
                   strokeLinejoin="round"
                 />
               </svg>
-            </a>
+            </PortfolioDownloadLink>
           </Reveal>
         ) : null}
       </div>

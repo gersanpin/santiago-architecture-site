@@ -44,6 +44,9 @@ next-env.d.ts
 # OpenNext
 .open-next
 
+# Local selected-works PDF. Too large for git; production serves it from R2.
+/public/portfolio/*.pdf
+
 # wrangler files
 .wrangler
 .dev.vars*
