@@ -1,0 +1,10 @@
+# Internal notes — remain in the repo, but must not be uploaded as public assets.
+**/README.md
+**/*.md
+
+# Unused create-next-app placeholders.
+vercel.svg
+window.svg
+globe.svg
+next.svg
+file.svg

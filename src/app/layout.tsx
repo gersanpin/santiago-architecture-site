@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+export const revalidate = 60;
+
 type Props = {
   children: ReactNode;
 };

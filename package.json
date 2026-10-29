@@ -8,9 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "images:upscale": "node scripts/upscale-project-images.mjs",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "prepare:cf-assets": "node scripts/prepare-cloudflare-assets.mjs",
+    "preview": "opennextjs-cloudflare build && node scripts/prepare-cloudflare-assets.mjs && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && node scripts/prepare-cloudflare-assets.mjs && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && node scripts/prepare-cloudflare-assets.mjs && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {

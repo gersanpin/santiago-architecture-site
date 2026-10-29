@@ -3,6 +3,9 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+const htmlCacheControl =
+  "public, max-age=0, s-maxage=60, stale-while-revalidate=600";
+
 const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
@@ -14,6 +17,17 @@ const nextConfig: NextConfig = {
         destination: "/:locale/projects/awen",
         permanent: true,
       },
+    ];
+  },
+  async headers() {
+    const htmlHeaders = [
+      { key: "Cache-Control", value: htmlCacheControl },
+    ];
+    return [
+      { source: "/sitemap.xml", headers: htmlHeaders },
+      { source: "/robots.txt", headers: htmlHeaders },
+      { source: "/:locale(en|es)", headers: htmlHeaders },
+      { source: "/:locale(en|es)/:path*", headers: htmlHeaders },
     ];
   },
   images: {
