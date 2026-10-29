@@ -6,6 +6,14 @@
   background: transparent;
 }
 
+.minimalFooter {
+  padding-block: 1.5rem;
+}
+
+.minimalFooter .inner {
+  align-items: center;
+}
+
 .inner {
   display: flex;
   justify-content: space-between;
@@ -16,9 +24,11 @@
 }
 
 .left {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem 0.85rem;
+  max-width: 100%;
 }
 
 .brand {
@@ -41,4 +51,49 @@
 
 .email:hover {
   color: var(--ink);
+}
+
+.footerAction {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0;
+  color: var(--ink-muted);
+  font: inherit;
+  text-decoration: none;
+  transition: color var(--duration-ui) var(--ease-soft);
+}
+
+.footerAction:hover,
+.footerAction:focus-visible {
+  color: var(--ink);
+}
+
+.portfolio {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  padding: 0.35rem 0;
+  transition: color var(--duration-ui) var(--ease-soft);
+}
+
+.portfolio:hover {
+  color: var(--ink);
+}
+
+.portfolio:focus-visible {
+  color: var(--ink);
+  outline: 1px solid var(--steel);
+  outline-offset: 0.3rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand,
+  .email,
+  .footerAction,
+  .portfolio {
+    transition: none;
+  }
 }

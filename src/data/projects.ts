@@ -41,6 +41,11 @@ export type Project = {
   description: LocalizedString;
   /** Optional credit / collaboration line shown after the description. */
   credit?: LocalizedString;
+  /** Optional press / publication link shown on the project page. */
+  publication?: {
+    label: LocalizedString;
+    url: string;
+  };
   /** Optional status (e.g. under construction) — only when real. */
   status?: LocalizedString;
   /** Optional scope when the studio contributed only part of the work. */
@@ -310,16 +315,17 @@ const projectsData: Project[] = [
   },
   {
     slug: "aldea-uh-may",
-    year: 2025,
+    year: 2023,
     latitude: 20.3647,
     longitude: -87.5903,
     area: "8 ha",
     category: "masterplan",
     images: [
       "/projects/aldea-uh-may/01.png",
-      "/projects/aldea-uh-may/02.png",
+      "/projects/aldea-uh-may/WhatsApp_Image_2026-08-13_at_12.52.48_PM.png",
+      "/projects/aldea-uh-may/location_slide_1.png",
     ],
-    coverFocus: "50% 48%",
+    coverFocus: "42% 48%",
     name: {
       en: "Aldea Uh May",
       es: "Aldea Uh May",
@@ -361,6 +367,7 @@ const projectsData: Project[] = [
     area: "420 m²",
     category: "residential",
     images: [
+      "/projects/casa-sisal/00.png",
       "/projects/casa-sisal/01.png",
       "/projects/casa-sisal/02.png",
       "/projects/casa-sisal/03.png",
@@ -643,6 +650,13 @@ const projectsData: Project[] = [
       en: "In collaboration with Esteban Sepúlveda and Rodolfo Anaya.",
       es: "En colaboración con Esteban Sepúlveda y Rodolfo Anaya.",
     },
+    publication: {
+      label: {
+        en: "Published on ArchDaily",
+        es: "Publicado en ArchDaily",
+      },
+      url: "https://www.archdaily.com/es/889449/mountain-nazca-mar-arquitectos-plus-xamploo",
+    },
     seoTitle: {
       en: "Mountain Nazca Offices",
       es: "Mountain Nazca Offices",
@@ -650,43 +664,6 @@ const projectsData: Project[] = [
     seoDescription: {
       en: "Mountain Nazca Offices — prefabricated furniture designed for assembly without screws or glue.",
       es: "Mountain Nazca Offices — mobiliario prefabricado diseñado para armarse sin tornillos ni pegamento.",
-    },
-  },
-  {
-    slug: "veleta-tulum",
-    year: 2025,
-    latitude: 20.2048,
-    longitude: -87.4574,
-    area: "—",
-    category: "residential",
-    images: [
-      "/projects/veleta-tulum/01.png",
-      "/projects/veleta-tulum/02.png",
-    ],
-    coverFocus: "50% 40%",
-    name: {
-      en: "Veleta Tulum",
-      es: "Veleta Tulum",
-    },
-    city: {
-      en: "Tulum",
-      es: "Tulum",
-    },
-    country: {
-      en: "Mexico",
-      es: "México",
-    },
-    description: {
-      en: "A residential building in Tulum defined by sculpted earth-toned volumes, curved balconies, a central spiral staircase and a sweeping bamboo roof canopy, integrated with tropical vegetation at every level.",
-      es: "Un edificio residencial en Tulum definido por volúmenes esculpidos en tonos tierra, balcones curvos, una escalera espiral central y una cubierta ondulante de bambú, integrado con vegetación tropical en cada nivel.",
-    },
-    seoTitle: {
-      en: "Veleta Tulum",
-      es: "Veleta Tulum",
-    },
-    seoDescription: {
-      en: "Veleta Tulum — residential building with sculpted earth-toned volumes and a bamboo canopy.",
-      es: "Veleta Tulum — edificio residencial con volúmenes esculpidos en tonos tierra y cubierta de bambú.",
     },
   },
   {
@@ -730,55 +707,6 @@ const projectsData: Project[] = [
     seoDescription: {
       en: "Cabin Tulum — compact retreat with an expressive timber framework.",
       es: "Cabin Tulum — refugio compacto con entramado expresivo de madera.",
-    },
-  },
-  {
-    slug: "punta-cana",
-    year: 2025,
-    latitude: 18.582,
-    longitude: -68.404,
-    area: "—",
-    category: "hospitality",
-    images: [
-      "/projects/punta-cana/01.png",
-      "/projects/punta-cana/02.png",
-      "/projects/punta-cana/03.png",
-      "/projects/punta-cana/04.png",
-      "/projects/punta-cana/05.png",
-      "/projects/punta-cana/06.png",
-    ],
-    coverFocus: "50% 42%",
-    name: {
-      en: "Punta Cana",
-      es: "Punta Cana",
-    },
-    city: {
-      en: "Punta Cana",
-      es: "Punta Cana",
-    },
-    country: {
-      en: "Dominican Republic",
-      es: "República Dominicana",
-    },
-    description: {
-      en: "Collaboration on the conceptualization of the façade for a tropical resort in Punta Cana, shaped by flowing white balconies, integrated greenery and pools woven through the landscape.",
-      es: "Colaboración en la conceptualización de la fachada para un resort tropical en Punta Cana, definida por balcones blancos fluidos, vegetación integrada y piscinas entretejidas en el paisaje.",
-    },
-    credit: {
-      en: "In collaboration with Miguel Braun.",
-      es: "En colaboración con Miguel Braun.",
-    },
-    scope: {
-      en: "Façade conceptualization",
-      es: "Conceptualización de fachada",
-    },
-    seoTitle: {
-      en: "Punta Cana",
-      es: "Punta Cana",
-    },
-    seoDescription: {
-      en: "Punta Cana — collaborative façade conceptualization for a tropical resort in the Dominican Republic.",
-      es: "Punta Cana — colaboración en la conceptualización de fachada para un resort tropical en República Dominicana.",
     },
   },
   {
@@ -826,20 +754,114 @@ const projectsData: Project[] = [
     },
   },
   {
-    slug: "awen-tulum",
+    slug: "costa-rica-spa",
     year: 2025,
-    latitude: 20.1985,
-    longitude: -87.431,
+    latitude: 9.75,
+    longitude: -83.75,
+    area: "—",
+    category: "hospitality",
+    images: [
+      "/projects/costa-rica-spa/ChatGPT_Image_19_ago_2026__02_08_54_a.m.__4_.png",
+      "/projects/costa-rica-spa/ChatGPT_Image_19_ago_2026__02_08_51_a.m.__1_.png",
+      "/projects/costa-rica-spa/ChatGPT_Image_19_ago_2026__02_09_00_a.m.__3_.png",
+      "/projects/costa-rica-spa/eb8375fb-1b32-41c6-8db5-bd69dce8e693-2a1ca555-333b-4839-a155-f49be36604fb.png",
+      "/projects/costa-rica-spa/ChatGPT_Image_19_ago_2026__02_08_59_a.m.__1_.png",
+      "/projects/costa-rica-spa/ChatGPT_Image_19_ago_2026__02_09_01_a.m.__4_.png",
+    ],
+    coverFocus: "50% 50%",
+    name: {
+      en: "Costa Rica Spa",
+      es: "Costa Rica Spa",
+    },
+    city: {
+      en: "",
+      es: "",
+    },
+    country: {
+      en: "Costa Rica",
+      es: "Costa Rica",
+    },
+    description: {
+      en: "A spa immersed in the Costa Rican jungle, whose form is based on sacred geometry — a curved multi-level building with terraces, pools and pathways integrated into the landscape.",
+      es: "Un spa inmerso en la selva de Costa Rica, cuya forma se basa en geometría sagrada: un edificio curvo de varios niveles con terrazas, piscinas y recorridos integrados al paisaje.",
+    },
+    credit: {
+      en: "In collaboration with Christopher Landeros.",
+      es: "En colaboración con Christopher Landeros.",
+    },
+    seoTitle: {
+      en: "Costa Rica Spa | Jungle Architecture",
+      es: "Costa Rica Spa | Arquitectura en la selva",
+    },
+    seoDescription: {
+      en: "Costa Rica Spa — a curved multi-level spa based on sacred geometry, with terraces, pools and pathways immersed in the jungle landscape.",
+      es: "Costa Rica Spa — un spa curvo de varios niveles basado en geometría sagrada, con terrazas, piscinas y recorridos inmersos en el paisaje de la selva.",
+    },
+  },
+  {
+    slug: "punta-cana",
+    year: 2026,
+    latitude: 18.5601,
+    longitude: -68.3725,
     area: "—",
     category: "residential",
     images: [
-      "/projects/awen-tulum/01.png",
-      "/projects/awen-tulum/02.png",
+      "/projects/punta-cana/ChatGPT_Image_19_ago_2026__12_27_47_a.m.__1_.png",
+      "/projects/punta-cana/ChatGPT_Image_19_ago_2026__12_27_48_a.m.__5_.png",
+      "/projects/punta-cana/ChatGPT_Image_19_ago_2026__12_27_48_a.m.__4_.png",
+      "/projects/punta-cana/ChatGPT_Image_19_ago_2026__12_27_49_a.m.__6_.png",
+      "/projects/punta-cana/ChatGPT_Image_19_ago_2026__12_27_48_a.m.__3_.png",
+      "/projects/punta-cana/ChatGPT_Image_19_ago_2026__12_27_48_a.m.__2_.png",
     ],
-    coverFocus: "50% 42%",
+    coverFocus: "50% 50%",
     name: {
-      en: "Awen Tulum",
-      es: "Awen Tulum",
+      en: "Punta Cana",
+      es: "Punta Cana",
+    },
+    city: {
+      en: "Punta Cana",
+      es: "Punta Cana",
+    },
+    country: {
+      en: "Dominican Republic",
+      es: "República Dominicana",
+    },
+    description: {
+      en: "Conceptual façade design for a residential building in Punta Cana.",
+      es: "Diseño conceptual de fachada para un edificio residencial en Punta Cana.",
+    },
+    credit: {
+      en: "In collaboration with architect Miguel Braun.",
+      es: "En colaboración con el arquitecto Miguel Braun.",
+    },
+    scope: {
+      en: "Conceptual façade design",
+      es: "Diseño conceptual de fachada",
+    },
+    seoTitle: {
+      en: "Punta Cana",
+      es: "Punta Cana",
+    },
+    seoDescription: {
+      en: "Punta Cana — conceptual façade design for a residential building, in collaboration with architect Miguel Braun.",
+      es: "Punta Cana — diseño conceptual de fachada para un edificio residencial, en colaboración con el arquitecto Miguel Braun.",
+    },
+  },
+  {
+    slug: "awen",
+    year: 2023,
+    latitude: 20.2114,
+    longitude: -87.4654,
+    area: "—",
+    category: "residential",
+    images: [
+      "/projects/awen/ChatGPT_Image_19_ago_2026__12_42_18_a.m.__1_.png",
+      "/projects/awen/ChatGPT_Image_19_ago_2026__12_42_18_a.m.__2_.png",
+    ],
+    coverFocus: "50% 50%",
+    name: {
+      en: "Awen",
+      es: "Awen",
     },
     city: {
       en: "Tulum",
@@ -850,16 +872,91 @@ const projectsData: Project[] = [
       es: "México",
     },
     description: {
-      en: "An organic residential villa in The Awen at Soy Tulum, shaped by fluid white volumes, integrated greenery and curving balconies opening to pool terraces within the jungle.",
-      es: "Una villa residencial orgánica en The Awen, Soy Tulum, definida por volúmenes blancos fluidos, vegetación integrada y balcones curvos que se abren a terrazas y piscina en la selva.",
+      en: "A villa in Tulum shaped by flowing white volumes, generous arched openings and tropical vegetation integrated across its façades.",
+      es: "Una villa en Tulum definida por volúmenes blancos fluidos, amplios vanos arqueados y vegetación tropical integrada en sus fachadas.",
     },
     seoTitle: {
-      en: "Awen Tulum",
-      es: "Awen Tulum",
+      en: "Awen Villa Tulum",
+      es: "Villa Awen Tulum",
     },
     seoDescription: {
-      en: "Awen Tulum — organic residential villa in The Awen at Soy Tulum.",
-      es: "Awen Tulum — villa residencial orgánica en The Awen, Soy Tulum.",
+      en: "Awen — a villa in Tulum with flowing white volumes, arched openings and integrated tropical vegetation.",
+      es: "Awen — villa en Tulum con volúmenes blancos fluidos, vanos arqueados y vegetación tropical integrada.",
+    },
+  },
+  {
+    slug: "veleta-tulum",
+    year: 2022,
+    latitude: 20.2114,
+    longitude: -87.4654,
+    area: "—",
+    category: "residential",
+    images: [
+      "/projects/veleta-tulum/ChatGPT_Image_19_ago_2026__12_41_06_a.m.__1_.png",
+      "/projects/veleta-tulum/ChatGPT_Image_19_ago_2026__12_41_06_a.m.__2_.png",
+    ],
+    coverFocus: "50% 50%",
+    name: {
+      en: "Veleta",
+      es: "Veleta",
+    },
+    city: {
+      en: "Tulum",
+      es: "Tulum",
+    },
+    country: {
+      en: "Mexico",
+      es: "México",
+    },
+    description: {
+      en: "A tropical residential building with curved balconies, a flowing timber-and-bamboo roof structure and vegetation integrated throughout its façades.",
+      es: "Un edificio residencial tropical con balcones curvos, una cubierta fluida de estructura de madera y bambú, y vegetación integrada en sus fachadas.",
+    },
+    seoTitle: {
+      en: "Veleta Residential Building Tulum",
+      es: "Edificio residencial Veleta Tulum",
+    },
+    seoDescription: {
+      en: "Veleta — tropical residential building in Tulum with curved balconies, a timber-and-bamboo roof and integrated vegetation.",
+      es: "Veleta — edificio residencial tropical en Tulum con balcones curvos, cubierta de madera y bambú, y vegetación integrada.",
+    },
+  },
+  {
+    slug: "sensual-sanctuary",
+    year: 2025,
+    latitude: 9.93,
+    longitude: -84.09,
+    area: "—",
+    category: "hospitality",
+    images: [
+      "/projects/sensual-sanctuary/ChatGPT_Image_19_ago_2026__01_32_43_a.m.png",
+      "/projects/sensual-sanctuary/ChatGPT_Image_19_ago_2026__01_32_51_a.m.__1_.png",
+      "/projects/sensual-sanctuary/ChatGPT_Image_19_ago_2026__01_32_51_a.m.__2_.png",
+    ],
+    coverFocus: "50% 50%",
+    name: {
+      en: "Sensual Sanctuary",
+      es: "Sensual Sanctuary",
+    },
+    city: {
+      en: "",
+      es: "",
+    },
+    country: {
+      en: "Costa Rica",
+      es: "Costa Rica",
+    },
+    description: {
+      en: "A sanctuary of organic pavilions integrated into a mountainous tropical landscape, with lightweight roofs and intimate units.",
+      es: "Un santuario de pabellones orgánicos integrado en un paisaje tropical montañoso, con cubiertas ligeras y unidades íntimas.",
+    },
+    seoTitle: {
+      en: "Sensual Sanctuary | Costa Rica",
+      es: "Sensual Sanctuary | Costa Rica",
+    },
+    seoDescription: {
+      en: "Sensual Sanctuary — organic pavilions with lightweight roofs and intimate units in a mountainous tropical landscape.",
+      es: "Sensual Sanctuary — pabellones orgánicos con cubiertas ligeras y unidades íntimas en un paisaje tropical montañoso.",
     },
   },
   {
@@ -961,17 +1058,19 @@ const projectsData: Project[] = [
 
 /** Most visually striking projects first (list, hero, next-project flow). */
 const ATTRACTIVENESS_ORDER = [
+  "costa-rica-spa",
+  "sensual-sanctuary",
   "casa-sisal",
-  "awen-tulum",
-  "jungle-house-tulum",
+  "awen",
   "veleta-tulum",
+  "punta-cana",
+  "jungle-house-tulum",
   "cabin-tulum",
   "casa-manglar",
   "villa-nosara",
   "oficinas-mountain-nazca",
   "el-eden-tulum",
   "hexodome-cancun",
-  "punta-cana",
   "bali-resort",
   "restaurante-nosara",
   "casa-nosara",
@@ -983,8 +1082,21 @@ const ATTRACTIVENESS_ORDER = [
   "concepts",
 ] as const;
 
+function getUpscaledImagePath(imagePath: string): string {
+  return imagePath
+    .replace(/^\/projects\//, "/projects-hd/")
+    .replace(/\.(?:png|jpe?g)$/i, ".webp");
+}
+
 export const projects: Project[] = (() => {
-  const bySlug = new Map(projectsData.map((project) => [project.slug, project]));
+  const upscaledProjects = projectsData.map((project) => ({
+    ...project,
+    images: project.images.map(getUpscaledImagePath),
+    portraitImages: project.portraitImages?.map(getUpscaledImagePath),
+  }));
+  const bySlug = new Map(
+    upscaledProjects.map((project) => [project.slug, project]),
+  );
   const ordered: Project[] = [];
   for (const slug of ATTRACTIVENESS_ORDER) {
     const project = bySlug.get(slug);

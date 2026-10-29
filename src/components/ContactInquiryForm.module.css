@@ -210,6 +210,27 @@
   line-height: 1.55;
 }
 
+.success [role="status"] {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: center;
+}
+
+.success [role="status"] p {
+  margin: 0;
+  color: var(--ink-muted);
+  max-width: 30rem;
+  line-height: 1.55;
+}
+
+.success .successTitle {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
 .meetingPrompt {
   width: 100%;
   display: grid;

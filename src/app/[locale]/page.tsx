@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { HomeHero } from "@/components/HomeHero";
 import { Reveal } from "@/components/Reveal";
+import { TrackedCtaLink } from "@/components/TrackedCtaLink";
 import {
   formatPlace,
   getLocalized,
@@ -10,6 +11,7 @@ import {
   type LocaleCode,
 } from "@/data/projects";
 import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
+import { getLandingHref } from "@/lib/landing-pages";
 import { buildMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
 import styles from "./home.module.css";
@@ -48,7 +50,7 @@ export async function generateMetadata({ params }: Props) {
     pathname: `/${locale}`,
     title: t("homeTitle"),
     description: t("homeDescription"),
-    image: "/projects/casa-sisal/01.png",
+    image: "/projects-hd/casa-sisal/00.webp",
     imageAlt: "Casa Sisal — Santiago Architecture",
     absoluteTitle: true,
   });
@@ -61,6 +63,9 @@ export default async function HomePage({ params }: Props) {
   const tHome = await getTranslations("Home");
   const tAbout = await getTranslations("About");
   const tServices = await getTranslations("Services");
+  const routeLocale = locale as Locale;
+  const residentialHref = getLandingHref("residential", routeLocale);
+  const hospitalityHref = getLandingHref("hospitality", routeLocale);
 
   const slides = HOME_COVER_SLUGS.map((slug) => {
     const project = getProjectBySlug(slug);
@@ -80,6 +85,36 @@ export default async function HomePage({ params }: Props) {
   return (
     <div className={styles.home}>
       <HomeHero slides={slides} />
+
+      <section className={styles.sectorSection} aria-labelledby="sector-heading">
+        <h2 id="sector-heading" className={styles.visuallyHidden}>
+          {tHome("sectors.explore")}
+        </h2>
+        <Reveal className={styles.sectorBlock}>
+          <h3 className={styles.kicker}>{tHome("sectors.residencesTitle")}</h3>
+          <p className={styles.sectorBody}>{tHome("sectors.residencesBody")}</p>
+          <TrackedCtaLink
+            href={residentialHref}
+            className={styles.textLink}
+            destination="residential"
+            placement="sector"
+          >
+            {tHome("exploreResidences")}
+          </TrackedCtaLink>
+        </Reveal>
+        <Reveal className={styles.sectorBlock} delay={1}>
+          <h3 className={styles.kicker}>{tHome("sectors.hospitalityTitle")}</h3>
+          <p className={styles.sectorBody}>{tHome("sectors.hospitalityBody")}</p>
+          <TrackedCtaLink
+            href={hospitalityHref}
+            className={styles.textLink}
+            destination="hospitality"
+            placement="sector"
+          >
+            {tHome("hospitalityDevelopments")}
+          </TrackedCtaLink>
+        </Reveal>
+      </section>
 
       <section className={styles.selectedSection}>
         <Reveal>

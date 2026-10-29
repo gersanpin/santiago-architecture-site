@@ -2,9 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { trackCtaClick } from "@/lib/analytics";
 import { IMAGE_QUALITY_HERO, IMAGE_UNOPTIMIZED } from "@/lib/images";
+import { getLandingHref } from "@/lib/landing-pages";
+import type { Locale } from "@/i18n/routing";
 import styles from "./HomeHero.module.css";
 
 const INTERVAL_MS = 6500;
@@ -22,12 +25,15 @@ type Props = {
 
 export function HomeHero({ slides }: Props) {
   const t = useTranslations("Home");
+  const locale = useLocale() as Locale;
+  const residentialHref = getLandingHref("residential", locale);
+  const hospitalityHref = getLandingHref("hospitality", locale);
   const items =
     slides.length > 0
       ? slides
       : [
           {
-            src: "/projects/casa-sisal/01.png",
+            src: "/projects-hd/casa-sisal/00.webp",
             name: "Casa Sisal",
             place: "Sisal, Mexico",
             href: "/projects/casa-sisal",
@@ -71,15 +77,33 @@ export function HomeHero({ slides }: Props) {
           <h1 className={`${styles.headline} fade-up fade-up-delay`}>
             {t("headline")}
           </h1>
+          <p className={`${styles.supportingLine} fade-up fade-up-delay-2`}>
+            {t("supportingLine")}
+          </p>
           <p className={`${styles.support} fade-up fade-up-delay-2`}>
             {t("support")}
           </p>
         </div>
         <div className={`${styles.actions} fade-up fade-up-delay-2`}>
-          <Link href="/projects" className="btn btn-primary">
-            {t("exploreProjects")}
+          <Link
+            href={residentialHref}
+            className="btn btn-primary"
+            onClick={() => trackCtaClick("residential", "hero")}
+          >
+            {t("exploreResidences")}
           </Link>
-          <Link href="/contact?start=1" className="btn btn-ghost">
+          <Link
+            href={hospitalityHref}
+            className="btn btn-ghost"
+            onClick={() => trackCtaClick("hospitality", "hero")}
+          >
+            {t("hospitalityDevelopments")}
+          </Link>
+          <Link
+            href="/contact?start=1"
+            className="btn btn-ghost"
+            onClick={() => trackCtaClick("contact", "hero")}
+          >
             {t("startProject")}
           </Link>
         </div>

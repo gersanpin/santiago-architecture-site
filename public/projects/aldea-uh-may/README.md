@@ -1,6 +1,5 @@
 ﻿# Aldea Uh May — images
 
 - `01.png` — cover / portada (masterplan aerial)
-- `02.png` — community boulevard at dusk (circular amenity building)
-- `03.png` — night view of the community hub (pending)
-- `04.png` — organic bedroom interior (pending)
+- `WhatsApp_Image_2026-08-13_at_12.52.48_PM.png` — bedroom interior / interior de dormitorio
+- `location_slide_1.png` — nighttime exterior / exterior nocturno

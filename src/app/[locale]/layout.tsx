@@ -7,10 +7,13 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PageFade } from "@/components/PageFade";
+import { MetaPixel } from "@/components/MetaPixel";
+import { CookieConsent } from "@/components/CookieConsent";
 import {
   buildSiteStructuredData,
   StructuredData,
 } from "@/components/StructuredData";
+import { getPortfolioPdf } from "@/lib/portfolio";
 import { siteConfig } from "@/lib/site";
 import "@/styles/globals.css";
 
@@ -70,6 +73,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const portfolio = getPortfolioPdf();
 
   return (
     <html lang={locale} className={`${syne.variable} ${plex.variable}`}>
@@ -77,14 +81,18 @@ export default async function LocaleLayout({ children, params }: Props) {
         <StructuredData data={buildSiteStructuredData()} />
         <NextIntlClientProvider messages={messages}>
           <Suspense fallback={null}>
+            <MetaPixel />
+          </Suspense>
+          <Suspense fallback={null}>
             <SiteHeader />
           </Suspense>
           <main>
             <PageFade>{children}</PageFade>
           </main>
           <Suspense fallback={null}>
-            <SiteFooter />
+            <SiteFooter portfolio={portfolio} />
           </Suspense>
+          <CookieConsent />
         </NextIntlClientProvider>
       </body>
     </html>

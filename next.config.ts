@@ -7,6 +7,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  async redirects() {
+    return [
+      {
+        source: "/:locale(en|es)/projects/awen-tulum",
+        destination: "/:locale/projects/awen",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     // Optimized AVIF/WebP via Next + Cloudflare Images binding when deployed.
     qualities: [75, 90, 92, 100],

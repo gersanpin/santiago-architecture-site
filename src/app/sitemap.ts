@@ -2,7 +2,14 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 import { siteConfig } from "@/lib/site";
 
-const staticPaths = ["", "/projects", "/about", "/services", "/contact"];
+const staticPaths = [
+  "",
+  "/projects",
+  "/about",
+  "/services",
+  "/contact",
+  "/privacy",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const locales = ["en", "es"] as const;
@@ -30,7 +37,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${siteConfig.url}/${locale}${path}`,
         changeFrequency: "monthly",
         priority: 0.6,
-        images: project.images.map((image) => `${siteConfig.url}${image}`),
+        images: project.images
+          .filter((image) => image.startsWith("/"))
+          .map((image) => encodeURI(`${siteConfig.url}${image}`)),
         alternates: {
           languages: {
             en: `${siteConfig.url}/en${path}`,
