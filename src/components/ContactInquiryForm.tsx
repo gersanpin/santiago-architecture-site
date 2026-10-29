@@ -1,9 +1,14 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { InstagramLink } from "./InstagramLink";
+import {
+  createEventId,
+  hasAdvertisingConsent,
+  trackLead,
+} from "@/lib/analytics";
 import { siteConfig } from "@/lib/site";
 import styles from "./ContactInquiryForm.module.css";
 
@@ -13,8 +18,6 @@ type FormState = {
   whatsapp: string;
   location: string;
   projectType: string;
-  area: string;
-  hasSite: string;
   stage: string;
   message: string;
 };
@@ -33,7 +36,13 @@ type MeetingReason =
   | "press"
   | "other";
 
-type Step = "idle" | "reason" | "form" | "meeting" | "done";
+type Step =
+  | "idle"
+  | "reason"
+  | "form"
+  | "meeting"
+  | "inquiryDone"
+  | "done";
 type FormOrigin = "project" | "meeting";
 
 const MEETING_REASONS = [
@@ -49,10 +58,8 @@ const INITIAL: FormState = {
   email: "",
   whatsapp: "",
   location: "",
-  projectType: "residential",
-  area: "",
-  hasSite: "yes",
-  stage: "idea",
+  projectType: "",
+  stage: "",
   message: "",
 };
 
@@ -69,29 +76,68 @@ function detectedTimezone() {
 
 type Props = {
   studioEmail: string;
+  embedded?: boolean;
+  initialProjectType?: "residence" | "hospitality";
 };
 
-export function ContactInquiryForm({ studioEmail }: Props) {
+type Attribution = {
+  language: string;
+  landingPage: string;
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+  utm_content: string;
+  utm_term: string;
+  referrer: string;
+  source: string;
+};
+
+const EMPTY_ATTRIBUTION: Attribution = {
+  language: "",
+  landingPage: "",
+  utm_source: "",
+  utm_medium: "",
+  utm_campaign: "",
+  utm_content: "",
+  utm_term: "",
+  referrer: "",
+  source: "direct",
+};
+
+export function ContactInquiryForm({
+  studioEmail,
+  embedded = false,
+  initialProjectType,
+}: Props) {
   const t = useTranslations("Contact");
+  const locale = useLocale();
   const searchParams = useSearchParams();
   const shouldOpenForm = searchParams.get("start") === "1";
   const shouldOpenMeeting = searchParams.get("meeting") === "1";
 
   const [step, setStep] = useState<Step>(
-    shouldOpenForm ? "form" : shouldOpenMeeting ? "reason" : "idle",
+    embedded || shouldOpenForm
+      ? "form"
+      : shouldOpenMeeting
+        ? "reason"
+        : "idle",
   );
   const [formOrigin, setFormOrigin] = useState<FormOrigin>(
-    shouldOpenForm ? "project" : "meeting",
+    embedded || shouldOpenForm ? "project" : "meeting",
   );
   const [fromInquiry, setFromInquiry] = useState(false);
   const [meetingReason, setMeetingReason] = useState<MeetingReason | null>(
     null,
   );
-  const [values, setValues] = useState<FormState>(INITIAL);
+  const [values, setValues] = useState<FormState>(() => ({
+    ...INITIAL,
+    projectType: initialProjectType ?? "",
+  }));
   const [meeting, setMeeting] = useState<MeetingState>(INITIAL_MEETING);
-  const [attachments, setAttachments] = useState<File[]>([]);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [attribution, setAttribution] =
+    useState<Attribution>(EMPTY_ATTRIBUTION);
   const [formStartedAt] = useState(() => Date.now());
 
   useEffect(() => {
@@ -103,10 +149,33 @@ export function ContactInquiryForm({ studioEmail }: Props) {
     }
   }, []);
 
+  useEffect(() => {
+    const referrer = document.referrer;
+    let source = searchParams.get("utm_source") || "";
+    if (!source && referrer) {
+      try {
+        source = new URL(referrer).hostname;
+      } catch {
+        source = "referral";
+      }
+    }
+    setAttribution({
+      language: locale,
+      landingPage: window.location.href,
+      utm_source: searchParams.get("utm_source") || "",
+      utm_medium: searchParams.get("utm_medium") || "",
+      utm_campaign: searchParams.get("utm_campaign") || "",
+      utm_content: searchParams.get("utm_content") || "",
+      utm_term: searchParams.get("utm_term") || "",
+      referrer,
+      source: source || "direct",
+    });
+  }, [locale, searchParams]);
+
   const projectTypes = useMemo(
     () =>
       [
-        "residential",
+        "residence",
         "hospitality",
         "development",
         "masterplan",
@@ -116,14 +185,21 @@ export function ContactInquiryForm({ studioEmail }: Props) {
   );
 
   const stages = useMemo(
-    () => ["idea", "siteAcquired", "design", "construction"] as const,
+    () =>
+      [
+        "exploring",
+        "siteAcquired",
+        "concept",
+        "designInProgress",
+        "constructionPlanning",
+      ] as const,
     [],
   );
-
-  const hasSiteOptions = useMemo(
-    () => ["yes", "no", "unsure"] as const,
-    [],
-  );
+  const minMeetingDate = useMemo(() => {
+    const now = new Date();
+    const offset = now.getTimezoneOffset() * 60_000;
+    return new Date(now.getTime() - offset).toISOString().slice(0, 10);
+  }, []);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setValues((current) => ({ ...current, [key]: value }));
@@ -136,8 +212,15 @@ export function ContactInquiryForm({ studioEmail }: Props) {
     setMeeting((current) => ({ ...current, [key]: value }));
   }
 
+  function appendContext(payload: FormData) {
+    for (const [key, value] of Object.entries(attribution)) {
+      payload.set(key, value);
+    }
+  }
+
   async function postContact(payload: FormData) {
     payload.set("formStartedAt", String(formStartedAt));
+    appendContext(payload);
     const response = await fetch("/api/contact", {
       method: "POST",
       body: payload,
@@ -146,6 +229,7 @@ export function ContactInquiryForm({ studioEmail }: Props) {
       ok?: boolean;
       error?: string;
       code?: string;
+      accepted?: boolean;
     } | null;
     if (!response.ok || !data?.ok) {
       if (data?.code === "LOCAL_ATTACHMENT_UNSUPPORTED") {
@@ -153,6 +237,7 @@ export function ContactInquiryForm({ studioEmail }: Props) {
       }
       throw new Error(data?.error || t("sendError"));
     }
+    return { accepted: data.accepted === true };
   }
 
   async function handleInquirySubmit(event: FormEvent<HTMLFormElement>) {
@@ -171,16 +256,20 @@ export function ContactInquiryForm({ studioEmail }: Props) {
       payload.set("whatsapp", values.whatsapp);
       payload.set("location", values.location);
       payload.set("projectType", values.projectType);
-      payload.set("area", values.area);
-      payload.set("hasSite", values.hasSite);
       payload.set("stage", values.stage);
       payload.set("message", values.message);
-      for (const file of attachments) {
-        payload.append("attachments", file);
+      const eventId = createEventId();
+      payload.set("eventId", eventId);
+      payload.set(
+        "advertisingConsent",
+        hasAdvertisingConsent() ? "granted" : "denied",
+      );
+      const result = await postContact(payload);
+      if (result.accepted) {
+        trackLead(eventId);
       }
-      await postContact(payload);
       setFromInquiry(true);
-      setStep("meeting");
+      setStep(embedded ? "inquiryDone" : "meeting");
     } catch (err) {
       setError(err instanceof Error ? err.message : t("sendError"));
     } finally {
@@ -238,9 +327,8 @@ export function ContactInquiryForm({ studioEmail }: Props) {
   }
 
   function resetAll() {
-    setValues(INITIAL);
+    setValues({ ...INITIAL, projectType: initialProjectType ?? "" });
     setMeeting({ ...INITIAL_MEETING, timezone: detectedTimezone() });
-    setAttachments([]);
     setError(null);
     setFromInquiry(false);
     setMeetingReason(null);
@@ -258,7 +346,7 @@ export function ContactInquiryForm({ studioEmail }: Props) {
 
   function cancelMeeting() {
     if (fromInquiry) {
-      setStep("done");
+      setStep("inquiryDone");
       return;
     }
     if (meetingReason) {
@@ -268,10 +356,27 @@ export function ContactInquiryForm({ studioEmail }: Props) {
     setStep("idle");
   }
 
+  if (step === "inquiryDone") {
+    return (
+      <div className={styles.wrap}>
+        <div className={styles.success} role="status" aria-live="polite">
+          <p className={styles.successTitle}>{t("successTitle")}</p>
+          <p>{t("successBody")}</p>
+          {!embedded ? (
+            <button type="button" className="btn btn-line" onClick={resetAll}>
+              {t("sendAnother")}
+            </button>
+          ) : null}
+        </div>
+        {!embedded ? <ContactMeta studioEmail={studioEmail} /> : null}
+      </div>
+    );
+  }
+
   if (step === "done") {
     return (
       <div className={styles.wrap}>
-        <div className={styles.success}>
+        <div className={styles.success} role="status" aria-live="polite">
           <p>{t("meeting.done")}</p>
           <button type="button" className="btn btn-line" onClick={resetAll}>
             {t("sendAnother")}
@@ -392,6 +497,7 @@ export function ContactInquiryForm({ studioEmail }: Props) {
                 className={styles.input}
                 type="date"
                 name="meetingDate"
+                min={minMeetingDate}
                 required
                 value={meeting.date}
                 onChange={(event) => updateMeeting("date", event.target.value)}
@@ -462,7 +568,11 @@ export function ContactInquiryForm({ studioEmail }: Props) {
               {fromInquiry ? t("meeting.skip") : t("cancel")}
             </button>
           </div>
-          {error ? <p className={styles.formError}>{error}</p> : null}
+          {error ? (
+            <p className={styles.formError} role="alert">
+              {error}
+            </p>
+          ) : null}
         </form>
       </div>
     );
@@ -471,7 +581,10 @@ export function ContactInquiryForm({ studioEmail }: Props) {
       <div className={styles.wrap}>
         {fromInquiry ? (
           <div className={styles.success}>
-            <p>{t("success")}</p>
+            <div role="status" aria-live="polite">
+              <p className={styles.successTitle}>{t("successTitle")}</p>
+              <p>{t("successBody")}</p>
+            </div>
             {meetingForm}
           </div>
         ) : (
@@ -524,8 +637,6 @@ export function ContactInquiryForm({ studioEmail }: Props) {
           update={update}
           projectTypes={projectTypes}
           stages={stages}
-          hasSiteOptions={hasSiteOptions}
-          onAttachmentsChange={setAttachments}
         />
 
         <input
@@ -541,13 +652,19 @@ export function ContactInquiryForm({ studioEmail }: Props) {
           <button type="submit" className="btn btn-primary" disabled={sending}>
             {sending ? t("sending") : t("submit")}
           </button>
-          <button type="button" className="btn btn-line" onClick={cancelForm}>
-            {t("cancel")}
-          </button>
+          {!embedded ? (
+            <button type="button" className="btn btn-line" onClick={cancelForm}>
+              {t("cancel")}
+            </button>
+          ) : null}
         </div>
-        {error ? <p className={styles.formError}>{error}</p> : null}
+        {error ? (
+          <p className={styles.formError} role="alert">
+            {error}
+          </p>
+        ) : null}
       </form>
-      <ContactMeta studioEmail={studioEmail} />
+      {!embedded ? <ContactMeta studioEmail={studioEmail} /> : null}
     </div>
   );
 }
@@ -557,8 +674,6 @@ type ProjectInquiryFieldsProps = {
   update: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
   projectTypes: readonly string[];
   stages: readonly string[];
-  hasSiteOptions: readonly string[];
-  onAttachmentsChange: (files: File[]) => void;
 };
 
 function ProjectInquiryFields({
@@ -566,8 +681,6 @@ function ProjectInquiryFields({
   update,
   projectTypes,
   stages,
-  hasSiteOptions,
-  onAttachmentsChange,
 }: ProjectInquiryFieldsProps) {
   const t = useTranslations("Contact");
 
@@ -630,9 +743,11 @@ function ProjectInquiryFields({
           <select
             className={styles.select}
             name="projectType"
+            required
             value={values.projectType}
             onChange={(event) => update("projectType", event.target.value)}
           >
+            <option value="">{t("types.notSelected")}</option>
             {projectTypes.map((type) => (
               <option key={type} value={type}>
                 {t(`types.${type}`)}
@@ -642,79 +757,34 @@ function ProjectInquiryFields({
         </label>
       </div>
 
-      <div className={styles.row}>
-        <label className={styles.field}>
-          <span className={styles.label}>{t("fields.area")}</span>
-          <input
-            className={styles.input}
-            name="area"
-            placeholder={t("placeholders.area")}
-            value={values.area}
-            onChange={(event) => update("area", event.target.value)}
-          />
-        </label>
-        <label className={styles.field}>
-          <span className={styles.label}>{t("fields.hasSite")}</span>
-          <select
-            className={styles.select}
-            name="hasSite"
-            value={values.hasSite}
-            onChange={(event) => update("hasSite", event.target.value)}
-          >
-            {hasSiteOptions.map((option) => (
-              <option key={option} value={option}>
-                {t(`hasSiteOptions.${option}`)}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      <div className={styles.row}>
-        <label className={styles.field}>
-          <span className={styles.label}>{t("fields.stage")}</span>
-          <select
-            className={styles.select}
-            name="stage"
-            value={values.stage}
-            onChange={(event) => update("stage", event.target.value)}
-          >
-            {stages.map((stage) => (
-              <option key={stage} value={stage}>
-                {t(`stages.${stage}`)}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
+      <label className={styles.field}>
+        <span className={styles.label}>{t("fields.stage")}</span>
+        <select
+          className={styles.select}
+          name="stage"
+          value={values.stage}
+          onChange={(event) => update("stage", event.target.value)}
+        >
+          <option value="">{t("stages.notSelected")}</option>
+          {stages.map((stage) => (
+            <option key={stage} value={stage}>
+              {t(`stages.${stage}`)}
+            </option>
+          ))}
+        </select>
+      </label>
 
       <label className={styles.field}>
         <span className={styles.label}>{t("fields.message")}</span>
         <textarea
           className={styles.textarea}
           name="message"
-          required
           placeholder={t("placeholders.message")}
           value={values.message}
           onChange={(event) => update("message", event.target.value)}
         />
       </label>
 
-      <label className={styles.field}>
-        <span className={styles.label}>{t("fields.attachments")}</span>
-        <input
-          className={styles.file}
-          type="file"
-          name="attachments"
-          multiple
-          accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.zip,image/*,application/pdf"
-          onChange={(event) => {
-            const files = event.target.files;
-            onAttachmentsChange(files ? Array.from(files) : []);
-          }}
-        />
-        <span className={styles.hint}>{t("attachmentNote")}</span>
-      </label>
     </>
   );
 }

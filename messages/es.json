@@ -10,7 +10,13 @@
     "servicesTitle": "Servicios de arquitectura",
     "servicesDescription": "Arquitectura, diseño + construcción, planes maestros y desarrollo para clientes privados, desarrolladores e inversionistas a nivel internacional.",
     "contactTitle": "Contacto",
-    "contactDescription": "Cuéntanos sobre tu proyecto, terreno o idea de desarrollo. Trabajamos con clientes privados, desarrolladores e inversionistas a nivel internacional."
+    "contactDescription": "Cuéntanos sobre tu proyecto, terreno o idea de desarrollo. Trabajamos con clientes privados, desarrolladores e inversionistas a nivel internacional.",
+    "privacyTitle": "Privacidad y Cookies",
+    "privacyDescription": "Cómo Santiago Architecture utiliza almacenamiento esencial del navegador, Meta Pixel opcional y las preferencias de consentimiento.",
+    "residentialLandingTitle": "Arquitectura residencial — Santiago Architecture",
+    "residentialLandingDescription": "Residencias únicas definidas por el paisaje, el clima, la materialidad y la forma de habitar de sus habitantes.",
+    "hospitalityLandingTitle": "Arquitectura de hospitalidad — Santiago Architecture",
+    "hospitalityLandingDescription": "Proyectos de hospitalidad y desarrollos de mayor escala donde arquitectura, paisaje y experiencia forman una visión coherente."
   },
   "Nav": {
     "projects": "Proyectos",
@@ -23,9 +29,18 @@
   "Home": {
     "brand": "Santiago Architecture",
     "headline": "Arquitectura que pertenece a su paisaje.",
+    "supportingLine": "Arquitectura orgánica para residencias únicas, proyectos de hospitalidad y desarrollos en distintas partes del mundo.",
     "support": "Del concepto a la construcción — para clientes privados, desarrolladores e inversionistas.",
-    "exploreProjects": "Explorar proyectos",
+    "exploreResidences": "Explorar Residencias",
+    "hospitalityDevelopments": "Hospitalidad y Desarrollos",
     "startProject": "Iniciar un proyecto",
+    "sectors": {
+      "residencesTitle": "Residencias",
+      "residencesBody": "Residencias definidas por el lugar, el clima, el paisaje y la forma de habitar de cada cliente.",
+      "hospitalityTitle": "Hospitalidad y Desarrollos",
+      "hospitalityBody": "Hoteles, resorts y desarrollos de mayor escala donde arquitectura, paisaje y experiencia forman una sola visión.",
+      "explore": "Explorar"
+    },
     "selectedTitle": "Proyectos seleccionados",
     "viewAllProjects": "Ver todos los proyectos",
     "aboutP1": "Santiago Architecture es el estudio de Gerardo Santiago Pineda. Diseñamos y construimos, acompañando cada proyecto desde las primeras decisiones hasta la obra.",
@@ -88,7 +103,10 @@
     "approachTitle": "Enfoque",
     "approach1": "No entendemos la arquitectura como un objeto aislado. Cada proyecto parte del lugar: su clima, paisaje, luz, vegetación, materiales y forma de habitar.",
     "approach2": "El modelado tridimensional forma parte del proceso de diseño desde sus primeras etapas, permitiéndonos explorar espacios, geometrías y relaciones que difícilmente podrían desarrollarse únicamente en planta.",
-    "cta": "Conversar sobre un proyecto →"
+    "cta": "Conversar sobre un proyecto →",
+    "portfolioTitle": "Una mirada más cercana",
+    "portfolioBody": "Descarga una selección de nuestros proyectos y conoce nuestro enfoque de diseño.",
+    "portfolioDownload": "Descargar portfolio"
   },
   "Services": {
     "title": "Servicios",
@@ -141,7 +159,8 @@
     "submit": "Enviar consulta",
     "sending": "Enviando…",
     "cancel": "Cancelar",
-    "success": "Tu mensaje ha sido enviado. Me pondré en contacto contigo lo antes posible.",
+    "successTitle": "Gracias. Hemos recibido la información de tu proyecto.",
+    "successBody": "La revisaremos y nos pondremos en contacto contigo al correo proporcionado.",
     "sendError": "No pudimos enviar tu mensaje. Inténtalo de nuevo en un momento.",
     "attachmentLocalError": "Cloudflare no puede enviar archivos binarios desde localhost. Quita el adjunto para probar en local; los adjuntos funcionan en el sitio publicado.",
     "sendAnother": "Nueva consulta",
@@ -183,40 +202,107 @@
       "whatsapp": "WhatsApp (opcional)",
       "location": "Ubicación del proyecto",
       "projectType": "Tipo de proyecto",
-      "area": "Superficie aproximada del terreno",
-      "hasSite": "¿Ya cuentas con terreno?",
-      "stage": "Etapa actual",
-      "message": "Cuéntanos brevemente sobre el proyecto",
-      "attachments": "Adjuntar sitio, planos, referencias o brief",
-      "attachmentNote": "Opcional. PDF o imágenes, hasta 5 archivos / 4 MB cada uno (máx. 4.5 MB en total)."
+      "stage": "Etapa del proyecto (opcional)",
+      "message": "Mensaje (opcional)"
     },
     "placeholders": {
       "email": "tu@correo.com",
       "whatsapp": "+52 55 0000 0000",
       "location": "Ciudad, región o país",
-      "area": "p. ej. 450 m² de terreno",
       "message": "Contexto del sitio, programa, objetivos o referencias."
     },
-    "hasSiteOptions": {
-      "yes": "Sí",
-      "no": "No",
-      "unsure": "En proceso"
-    },
     "types": {
-      "residential": "Residencial",
-      "hospitality": "Hospitality",
+      "notSelected": "Selecciona un tipo de proyecto",
+      "residence": "Residencia",
+      "hospitality": "Hospitalidad",
       "development": "Desarrollo",
-      "masterplan": "Masterplan",
+      "masterplan": "Plan maestro",
       "other": "Otro"
     },
     "stages": {
-      "idea": "Idea",
+      "notSelected": "Selecciona una etapa",
+      "exploring": "Exploración",
       "siteAcquired": "Terreno adquirido",
-      "design": "Diseño",
-      "construction": "Construcción"
+      "concept": "Concepto",
+      "designInProgress": "Diseño en proceso",
+      "constructionPlanning": "Planificación de construcción"
     }
   },
+  "LandingPages": {
+    "selectedProjects": "Proyectos seleccionados",
+    "viewProject": "Ver proyecto",
+    "formTitle": "Cuéntanos sobre tu proyecto",
+    "formLead": "Comparte el terreno, la ubicación y el tipo de proyecto. Revisaremos la información y responderemos por correo.",
+    "residential": {
+      "eyebrow": "Arquitectura residencial",
+      "title": "Residencias definidas por su lugar.",
+      "lead": "Diseñamos residencias únicas a partir del paisaje, el clima, la materialidad y la forma en que quieres habitar. Desde la primera idea hasta el desarrollo arquitectónico, cada proyecto comienza con su terreno.",
+      "cta": "Cuéntanos sobre tu terreno",
+      "approachTitle": "Una arquitectura del lugar",
+      "approachBody": "Cada residencia parte de las condiciones específicas de su entorno —paisaje, clima, luz, vegetación y materialidad— y se desarrolla alrededor de la forma en que sus habitantes quieren vivir.",
+      "helpTitle": "En qué podemos ayudarte",
+      "helpItems": [
+        "Definición del terreno y programa",
+        "Concepto arquitectónico",
+        "Desarrollo de diseño",
+        "Planificación de construcción"
+      ]
+    },
+    "hospitality": {
+      "eyebrow": "Hospitalidad y Desarrollos",
+      "title": "Arquitectura para destinos con identidad.",
+      "lead": "Trabajamos con propietarios, desarrolladores e inversionistas en proyectos de hospitalidad, resorts y desarrollos de mayor escala donde arquitectura, paisaje y experiencia se integran en una sola estrategia.",
+      "cta": "Conversar sobre un proyecto de hospitalidad",
+      "approachTitle": "Una visión coherente",
+      "approachBody": "Arquitectura, paisaje y experiencia se consideran en conjunto desde la estrategia inicial hasta el desarrollo arquitectónico, creando proyectos con una relación propia con su entorno.",
+      "helpTitle": "Capacidades y escalas",
+      "helpItems": [
+        "Hospitalidad boutique",
+        "Resorts",
+        "Desarrollos de mayor escala",
+        "Desarrollo arquitectónico"
+      ]
+    }
+  },
+  "Consent": {
+    "title": "Tus opciones de privacidad",
+    "body": "Usamos almacenamiento esencial del navegador para recordar tus preferencias. Con tu permiso, Meta Pixel nos ayuda a comprender las visitas y las consultas de proyecto enviadas correctamente.",
+    "learnMore": "Más información",
+    "acceptAll": "Aceptar Todo",
+    "rejectNonEssential": "Rechazar No Esenciales",
+    "manage": "Gestionar Preferencias",
+    "preferencesKicker": "Controles de privacidad",
+    "preferencesTitle": "Preferencias de cookies",
+    "necessaryTitle": "Esenciales",
+    "necessaryBody": "Necesarias para recordar tu elección de privacidad y mantener las funciones principales del sitio.",
+    "alwaysOn": "Siempre activas",
+    "marketingTitle": "Marketing",
+    "marketingBody": "Permite que Meta Pixel mida visitas y consultas de proyecto confirmadas. Permanece bloqueado a menos que lo actives.",
+    "save": "Guardar Preferencias",
+    "privacyLink": "Leer la información de Privacidad y Cookies",
+    "changePreferences": "Preferencias de cookies",
+    "close": "Cerrar preferencias"
+  },
+  "Privacy": {
+    "title": "Privacidad y Cookies",
+    "lead": "Opciones claras sobre tecnología de marketing opcional.",
+    "intro": "Santiago Architecture utiliza almacenamiento limitado del navegador para recordar tus preferencias de privacidad. El seguimiento de marketing opcional permanece desactivado salvo que lo autorices expresamente.",
+    "essentialTitle": "Almacenamiento esencial",
+    "essentialBody": "Guardamos un registro de preferencias en tu navegador para recordar si aceptaste o rechazaste el seguimiento de marketing. Este registro es necesario para el sistema de consentimiento y no contiene información del formulario de contacto.",
+    "marketingTitle": "Meta Pixel",
+    "marketingBody": "Si otorgas consentimiento de marketing y el seguimiento está habilitado, Meta Pixel nos ayuda a comprender las visitas a páginas en inglés y español y si recibimos correctamente una consulta de proyecto. Meta puede procesar información técnica como la dirección IP, datos del navegador o dispositivo, URL de la página, información de referencia y hora del evento. Los campos del formulario de contacto no se incluyen en los parámetros de eventos del Pixel del navegador.",
+    "controlTitle": "Tus opciones",
+    "controlBody": "Puedes aceptar el seguimiento de marketing, rechazar el seguimiento no esencial o gestionar tu preferencia. Puedes cambiar o revocar tu elección en cualquier momento mediante el control Preferencias de cookies. La revocación evita nuevos eventos PageView y Lead de Meta desde este sitio.",
+    "activationTitle": "Cuándo se activa el seguimiento de marketing",
+    "activationBody": "Meta Pixel se carga únicamente cuando se cumplen ambas condiciones: otorgaste consentimiento de marketing y la variable de seguimiento del sitio en producción está habilitada. Rechazar el seguimiento de marketing no afecta el acceso al sitio ni al formulario de contacto.",
+    "metaLink": "Leer la Política de Privacidad de Meta",
+    "contactTitle": "Preguntas",
+    "contactBody": "Para consultas sobre privacidad o tu consulta de proyecto, escribe a"
+  },
   "Footer": {
-    "rights": "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados.",
+    "portfolio": "Portfolio PDF",
+    "privacy": "Privacidad y Cookies",
+    "cookiePreferences": "Preferencias de cookies"
   }
 }

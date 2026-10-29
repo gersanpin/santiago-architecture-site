@@ -10,7 +10,13 @@
     "servicesTitle": "Architecture Services",
     "servicesDescription": "Architecture, design + build, masterplanning, and development for private clients, developers, and investors internationally.",
     "contactTitle": "Contact",
-    "contactDescription": "Tell us about your project, site, or development idea. We work with private clients, developers, and investors internationally."
+    "contactDescription": "Tell us about your project, site, or development idea. We work with private clients, developers, and investors internationally.",
+    "privacyTitle": "Privacy & Cookies",
+    "privacyDescription": "How Santiago Architecture uses essential browser storage, optional Meta Pixel marketing technology, and visitor consent choices.",
+    "residentialLandingTitle": "Residential Architecture — Santiago Architecture",
+    "residentialLandingDescription": "Distinctive residences shaped by landscape, climate, materiality and the way their inhabitants want to live.",
+    "hospitalityLandingTitle": "Hospitality Architecture — Santiago Architecture",
+    "hospitalityLandingDescription": "Hospitality projects and larger-scale developments where architecture, landscape and experience form one coherent vision."
   },
   "Nav": {
     "projects": "Projects",
@@ -23,9 +29,18 @@
   "Home": {
     "brand": "Santiago Architecture",
     "headline": "Architecture that belongs to its landscape.",
+    "supportingLine": "Organic architecture for distinctive residences, hospitality projects and developments worldwide.",
     "support": "From concept to construction — for private clients, developers, and investors.",
-    "exploreProjects": "Explore Projects",
+    "exploreResidences": "Explore Residences",
+    "hospitalityDevelopments": "Hospitality & Developments",
     "startProject": "Start a Project",
+    "sectors": {
+      "residencesTitle": "Residences",
+      "residencesBody": "Homes shaped by site, climate, landscape and the way their inhabitants want to live.",
+      "hospitalityTitle": "Hospitality & Developments",
+      "hospitalityBody": "Hotels, resorts and larger-scale developments where architecture, landscape and experience form one coherent vision.",
+      "explore": "Explore"
+    },
     "selectedTitle": "Selected Projects",
     "viewAllProjects": "View all projects",
     "aboutP1": "Santiago Architecture is the studio of Gerardo Santiago Pineda. We design and build — staying with each project from early decisions through construction.",
@@ -88,7 +103,10 @@
     "approachTitle": "Approach",
     "approach1": "We do not understand architecture as an isolated object. Every project begins with place: its climate, landscape, light, vegetation, materials, and ways of living.",
     "approach2": "Three-dimensional modeling is part of the design process from the earliest stages, allowing us to explore spaces, geometries, and relationships that could hardly be developed in plan alone.",
-    "cta": "Discuss a project →"
+    "cta": "Discuss a project →",
+    "portfolioTitle": "A closer look",
+    "portfolioBody": "Download a selection of our projects and explore our approach to design.",
+    "portfolioDownload": "Download portfolio"
   },
   "Services": {
     "title": "Services",
@@ -141,7 +159,8 @@
     "submit": "Send inquiry",
     "sending": "Sending…",
     "cancel": "Cancel",
-    "success": "Your message has been sent. I’ll get back to you as soon as possible.",
+    "successTitle": "Thank you. Your project inquiry has been received.",
+    "successBody": "We'll review the information and get back to you at the email provided.",
     "sendError": "We could not send your message. Please try again in a moment.",
     "attachmentLocalError": "Cloudflare cannot send binary attachments from localhost. Remove the attachment to test locally; attachments work on the deployed site.",
     "sendAnother": "Start another inquiry",
@@ -183,40 +202,107 @@
       "whatsapp": "WhatsApp (optional)",
       "location": "Project location",
       "projectType": "Project type",
-      "area": "Approximate land area (sqm)",
-      "hasSite": "Do you already have a site?",
-      "stage": "Current stage",
-      "message": "Brief project description",
-      "attachments": "Attach site, plans, references, or brief",
-      "attachmentNote": "Optional. PDF or images, up to 5 files / 4 MB each (under 4.5 MB total)."
+      "stage": "Project stage (optional)",
+      "message": "Message (optional)"
     },
     "placeholders": {
       "email": "you@example.com",
       "whatsapp": "+1 555 000 0000",
       "location": "City, region, or country",
-      "area": "e.g. 450 m² land",
       "message": "Site context, program, goals, or references."
     },
-    "hasSiteOptions": {
-      "yes": "Yes",
-      "no": "No",
-      "unsure": "In progress"
-    },
     "types": {
-      "residential": "Residential",
+      "notSelected": "Select a project type",
+      "residence": "Residence",
       "hospitality": "Hospitality",
       "development": "Development",
       "masterplan": "Masterplan",
       "other": "Other"
     },
     "stages": {
-      "idea": "Idea",
+      "notSelected": "Select a stage",
+      "exploring": "Exploring",
       "siteAcquired": "Site acquired",
-      "design": "Design",
-      "construction": "Construction"
+      "concept": "Concept",
+      "designInProgress": "Design in progress",
+      "constructionPlanning": "Construction planning"
     }
   },
+  "LandingPages": {
+    "selectedProjects": "Selected projects",
+    "viewProject": "View project",
+    "formTitle": "Tell us about your project",
+    "formLead": "Share the site, location and project type. We will review the information and respond by email.",
+    "residential": {
+      "eyebrow": "Residential Architecture",
+      "title": "Homes shaped by their place.",
+      "lead": "We design distinctive residences around landscape, climate, materiality and the way you want to live. From the first idea through architectural development, every project begins with its site.",
+      "cta": "Tell us about your site",
+      "approachTitle": "An architecture of place",
+      "approachBody": "Each residence begins with the specific conditions of its setting—landscape, climate, light, vegetation and materiality—and develops around the way its inhabitants want to live.",
+      "helpTitle": "What we can help with",
+      "helpItems": [
+        "Site and brief definition",
+        "Architectural concept",
+        "Design development",
+        "Construction planning"
+      ]
+    },
+    "hospitality": {
+      "eyebrow": "Hospitality & Developments",
+      "title": "Architecture for destinations with identity.",
+      "lead": "We work with owners, developers and investors on boutique hospitality, resorts and larger-scale developments where architecture, landscape and guest experience are developed as one strategy.",
+      "cta": "Discuss a hospitality project",
+      "approachTitle": "One coherent vision",
+      "approachBody": "Architecture, landscape and experience are considered together from early strategy through architectural development, creating projects with a distinct relationship to their setting.",
+      "helpTitle": "Capabilities and scales",
+      "helpItems": [
+        "Boutique hospitality",
+        "Resorts",
+        "Larger-scale developments",
+        "Architectural development"
+      ]
+    }
+  },
+  "Consent": {
+    "title": "Your privacy choices",
+    "body": "We use essential browser storage for your preferences. With your permission, Meta Pixel helps us understand visits and successful project inquiries.",
+    "learnMore": "Learn more",
+    "acceptAll": "Accept All",
+    "rejectNonEssential": "Reject Non-Essential",
+    "manage": "Manage Preferences",
+    "preferencesKicker": "Privacy controls",
+    "preferencesTitle": "Cookie preferences",
+    "necessaryTitle": "Essential",
+    "necessaryBody": "Required to remember your privacy choice and support core website functionality.",
+    "alwaysOn": "Always on",
+    "marketingTitle": "Marketing",
+    "marketingBody": "Allows Meta Pixel to measure page visits and confirmed project inquiries. It stays blocked unless you enable it.",
+    "save": "Save Preferences",
+    "privacyLink": "Read the Privacy & Cookies information",
+    "changePreferences": "Cookie preferences",
+    "close": "Close preferences"
+  },
+  "Privacy": {
+    "title": "Privacy & Cookies",
+    "lead": "Clear choices about optional marketing technology.",
+    "intro": "Santiago Architecture uses limited browser storage to remember your privacy preferences. Optional marketing tracking remains off unless you explicitly allow it.",
+    "essentialTitle": "Essential storage",
+    "essentialBody": "A preference record is stored in your browser so the website can remember whether you accepted or rejected marketing tracking. This record is necessary for the consent system and does not contain contact-form information.",
+    "marketingTitle": "Meta Pixel",
+    "marketingBody": "If you grant marketing consent and tracking is enabled, Meta Pixel helps us understand visits to English and Spanish pages and whether a project inquiry was successfully received. Meta may process technical information such as IP address, browser or device information, page URL, referral information, and event time. Contact-form fields are not included in browser Pixel event parameters.",
+    "controlTitle": "Your choices",
+    "controlBody": "You can accept marketing tracking, reject non-essential tracking, or manage your preference. You can change or revoke your choice at any time using the Cookie preferences control. Revocation prevents further Meta PageView and Lead events from this website.",
+    "activationTitle": "When marketing tracking is active",
+    "activationBody": "Meta Pixel loads only when both conditions are met: you have granted marketing consent and the website's production tracking flag is enabled. Rejecting marketing tracking does not affect access to the website or contact form.",
+    "metaLink": "Read Meta's Privacy Policy",
+    "contactTitle": "Questions",
+    "contactBody": "For questions about privacy or your project inquiry, contact us at"
+  },
   "Footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "portfolio": "Portfolio PDF",
+    "privacy": "Privacy & Cookies",
+    "cookiePreferences": "Cookie preferences"
   }
 }

@@ -2,7 +2,14 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 import { siteConfig } from "@/lib/site";
 
-const staticPaths = ["", "/projects", "/about", "/services", "/contact"];
+const staticPaths = [
+  "",
+  "/projects",
+  "/about",
+  "/services",
+  "/contact",
+  "/privacy",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const locales = ["en", "es"] as const;

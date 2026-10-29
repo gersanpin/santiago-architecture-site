@@ -7,6 +7,7 @@
     "dev": "next dev --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "images:upscale": "node scripts/upscale-project-images.mjs",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",

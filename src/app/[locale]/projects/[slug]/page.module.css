@@ -56,6 +56,27 @@
   opacity: 0.88;
 }
 
+.publication {
+  margin: 0.7rem 0 0;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.publication a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.08rem;
+  transition: color var(--duration-ui) var(--ease-soft),
+    border-color var(--duration-ui) var(--ease-soft);
+}
+
+.publication a:hover,
+.publication a:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
 .next {
   display: block;
   width: min(62%, 48rem);

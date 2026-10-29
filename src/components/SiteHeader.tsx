@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { InstagramLink } from "./InstagramLink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { isAdLandingPath } from "@/lib/landing-pages";
 import styles from "./SiteHeader.module.css";
 
 const links = [
@@ -18,6 +19,8 @@ export function SiteHeader() {
   const t = useTranslations("Nav");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  if (isAdLandingPath(pathname)) return null;
 
   return (
     <header className={styles.header}>

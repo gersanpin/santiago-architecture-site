@@ -69,6 +69,9 @@ export default async function ProjectDetailPage({ params }: Props) {
   const credit = project.credit
     ? getLocalized(project.credit, lang)
     : null;
+  const publicationLabel = project.publication
+    ? getLocalized(project.publication.label, lang)
+    : null;
   const nextName = next ? getLocalized(next.name, lang) : null;
   const nextPlace = next ? formatPlace(next, lang) : null;
   const nextImage = next?.images[0] ?? null;
@@ -93,6 +96,17 @@ export default async function ProjectDetailPage({ params }: Props) {
             {getLocalized(project.description, lang)}
           </p>
           {credit ? <p className={styles.credit}>{credit}</p> : null}
+          {publicationLabel && project.publication ? (
+            <p className={styles.publication}>
+              <a
+                href={project.publication.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {publicationLabel}
+              </a>
+            </p>
+          ) : null}
         </header>
       </ProjectGallery>
 

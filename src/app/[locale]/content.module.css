@@ -224,6 +224,82 @@
   border-color: var(--ink);
 }
 
+.portfolio {
+  width: 100%;
+  margin-top: var(--space-about-gap);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.portfolioTitle {
+  margin: 0;
+  max-width: 16em;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.2vw, 2.55rem);
+  font-weight: 600;
+  letter-spacing: -0.036em;
+  line-height: 1.08;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.portfolio .rule {
+  margin: 1.35rem 0 1.65rem;
+  width: min(7.5rem, 34vw);
+}
+
+.portfolio .body + .portfolioLink {
+  margin-top: 1.85rem;
+}
+
+.portfolioLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.55rem;
+  min-height: 44px;
+  margin-top: 1.85rem;
+  padding: 0.35rem 0.1rem 0.4rem;
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  transition:
+    color var(--duration-ui) var(--ease-soft),
+    border-color var(--duration-ui) var(--ease-soft);
+}
+
+.portfolioLink:hover,
+.portfolioLink:focus-visible {
+  color: var(--steel-strong);
+  border-color: var(--steel);
+}
+
+.portfolioLink:focus-visible {
+  outline: 1px solid var(--steel);
+  outline-offset: 0.4rem;
+}
+
+.portfolioArrow {
+  display: block;
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: 0 0 auto;
+  color: var(--steel);
+  transition: transform var(--duration-ui) var(--ease-soft);
+}
+
+.portfolioLink:hover .portfolioArrow,
+.portfolioLink:focus-visible .portfolioArrow {
+  transform: translate3d(0.28rem, 0, 0);
+}
+
 .serviceIndex {
   font-variant-numeric: tabular-nums;
   color: var(--wood);
@@ -323,7 +399,12 @@
     --space-after-title: 1rem;
     --space-section: 1.25rem;
     --space-services: 1.5rem;
+    --space-about-gap: 2.75rem;
     --space-block: 0;
+  }
+
+  .portfolioTitle {
+    font-size: clamp(1.45rem, 7vh, 1.9rem);
   }
 
   .title {
@@ -353,5 +434,17 @@
     border-top: none;
     padding-top: 0;
     padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolioLink,
+  .portfolioArrow {
+    transition: none;
+  }
+
+  .portfolioLink:hover .portfolioArrow,
+  .portfolioLink:focus-visible .portfolioArrow {
+    transform: none;
   }
 }

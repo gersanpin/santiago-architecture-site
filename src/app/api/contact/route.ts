@@ -5,6 +5,7 @@ import {
   clientIp,
   isAllowedAttachment,
 } from "@/lib/contact";
+import { sendMetaLead } from "@/lib/meta-capi";
 
 export const runtime = "nodejs";
 
@@ -33,7 +34,7 @@ export async function POST(request: Request) {
   // Honeypot — bots fill hidden fields.
   const honeypot = String(form.get("website") ?? "").trim();
   if (honeypot) {
-    return Response.json({ ok: true });
+    return Response.json({ ok: true, accepted: false });
   }
 
   const startedAt = Number(form.get("formStartedAt") ?? 0);
@@ -61,6 +62,33 @@ export async function POST(request: Request) {
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return bad("Enter a valid email address.");
+  }
+  if (/[\r\n]/.test(name) || /[\r\n]/.test(email)) {
+    return bad("Invalid contact details.");
+  }
+
+  const language = String(form.get("language") ?? "").trim();
+  const landingPage = String(form.get("landingPage") ?? "").trim();
+  const utmSource = String(form.get("utm_source") ?? "").trim();
+  const utmMedium = String(form.get("utm_medium") ?? "").trim();
+  const utmCampaign = String(form.get("utm_campaign") ?? "").trim();
+  const utmContent = String(form.get("utm_content") ?? "").trim();
+  const utmTerm = String(form.get("utm_term") ?? "").trim();
+  const referrer = String(form.get("referrer") ?? "").trim();
+  const source = String(form.get("source") ?? "direct").trim() || "direct";
+  const contextValues = [
+    language,
+    landingPage,
+    utmSource,
+    utmMedium,
+    utmCampaign,
+    utmContent,
+    utmTerm,
+    referrer,
+    source,
+  ];
+  if (contextValues.some((value) => value.length > 1000)) {
+    return bad("Attribution data is too long.");
   }
 
   const files = form
@@ -92,12 +120,35 @@ export async function POST(request: Request) {
   if (kind === "inquiry") {
     const location = String(form.get("location") ?? "").trim();
     const projectType = String(form.get("projectType") ?? "").trim();
-    const area = String(form.get("area") ?? "").trim();
-    const hasSite = String(form.get("hasSite") ?? "").trim();
     const stage = String(form.get("stage") ?? "").trim();
     const message = String(form.get("message") ?? "").trim();
-    if (!location || !message) {
-      return bad("Location and message are required.");
+    const projectTypes = new Set([
+      "residence",
+      "hospitality",
+      "development",
+      "masterplan",
+      "other",
+    ]);
+    const stages = new Set([
+      "",
+      "exploring",
+      "siteAcquired",
+      "concept",
+      "designInProgress",
+      "constructionPlanning",
+    ]);
+    if (!location || !projectType) {
+      return bad("Location and project type are required.");
+    }
+    if (!projectTypes.has(projectType) || !stages.has(stage)) {
+      return bad("Select a valid project type and stage.");
+    }
+    if (
+      location.length > 240 ||
+      message.length > 5000 ||
+      stage.length > 40
+    ) {
+      return bad("Input is too long.");
     }
     subject = `Project inquiry — ${name}`;
     text = [
@@ -108,12 +159,18 @@ export async function POST(request: Request) {
       whatsapp ? `WhatsApp: ${whatsapp}` : null,
       `Location: ${location}`,
       `Project type: ${projectType}`,
-      area ? `Area: ${area}` : null,
-      `Has site: ${hasSite}`,
-      `Stage: ${stage}`,
+      stage ? `Stage: ${stage}` : null,
+      message ? `\nMessage:\n${message}` : null,
       "",
-      "Message:",
-      message,
+      `Language: ${language || "unknown"}`,
+      `Landing page: ${landingPage || "unknown"}`,
+      `Source: ${source}`,
+      utmSource ? `utm_source: ${utmSource}` : null,
+      utmMedium ? `utm_medium: ${utmMedium}` : null,
+      utmCampaign ? `utm_campaign: ${utmCampaign}` : null,
+      utmContent ? `utm_content: ${utmContent}` : null,
+      utmTerm ? `utm_term: ${utmTerm}` : null,
+      referrer ? `Referrer: ${referrer}` : null,
       files.length
         ? `\nAttachments: ${files.map((file) => file.name).join(", ")}`
         : null,
@@ -130,8 +187,20 @@ export async function POST(request: Request) {
     if (!date || !time || !timezone) {
       return bad("Meeting date, time, and timezone are required.");
     }
-    if (timezone.length > 100) {
-      return bad("Timezone is too long.");
+    const today = new Date().toISOString().slice(0, 10);
+    if (
+      !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+      !/^\d{2}:\d{2}$/.test(time) ||
+      date < today
+    ) {
+      return bad("Select a valid future meeting date and time.");
+    }
+    if (
+      timezone.length > 100 ||
+      notes.length > 5000 ||
+      reason.length > 240
+    ) {
+      return bad("Input is too long.");
     }
     subject = `Meeting request — ${name}`;
     text = [
@@ -147,6 +216,14 @@ export async function POST(request: Request) {
       `Time: ${time}`,
       `Timezone: ${timezone}`,
       notes ? `\nNotes:\n${notes}` : null,
+      "",
+      `Language: ${language || "unknown"}`,
+      `Landing page: ${landingPage || "unknown"}`,
+      `Source: ${source}`,
+      utmSource ? `utm_source: ${utmSource}` : null,
+      utmMedium ? `utm_medium: ${utmMedium}` : null,
+      utmCampaign ? `utm_campaign: ${utmCampaign}` : null,
+      referrer ? `Referrer: ${referrer}` : null,
     ]
       .filter(Boolean)
       .join("\n");
@@ -182,7 +259,31 @@ export async function POST(request: Request) {
       attachments: attachments.length ? attachments : undefined,
     });
 
-    return Response.json({ ok: true });
+    if (
+      kind === "inquiry" &&
+      String(form.get("advertisingConsent") ?? "") === "granted"
+    ) {
+      const eventId = String(form.get("eventId") ?? "").trim();
+      const projectType = String(form.get("projectType") ?? "").trim();
+      if (/^[a-zA-Z0-9-]{12,100}$/.test(eventId)) {
+        await sendMetaLead({
+          env,
+          eventId,
+          eventSourceUrl: /^https?:\/\//.test(landingPage)
+            ? landingPage
+            : "https://santiago-architecture.com",
+          email,
+          name,
+          projectType,
+          locale: language || "unknown",
+          source,
+          clientIp: ip,
+          userAgent: request.headers.get("user-agent") ?? "",
+        });
+      }
+    }
+
+    return Response.json({ ok: true, accepted: true });
   } catch (error) {
     console.error("Contact email failed", error);
     if (
