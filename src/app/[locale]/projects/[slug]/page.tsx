@@ -8,6 +8,7 @@ import {
   formatProjectFacts,
   getNextProject,
   getProjectBySlug,
+  getProjectSeoType,
   projects,
   type LocaleCode,
 } from "@/data/projects";
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: Props) {
     locale: locale as Locale,
     pathname: `/${locale}/projects/${slug}`,
     title: `${getLocalized(project.seoTitle, lang)} — ${t(
-      `seoTypes.${project.category}`,
+      `seoTypes.${getProjectSeoType(project)}`,
     )}`,
     description: getLocalized(project.seoDescription, lang),
     image: project.images[0] ?? null,
@@ -89,7 +90,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       />
       <ProjectGallery images={project.images} alt={galleryAlt}>
         <header className={styles.intro}>
-          <p className={styles.kicker}>{t(`filters.${project.category}`)}</p>
+          <p className={styles.kicker}>{t(`typologies.${project.category}`)}</p>
           <h1 className={styles.title}>{name}</h1>
           {facts ? <p className={styles.facts}>{facts}</p> : null}
           <p className={styles.lead}>

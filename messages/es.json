@@ -4,7 +4,21 @@
     "homeTitle": "Santiago Architecture — Arquitectura orgánica y estudio de diseño",
     "homeDescription": "Santiago Architecture es un estudio internacional de arquitectura orgánica integrada al paisaje para proyectos residenciales, de hospitalidad y desarrollo.",
     "projectsTitle": "Proyectos de arquitectura",
-    "projectsDescription": "Proyectos residenciales, villas, hospitalidad, resorts y planes maestros definidos por el paisaje, el clima y la materialidad.",
+    "projectsDescription": "Proyectos residenciales, tiny houses, hospitalidad, resorts y planes maestros definidos por el paisaje, el clima y la materialidad.",
+    "filterTitles": {
+      "residential": "Proyectos de arquitectura residencial",
+      "hospitality": "Proyectos de arquitectura de hospitalidad",
+      "masterplan": "Proyectos de masterplanning y desarrollo",
+      "commercial": "Proyectos comerciales y otros",
+      "tinyLiving": "Tiny Living — Tiny Homes y Viviendas Compactas"
+    },
+    "filterDescriptions": {
+      "residential": "Arquitectura residencial, villas y casas definidas por el paisaje, el clima y la materialidad.",
+      "hospitality": "Arquitectura de hospitalidad, resorts y destinos definidos por el paisaje y la experiencia.",
+      "masterplan": "Proyectos de masterplanning y desarrollo que integran arquitectura, paisaje y estrategia de crecimiento.",
+      "commercial": "Arquitectura comercial, espacios de trabajo, pabellones y otros proyectos no residenciales.",
+      "tinyLiving": "Arquitectura de tiny homes, viviendas prefabricadas, casas modulares y diseño residencial compacto de Santiago Architecture."
+    },
     "aboutTitle": "Acerca del estudio",
     "aboutDescription": "Santiago Architecture es un estudio internacional fundado por Gerardo Santiago Pineda que trabaja del diseño arquitectónico a la construcción.",
     "servicesTitle": "Servicios de arquitectura",
@@ -64,14 +78,29 @@
     "close": "Cerrar",
     "previousImage": "Imagen anterior",
     "nextImage": "Imagen siguiente",
+    "categories": "Categorías de proyectos",
     "filters": {
-      "all": "Todos",
+      "all": "Todos los proyectos",
+      "residential": "Residencial",
+      "hospitality": "Hospitalidad",
+      "masterplan": "Masterplanning y Desarrollos",
+      "commercial": "Comercial y Otros",
+      "tinyLiving": "Tiny Living",
+      "workplace": "Oficinas",
+      "pavilion": "Pabellón",
+      "interior": "Interiorismo"
+    },
+    "filterLeads": {
+      "tinyLiving": "Tiny Homes y Viviendas Compactas"
+    },
+    "typologies": {
       "residential": "Residencial",
       "hospitality": "Hospitalidad",
       "masterplan": "Plan maestro",
       "workplace": "Oficinas",
       "pavilion": "Pabellón",
-      "interior": "Interiorismo"
+      "interior": "Interiorismo",
+      "tinyLiving": "Tiny Living"
     },
     "seoTypes": {
       "residential": "Arquitectura residencial",
@@ -79,7 +108,8 @@
       "masterplan": "Plan maestro",
       "workplace": "Diseño de espacios de trabajo",
       "pavilion": "Arquitectura de pabellón",
-      "interior": "Diseño de interiores"
+      "interior": "Diseño de interiores",
+      "tinyLiving": "Arquitectura de tiny homes"
     },
     "labels": {
       "project": "Proyecto",

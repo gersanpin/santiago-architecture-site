@@ -11,30 +11,53 @@ import {
   buildBreadcrumbStructuredData,
   StructuredData,
 } from "@/components/StructuredData";
+import {
+  filterProjectsByGroup,
+  getProjectFilterSlug,
+  parseProjectFilter,
+  type ProjectFilterId,
+} from "@/lib/project-filters";
 import { buildMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
 import styles from "./page.module.css";
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ category?: string | string[] }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+function filterSearch(filterId: ProjectFilterId) {
+  const slug = getProjectFilterSlug(filterId);
+  return slug ? `?category=${slug}` : undefined;
+}
+
+export async function generateMetadata({ params, searchParams }: Props) {
   const { locale } = await params;
+  const query = await searchParams;
+  const filterId = parseProjectFilter(query.category);
   const t = await getTranslations({ locale, namespace: "Meta" });
+
   return buildMetadata({
     locale: locale as Locale,
     pathname: `/${locale}/projects`,
-    title: t("projectsTitle"),
-    description: t("projectsDescription"),
+    title:
+      filterId === "all" ? t("projectsTitle") : t(`filterTitles.${filterId}`),
+    description:
+      filterId === "all"
+        ? t("projectsDescription")
+        : t(`filterDescriptions.${filterId}`),
+    search: filterSearch(filterId),
   });
 }
 
-export default async function ProjectsPage({ params }: Props) {
+export default async function ProjectsPage({ params, searchParams }: Props) {
   const { locale } = await params;
+  const query = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("Projects");
   const lang = locale as LocaleCode;
+  const filterId = parseProjectFilter(query.category);
+  const listedProjects = filterProjectsByGroup(projects, filterId);
 
   return (
     <div className={styles.page}>
@@ -51,7 +74,7 @@ export default async function ProjectsPage({ params }: Props) {
       {/* Server-rendered project links for crawlers and no-JS. */}
       <nav className={styles.seoIndex} aria-label={t("title")}>
         <ul>
-          {projects.map((project) => (
+          {listedProjects.map((project) => (
             <li key={project.slug}>
               <Link href={`/projects/${project.slug}`}>
                 {getLocalized(project.name, lang)}
@@ -65,7 +88,7 @@ export default async function ProjectsPage({ params }: Props) {
         fallback={
           <nav className={styles.fallbackIndex} aria-label={t("title")}>
             <ul>
-              {projects.map((project) => (
+              {listedProjects.map((project) => (
                 <li key={`fb-${project.slug}`}>
                   <Link href={`/projects/${project.slug}`}>
                     {getLocalized(project.name, lang)}

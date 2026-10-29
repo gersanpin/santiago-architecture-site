@@ -5,6 +5,13 @@ import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import type { Project } from "@/data/projects";
+import {
+  filterProjectsByGroup,
+  getProjectFilterSlug,
+  parseProjectFilter,
+  PROJECT_FILTERS,
+  type ProjectFilterId,
+} from "@/lib/project-filters";
 import { ProjectGrid } from "./ProjectGrid";
 import { ProjectList } from "./ProjectList";
 import styles from "./ProjectsExplorer.module.css";
@@ -32,13 +39,26 @@ export function ProjectsExplorer({ projects }: Props) {
 
   const view = parseView(searchParams.get("view"));
   const selectedSlug = searchParams.get("project");
+  const filterId = parseProjectFilter(searchParams.get("category"));
+  const visibleProjects = filterProjectsByGroup(projects, filterId);
+  const filterLead =
+    filterId === "tinyLiving" ? t("filterLeads.tinyLiving") : null;
+  const globeSelectedSlug = visibleProjects.some(
+    (project) => project.slug === selectedSlug,
+  )
+    ? selectedSlug
+    : null;
 
   const updateParams = useCallback(
     (patch: Record<string, string | null>) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.delete("category");
       Object.entries(patch).forEach(([key, value]) => {
-        if (value == null || value === "" || (key === "view" && value === "grid")) {
+        if (
+          value == null ||
+          value === "" ||
+          (key === "view" && value === "grid") ||
+          (key === "category" && value === "all")
+        ) {
           params.delete(key);
         } else {
           params.set(key, value);
@@ -55,9 +75,31 @@ export function ProjectsExplorer({ projects }: Props) {
     [pathname, router, searchParams],
   );
 
+  function selectFilter(id: ProjectFilterId) {
+    updateParams({ category: getProjectFilterSlug(id) });
+  }
+
   return (
     <div className={styles.explorer}>
       <div className={styles.toolbar}>
+        <div
+          className={styles.filters}
+          role="radiogroup"
+          aria-label={t("categories")}
+        >
+          {PROJECT_FILTERS.map((filter) => (
+            <button
+              key={filter.id}
+              type="button"
+              role="radio"
+              aria-checked={filterId === filter.id}
+              className={filterId === filter.id ? styles.active : undefined}
+              onClick={() => selectFilter(filter.id)}
+            >
+              {t(`filters.${filter.id}`)}
+            </button>
+          ))}
+        </div>
         <div className={styles.views} role="tablist" aria-label="View mode">
           <button
             type="button"
@@ -89,15 +131,17 @@ export function ProjectsExplorer({ projects }: Props) {
         </div>
       </div>
 
+      {filterLead ? <p className={styles.filterLead}>{filterLead}</p> : null}
+
       {view === "grid" ? (
         <section className={styles.bleed} aria-label={t("title")}>
-          <ProjectGrid projects={projects} />
+          <ProjectGrid projects={visibleProjects} />
         </section>
       ) : null}
 
       {view === "list" ? (
         <section className={styles.bleed} aria-label={t("listView")}>
-          <ProjectList projects={projects} />
+          <ProjectList projects={visibleProjects} />
         </section>
       ) : null}
 
@@ -105,8 +149,8 @@ export function ProjectsExplorer({ projects }: Props) {
         <div className={styles.globeWrap}>
           <Suspense fallback={<p className={styles.globeLoading}>{t("globeLoading")}</p>}>
             <ProjectGlobe
-              projects={projects}
-              selectedSlug={selectedSlug}
+              projects={visibleProjects}
+              selectedSlug={globeSelectedSlug}
               onSelect={(slug) => updateParams({ project: slug })}
             />
           </Suspense>

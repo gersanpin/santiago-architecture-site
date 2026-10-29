@@ -10,6 +10,8 @@ type BuildMetadataInput = {
   image?: string | null;
   imageAlt?: string;
   absoluteTitle?: boolean;
+  /** Optional query string beginning with `?`, included on canonical and hreflang URLs. */
+  search?: string;
 };
 
 function absoluteUrl(path: string) {
@@ -26,6 +28,7 @@ export function buildMetadata({
   image,
   imageAlt,
   absoluteTitle = false,
+  search,
 }: BuildMetadataInput): Metadata {
   const normalizedPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
   const pathWithoutLocale =
@@ -37,9 +40,15 @@ export function buildMetadata({
   const esPath = `/es${pathWithoutLocale || ""}`;
   const canonicalPath = `/${locale}${pathWithoutLocale || ""}`;
 
-  const canonical = absoluteUrl(canonicalPath);
-  const enUrl = absoluteUrl(enPath);
-  const esUrl = absoluteUrl(esPath);
+  const query =
+    search && search.startsWith("?")
+      ? search
+      : search
+        ? `?${search}`
+        : "";
+  const canonical = `${absoluteUrl(canonicalPath)}${query}`;
+  const enUrl = `${absoluteUrl(enPath)}${query}`;
+  const esUrl = `${absoluteUrl(esPath)}${query}`;
   const ogImage = image ? absoluteUrl(image) : absoluteUrl(siteConfig.ogImage);
 
   return {

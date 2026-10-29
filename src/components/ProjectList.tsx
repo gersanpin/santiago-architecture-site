@@ -129,7 +129,7 @@ function ProjectListEntry({ project, locale, priority }: EntryProps) {
               <span className={styles.indexItem}>
                 <span className={styles.indexLabel}>{t("labels.typology")}</span>
                 <span className={styles.indexValue}>
-                  {t(`filters.${project.category}`)}
+                  {t(`typologies.${project.category}`)}
                 </span>
               </span>
               <span className={styles.indexItem}>

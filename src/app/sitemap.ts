@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
+import { PROJECT_FILTERS } from "@/lib/project-filters";
 import { siteConfig } from "@/lib/site";
 
 const staticPaths = [
@@ -21,6 +22,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${siteConfig.url}/${locale}${path}`,
         changeFrequency: path === "" ? "weekly" : "monthly",
         priority: path === "" ? 1 : 0.7,
+        alternates: {
+          languages: {
+            en: `${siteConfig.url}/en${path}`,
+            es: `${siteConfig.url}/es${path}`,
+            "x-default": `${siteConfig.url}/en${path}`,
+          },
+        },
+      });
+    }
+
+    for (const filter of PROJECT_FILTERS) {
+      if (filter.id === "all") continue;
+      const path = `/projects?category=${filter.slug}`;
+      entries.push({
+        url: `${siteConfig.url}/${locale}${path}`,
+        changeFrequency: "monthly",
+        priority: 0.65,
         alternates: {
           languages: {
             en: `${siteConfig.url}/en${path}`,

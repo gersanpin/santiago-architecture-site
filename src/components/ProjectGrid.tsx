@@ -171,7 +171,7 @@ function ProjectTile({
           </div>
         ) : null}
         <div className={styles.meta}>
-          <p className={styles.category}>{t(`filters.${project.category}`)}</p>
+          <p className={styles.category}>{t(`typologies.${project.category}`)}</p>
           <h2>{name}</h2>
           <p>{place}</p>
         </div>

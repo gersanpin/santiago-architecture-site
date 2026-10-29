@@ -691,7 +691,7 @@ export function ProjectGlobe({ projects, selectedSlug, onSelect }: Props) {
         {selected ? (
           <>
             <GlobePreview key={selected.slug} project={selected} locale={locale} />
-            <p className={styles.kicker}>{t(`filters.${selected.category}`)}</p>
+            <p className={styles.kicker}>{t(`typologies.${selected.category}`)}</p>
             <h2>
               <Link
                 href={`/projects/${selected.slug}`}
@@ -707,7 +707,7 @@ export function ProjectGlobe({ projects, selectedSlug, onSelect }: Props) {
               </div>
               <div>
                 <dt>{t("labels.typology")}</dt>
-                <dd>{t(`filters.${selected.category}`)}</dd>
+                <dd>{t(`typologies.${selected.category}`)}</dd>
               </div>
               <div>
                 <dt>{t("labels.year")}</dt>

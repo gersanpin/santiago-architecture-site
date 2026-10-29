@@ -5,6 +5,7 @@ export const categories = [
   "workplace",
   "pavilion",
   "interior",
+  "tinyLiving",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -29,7 +30,10 @@ export type Project = {
   latitude: number;
   longitude: number;
   area: string;
+  /** Primary typology shown on project cards and detail pages. */
   category: Category;
+  /** Additional filter memberships. A tiny house can be Residential and Tiny Living. */
+  categories?: Category[];
   images: string[];
   /** Portrait/vertical frames preferred for tall collage tiles. */
   portraitImages?: string[];
@@ -91,6 +95,7 @@ const projectsData: Project[] = [
     longitude: -84.645,
     area: "85 m²",
     category: "residential",
+    categories: ["tinyLiving"],
     images: [
       "/projects/tiny-home-costa-rica/04.png",
       "/projects/tiny-home-costa-rica/01.png",
@@ -125,8 +130,8 @@ const projectsData: Project[] = [
       es: "Tiny Home Costa Rica",
     },
     seoDescription: {
-      en: "Tiny Home Costa Rica — a two-level prefabricated retreat transported in two modules and assembled on site.",
-      es: "Tiny Home Costa Rica — refugio prefabricado de dos niveles transportado en dos módulos y ensamblado en sitio.",
+      en: "Tiny Home Costa Rica — tiny house architecture for a two-level prefabricated retreat transported in two modules and assembled on site.",
+      es: "Tiny Home Costa Rica — arquitectura de tiny house para un refugio prefabricado de dos niveles transportado en dos módulos y ensamblado en sitio.",
     },
   },
   {
@@ -136,6 +141,7 @@ const projectsData: Project[] = [
     longitude: -85.4377,
     area: "42 m²",
     category: "residential",
+    categories: ["tinyLiving"],
     images: [
       "/projects/tiny-home-1-bedroom/01.png",
       "/projects/tiny-home-1-bedroom/02.png",
@@ -169,8 +175,8 @@ const projectsData: Project[] = [
       es: "Tiny Home 1 Bedroom",
     },
     seoDescription: {
-      en: "Tiny Home 1 Bedroom — a compact modular home designed to grow by adding rooms over time.",
-      es: "Tiny Home 1 Bedroom — vivienda modular compacta diseñada para crecer al añadir habitaciones con el tiempo.",
+      en: "Tiny Home 1 Bedroom — compact modular home and tiny house design, planned to grow by adding rooms over time.",
+      es: "Tiny Home 1 Bedroom — vivienda modular compacta y tiny house, pensada para crecer al añadir habitaciones con el tiempo.",
     },
   },
   {
@@ -180,6 +186,7 @@ const projectsData: Project[] = [
     longitude: -84.8384,
     area: "28 m²",
     category: "residential",
+    categories: ["tinyLiving"],
     images: [
       "/projects/tiny-house-costa-rica/01.png",
       "/projects/tiny-house-costa-rica/02.png",
@@ -207,8 +214,8 @@ const projectsData: Project[] = [
       es: "Tiny House Costa Rica",
     },
     seoDescription: {
-      en: "Tiny House Costa Rica — a compact 28 m² prefabricated studio with a curved timber roof.",
-      es: "Tiny House Costa Rica — estudio prefabricado compacto de 28 m² con cubierta de madera curva.",
+      en: "Tiny House Costa Rica — compact prefabricated tiny house architecture: a 28 m² studio with a curved timber roof.",
+      es: "Tiny House Costa Rica — arquitectura de tiny house prefabricada y compacta: un estudio de 28 m² con cubierta de madera curva.",
     },
   },
   {
@@ -453,6 +460,7 @@ const projectsData: Project[] = [
     longitude: -4.4214,
     area: "32 m²",
     category: "residential",
+    categories: ["tinyLiving"],
     images: [
       "/projects/tiny-home-spain/01.png",
       "/projects/tiny-home-spain/02.png",
@@ -483,8 +491,8 @@ const projectsData: Project[] = [
       es: "Tiny Home Spain",
     },
     seoDescription: {
-      en: "Tiny Home Spain — a towable 32 m² dwelling with a curved white shell.",
-      es: "Tiny Home Spain — vivienda móvil de 32 m² con cascarón blanco curvo.",
+      en: "Tiny Home Spain — compact tiny house architecture for a towable 32 m² dwelling with a curved white shell.",
+      es: "Tiny Home Spain — arquitectura de tiny house compacta para una vivienda remolcable de 32 m² con cascarón blanco curvo.",
     },
   },
   {
@@ -673,6 +681,7 @@ const projectsData: Project[] = [
     longitude: -87.455,
     area: "95 m²",
     category: "residential",
+    categories: ["tinyLiving"],
     images: [
       "/projects/cabin-tulum/01.png",
       "/projects/cabin-tulum/02.png",
@@ -705,8 +714,8 @@ const projectsData: Project[] = [
       es: "Cabin Tulum",
     },
     seoDescription: {
-      en: "Cabin Tulum — compact retreat with an expressive timber framework.",
-      es: "Cabin Tulum — refugio compacto con entramado expresivo de madera.",
+      en: "Cabin Tulum — compact residential design: a thatched retreat with an expressive timber framework.",
+      es: "Cabin Tulum — diseño residencial compacto: un refugio de cubierta de paja con entramado expresivo de madera.",
     },
   },
   {
@@ -1074,6 +1083,18 @@ export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);
 }
 
+/** Primary category plus any additional filter memberships, without duplicates. */
+export function getProjectCategories(project: Project): Category[] {
+  return Array.from(new Set([project.category, ...(project.categories ?? [])]));
+}
+
+/** Prefer Tiny Living for SEO titles when a project belongs to that category. */
+export function getProjectSeoType(project: Project): Category {
+  return getProjectCategories(project).includes("tinyLiving")
+    ? "tinyLiving"
+    : project.category;
+}
+
 export function getLocalized(
   value: LocalizedString,
   locale: LocaleCode,
@@ -1119,5 +1140,7 @@ export function getNextProject(slug: string): Project | undefined {
 
 export function filterProjects(category?: string | null): Project[] {
   if (!category || category === "all") return projects;
-  return projects.filter((project) => project.category === category);
+  return projects.filter((project) =>
+    getProjectCategories(project).includes(category as Category),
+  );
 }

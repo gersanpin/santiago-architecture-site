@@ -11,9 +11,11 @@
   position: sticky;
   top: var(--nav-height);
   z-index: 30;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 1.6rem;
+  row-gap: 0.45rem;
   width: 100%;
   box-sizing: border-box;
   margin: 0;
@@ -24,12 +26,33 @@
   -webkit-backdrop-filter: blur(14px) saturate(1.05);
 }
 
+.filters,
 .views {
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem 1.15rem;
 }
 
+.filters {
+  min-width: 0;
+}
+
+.views {
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 760px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .views {
+    justify-content: flex-start;
+  }
+}
+
+.filters button,
 .views button {
   font-size: 0.72rem;
   font-weight: 500;
@@ -40,6 +63,16 @@
   transition: color var(--duration-ui) var(--ease-soft);
 }
 
+.filterLead {
+  margin: 0;
+  padding: 0.7rem var(--page-pad) 0.15rem;
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.filters button:hover,
 .views button:hover,
 .active {
   color: var(--ink);
