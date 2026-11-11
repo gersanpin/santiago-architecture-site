@@ -33,7 +33,7 @@ export function HomeHero({ slides }: Props) {
       ? slides
       : [
           {
-            src: "/projects-hd/casa-sisal/00.webp",
+            src: "/projects/casa-sisal/00.png",
             name: "Casa Sisal",
             place: "Sisal, Mexico",
             href: "/projects/casa-sisal",

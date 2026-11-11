@@ -1052,21 +1052,10 @@ const ATTRACTIVENESS_ORDER = [
   "tiny-house-costa-rica",
 ] as const;
 
-/** Prefer the 2× WebP set in public/projects-hd for retina / full-bleed frames. */
-function getHighResImagePath(imagePath: string): string {
-  return imagePath
-    .replace(/^\/projects\//, "/projects-hd/")
-    .replace(/\.(?:png|jpe?g)$/i, ".webp");
-}
-
+/** Serve the uploaded files in public/projects — no HD remap or re-encode. */
 export const projects: Project[] = (() => {
-  const highResProjects = projectsData.map((project) => ({
-    ...project,
-    images: project.images.map(getHighResImagePath),
-    portraitImages: project.portraitImages?.map(getHighResImagePath),
-  }));
   const bySlug = new Map(
-    highResProjects.map((project) => [project.slug, project]),
+    projectsData.map((project) => [project.slug, project]),
   );
   const ordered: Project[] = [];
   for (const slug of ATTRACTIVENESS_ORDER) {

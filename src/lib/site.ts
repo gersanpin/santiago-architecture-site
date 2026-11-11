@@ -6,7 +6,7 @@ export const siteConfig = {
   /** Public studio inbox — only address shown on the site. */
   email: "hello@santiago-architecture.com",
   /** Default share image when a page has no project-specific photo. */
-  ogImage: "/projects-hd/casa-sisal/00.webp",
+  ogImage: "/projects/casa-sisal/00.png",
   instagram: {
     handle: "Santiago.architecture",
     url: "https://www.instagram.com/santiago.architecture/",

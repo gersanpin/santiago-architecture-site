@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props) {
     pathname: `/${locale}`,
     title: t("homeTitle"),
     description: t("homeDescription"),
-    image: "/projects-hd/casa-sisal/00.webp",
+    image: "/projects/casa-sisal/00.png",
     imageAlt: "Casa Sisal — Santiago Architecture",
     absoluteTitle: true,
   });
