@@ -12,7 +12,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
-import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
+import { IMAGE_QUALITY_HERO, IMAGE_UNOPTIMIZED } from "@/lib/images";
 import styles from "./ProjectLightbox.module.css";
 
 type ExpandProps = {
@@ -192,7 +192,7 @@ export function ProjectLightbox({
               alt={`${alt} — ${index + 1}`}
               width={1920}
               height={1080}
-              quality={IMAGE_QUALITY}
+              quality={IMAGE_QUALITY_HERO}
               unoptimized={IMAGE_UNOPTIMIZED}
               sizes="100vw"
               className={styles.image}

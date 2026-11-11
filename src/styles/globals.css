@@ -16,10 +16,10 @@
   --white: #faf7f2;
   --hero-overlay: linear-gradient(
     168deg,
-    rgba(42, 39, 34, 0.58) 0%,
-    rgba(42, 39, 34, 0.28) 38%,
-    rgba(58, 48, 36, 0.1) 68%,
-    rgba(42, 39, 34, 0.32) 100%
+    rgba(42, 39, 34, 0.28) 0%,
+    rgba(42, 39, 34, 0.12) 38%,
+    rgba(42, 39, 34, 0.04) 68%,
+    rgba(42, 39, 34, 0.18) 100%
   );
   --font-display: var(--font-syne), "Arial Narrow", sans-serif;
   --font-body: var(--font-plex), "Helvetica Neue", sans-serif;
@@ -84,20 +84,6 @@ body {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-}
-
-/* Quiet grain — atmosphere without chrome */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 180px 180px;
-  mix-blend-mode: multiply;
 }
 
 a {

@@ -1052,20 +1052,21 @@ const ATTRACTIVENESS_ORDER = [
   "tiny-house-costa-rica",
 ] as const;
 
-function getUpscaledImagePath(imagePath: string): string {
+/** Prefer the 2× WebP set in public/projects-hd for retina / full-bleed frames. */
+function getHighResImagePath(imagePath: string): string {
   return imagePath
     .replace(/^\/projects\//, "/projects-hd/")
     .replace(/\.(?:png|jpe?g)$/i, ".webp");
 }
 
 export const projects: Project[] = (() => {
-  const upscaledProjects = projectsData.map((project) => ({
+  const highResProjects = projectsData.map((project) => ({
     ...project,
-    images: project.images.map(getUpscaledImagePath),
-    portraitImages: project.portraitImages?.map(getUpscaledImagePath),
+    images: project.images.map(getHighResImagePath),
+    portraitImages: project.portraitImages?.map(getHighResImagePath),
   }));
   const bySlug = new Map(
-    upscaledProjects.map((project) => [project.slug, project]),
+    highResProjects.map((project) => [project.slug, project]),
   );
   const ordered: Project[] = [];
   for (const slug of ATTRACTIVENESS_ORDER) {

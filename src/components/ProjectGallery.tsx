@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { useTranslations } from "next-intl";
-import { IMAGE_QUALITY, IMAGE_UNOPTIMIZED } from "@/lib/images";
+import { IMAGE_QUALITY_HERO, IMAGE_UNOPTIMIZED } from "@/lib/images";
 import { ExpandImageButton, ProjectLightbox } from "./ProjectLightbox";
 import styles from "./ProjectGallery.module.css";
 
@@ -61,7 +61,7 @@ export function ProjectGallery({ images, alt, children }: Props) {
               width={1920}
               height={1080}
               priority
-              quality={IMAGE_QUALITY}
+              quality={IMAGE_QUALITY_HERO}
               unoptimized={IMAGE_UNOPTIMIZED}
               sizes="100vw"
               className={styles.image}

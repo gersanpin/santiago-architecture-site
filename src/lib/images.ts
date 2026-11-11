@@ -1,11 +1,11 @@
 /** Max fidelity for next/image (must be listed in next.config images.qualities). */
-export const IMAGE_QUALITY = 90 as const;
+export const IMAGE_QUALITY = 100 as const;
 
 /** High-detail frames (gallery / lightbox / hero). */
-export const IMAGE_QUALITY_HERO = 92 as const;
+export const IMAGE_QUALITY_HERO = 100 as const;
 
 /**
- * Prefer optimized delivery via Next/Cloudflare Images.
- * Gallery/lightbox can still request higher quality.
+ * Serve static assets as-is — skip Next/Cloudflare re-encode so portfolio
+ * photos keep full sharpness and color from the source files.
  */
-export const IMAGE_UNOPTIMIZED = false as const;
+export const IMAGE_UNOPTIMIZED = true as const;
