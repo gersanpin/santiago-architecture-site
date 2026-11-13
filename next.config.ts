@@ -17,6 +17,16 @@ const nextConfig: NextConfig = {
         destination: "/:locale/projects/awen",
         permanent: true,
       },
+      {
+        source: "/:locale(en|es)/projects/concepts",
+        destination: "/:locale/projects",
+        permanent: true,
+      },
+      {
+        source: "/projects/concepts",
+        destination: "/projects",
+        permanent: true,
+      },
     ];
   },
   async headers() {
